@@ -1,0 +1,6 @@
+- design data model and divide them into component-level and application-level
+- design the store
+- design the router
+- try separate the github-api to turn into an reusable module
+- design view
+- collect components and divide them into General ones and special ones
