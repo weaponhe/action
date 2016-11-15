@@ -1,28 +1,20 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <button @click="test">test</button>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
-export default {
-  name: 'app',
-  components: {
-    Hello
+  export default {
+    name: 'app',
+    methods: {
+      test () {
+        this.$store.commit(this.$store.state.todo.types.ADD_TODO)
+        console.log(this.$store.state.todo.all)
+      }
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
