@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import App from './App'
+import './components/styles/base.less'
 import store from './store'
 
-/* eslint-disable no-new */
+import AppBar from './components/appBar'
+Vue.component(AppBar.name,AppBar)
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: {App},
-  store
+	el: '#app',
+	template: '<App/>',
+	components: {
+		App
+	},
+	store
 })

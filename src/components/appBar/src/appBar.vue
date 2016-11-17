@@ -1,0 +1,65 @@
+<template>
+<div class="ac-appbar" :class="{fixed}">
+  <div class="left">
+    <slot name="left"></slot>
+  </div>
+  <div class="middle">
+    <slot>
+      <span>{{title}}</span>
+    </slot>
+  </div>
+  <div class="right">
+    <slot name="right"></slot>
+  </div>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'appBar',
+  props:{
+  	title:{
+  		type:String,
+  		default:''
+  	},
+  	fixed:{
+  		type:Boolean,
+  		default:false
+  	}
+  }
+}
+</script>
+
+
+<style lang="less" rel="stylesheet/less">
+@import "../../styles/index.less";
+  .ac-appbar{
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 8px;
+    background-color: @primaryColor;
+    .left,.right{
+      display: flex;
+      height: 100%;
+      flex-shrink: 1;
+      align-items: center;
+    }
+    .middle{
+      display: flex;
+      padding-left: 8px;
+      padding-right: 8px;
+      flex-grow: 1;
+      height: 100%;
+      align-items: center;
+    }
+
+  }
+  .fixed{
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    margin-bottom: 100px;
+  }
+</style>
