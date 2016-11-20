@@ -2,6 +2,8 @@
 - [ok] design the store
 - [ok] design view
 - [ok] collect components and divide them into General ones and special ones
+    - [ok] app-bar
+    - [ok] icon
     - button
     - input
     - tree
@@ -13,7 +15,6 @@
     - dropdown
     - calendar
 
-- nav-bar
 
 
 

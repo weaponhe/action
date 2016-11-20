@@ -1,9 +1,8 @@
 <template>
   <div>
     <app-bar :fixed="true">
-      <div slot="left">左边</div>
-      <div>标题</div>
-      <div slot="right">右边</div>
+      <tooltip  slot="left" content="left tooltip"><icon name="account"></icon></tooltip>
+      <tooltip  slot="right"><icon name="add"></icon></tooltip>
     </app-bar>
     <div class="test"></div>
   </div>
