@@ -1,43 +1,59 @@
 <template>
   <div>
     <app-bar :fixed="true">
-      <tooltip  slot="left" content="left tooltip" direction="bottom"><icon name="account"></icon></tooltip>
-      <tooltip  slot="right"><icon name="add"></icon></tooltip>
+      <tooltip slot="left" content="left tooltip" direction="bottom">
+        <icon name="account"></icon>
+      </tooltip>
+      <tooltip slot="right">
+        <icon name="add"></icon>
+      </tooltip>
     </app-bar>
-    <div class="test">
-      <div class="test-button">
-        <tooltip direction="top" theme="dark" content="top tooltip">
-          <tooltip direction="bottom" theme="light" content="bottom tooltip">
-            <tooltip direction="left" theme="light" content="left tooltip">
-              <tooltip direction="right" theme="light" content="right tooltip">
-                <div class="cube"></div>
-              </tooltip>
-            </tooltip>
-          </tooltip>
-        </tooltip>
-      </div>
-    </div>
+
+    <nav-bar :data="navTree"></nav-bar>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    data(){
+      return {
+        navTree: [
+          {
+            title: "item1",
+            children: [
+              {
+                title: "item1-1"
+              }, {
+                title: "item1-2"
+              }
+            ]
+          },
+          {
+            title: "item2",
+            children: [
+              {
+                title: "item2-1"
+              }, {
+                title: "item2-2"
+              }
+            ]
+          }, {
+            title: "item3",
+            children: [
+              {
+                title: "item3-1"
+              }, {
+                title: "item3-2"
+              }
+            ]
+          }
+        ]
+      }
+    }
   }
 </script>
 
 <style>
 
-  .test{
-    height: 1000px;
-    text-align: center;
-  }
-  .test-button{
-    padding-top: 200px;
-  }
-  .cube{
-    width:100px;
-    height: 100px;
-    background-color: green;
-  }
 </style>

@@ -1,16 +1,19 @@
 <template>
-  <div class="tooltip"
-       @mouseenter="handleShowPopper"
-       @mouseleave="handleClosePopper">
+  <div class="tooltip">
 
-    <div class="tooltip-rel" ref="reference">
+    <div 
+      class="tooltip-rel" 
+      ref="reference"
+      @mouseenter="handleShowPopper"
+      @mouseleave="handleClosePopper">
       <slot></slot>
     </div>
 
-    <div class="tooltip-popper"
-         v-show="showPopper"
-         ref="popper"
-         :class="['direction-' + direction,'theme-' + theme]">
+    <div 
+      class="tooltip-popper"
+      v-show="showPopper"
+      ref="popper"
+      :class="['direction-' + direction,'theme-' + theme]">
       <slot name="content">
         <div class="tooltip-popper-content" v-text="content"></div>
       </slot>
@@ -23,7 +26,7 @@
     name: 'tooltip',
     data(){
       return {
-        showPopper: true
+        showPopper: false
       }
     },
     props: {
