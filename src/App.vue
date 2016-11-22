@@ -9,7 +9,9 @@
       </tooltip>
     </app-bar>
 
-    <nav-bar :data="navTree"></nav-bar>
+    <nav>
+      <vertical-menu :data="navTree"></vertical-menu>
+    </nav>
   </div>
 </template>
 
@@ -21,25 +23,39 @@
         navTree: [
           {
             title: "item1",
+            icon:"smile",
             children: [
               {
                 title: "item1-1"
               }, {
-                title: "item1-2"
+                title: "item1-2",
+                children: [
+                  {
+                    title: "item1-2-1",
+                    active: true
+                  },
+                  {
+                    title: "item1-2-2",
+                    active: true
+                  }
+                ]
               }
             ]
           },
           {
             title: "item2",
+            icon:"smile",
             children: [
               {
                 title: "item2-1"
               }, {
-                title: "item2-2"
+                title: "item2-2",
+                icon:"smile"
               }
             ]
           }, {
             title: "item3",
+            icon:"smile",
             children: [
               {
                 title: "item3-1"
@@ -55,5 +71,14 @@
 </script>
 
 <style>
-
+  nav {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    background-color: #00acc1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 </style>
