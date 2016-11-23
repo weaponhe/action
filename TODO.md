@@ -4,13 +4,13 @@
 - [ok] collect components and divide them into General ones and special ones
     - [ok] app-bar
     - [ok] icon
+    - [ok] tool-tip
+    - [ok] vertical-menu
     - button
     - input
-    - tree
-    - nav-bar
+    - popup
     - message
     - message-box
-    - tool-tip
     - progress
     - dropdown
     - calendar
