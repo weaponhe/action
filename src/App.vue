@@ -14,11 +14,27 @@
     </nav>
 
     <div class="main">
-      <ac-button>查看详情</ac-button>
-      <ac-button type="primary">查看详情</ac-button>
-      <ac-button type="primary" disabled>查看详情</ac-button>
-      <ac-button type="danger">查看详情</ac-button>
-      <ac-button type="success">查看详情</ac-button>
+      <div>
+        <ac-button size="sm">查看详情</ac-button>
+        <ac-button size="sm" type="primary">查看详情</ac-button>
+        <ac-button size="sm" type="primary" disabled>查看详情</ac-button>
+        <ac-button size="sm" type="danger">查看详情</ac-button>
+        <ac-button size="sm" type="success">查看详情</ac-button>
+      </div>
+      <div>
+        <ac-button>查看详情</ac-button>
+        <ac-button type="primary">查看详情</ac-button>
+        <ac-button type="primary" disabled>查看详情</ac-button>
+        <ac-button type="danger">查看详情</ac-button>
+        <ac-button type="success">查看详情</ac-button>
+      </div>
+      <div>
+        <ac-button size="lg">查看详情</ac-button>
+        <ac-button size="lg" type="primary">查看详情</ac-button>
+        <ac-button size="lg" type="primary" disabled>查看详情</ac-button>
+        <ac-button size="lg" type="danger">查看详情</ac-button>
+        <ac-button size="lg" type="success">查看详情</ac-button>
+      </div>
     </div>
   </div>
 </template>
@@ -78,7 +94,7 @@
   }
 </script>
 
-<style>
+<style lang="less" rel="stylesheet/less">
   body {
     background: #ededed;
   }
@@ -96,5 +112,10 @@
   .main {
     margin-top: 56px;
     margin-left: 250px;
+    padding: 10px;
+    > div {
+      margin: 10px;
+    }
   }
+
 </style>
