@@ -38,12 +38,15 @@ export default {
     align-items: center;
     height: 56px;
     padding: 0 8px;
-    background-color: @primaryColor;
+    background-color: #1f2f3d;
+    color: #c0ccda;
     .left,.right{
       display: flex;
       height: 100%;
       flex-shrink: 1;
       align-items: center;
+      padding: 10px;
+      cursor: pointer;
     }
     .middle{
       display: flex;

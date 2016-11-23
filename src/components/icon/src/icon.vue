@@ -1,5 +1,5 @@
 <template>
-  <i class="icon iconfont" :class="'icon-'+name"></i>
+  <i class="icon iconfont" :class="'icon-'+name" :style="{fontSize:size+'px'}"></i>
 </template>
 
 <script>
@@ -9,6 +9,10 @@
       name: {
         type: String,
         required: true
+      },
+      size: {
+        type: Number,
+        default: 16
       }
     }
   }
