@@ -1,19 +1,26 @@
 <template>
-    <div class="popup" v-if="open" :style="{zIndex:zIndex}">
+    <div class="popup"
+         v-if="open"
+         :style="{zIndex:zIndex,backgroundColor: transparent}">
         <slot></slot>
     </div>
 </template>
 
 <script>
-    let $openCount = 0
-    let $closeCount = 0
+    let global = {
+        openCount: 0
+    }
+    let data = function () {
+        return {
+            zIndex: 0,
+            transparent: '',
+            global: global
+        }
+    }
+    data.openCount = 0
     export default {
         name: 'popup',
-        data(){
-            return {
-                zIndex: 0
-            }
-        },
+        data: data,
         props: {
             open: {
                 type: Boolean,
@@ -22,24 +29,24 @@
         },
         mounted(){
             if (open) {
-                $openCount++
-                this.zIndex = $openCount
+                this.global.openCount++
+                this.zIndex = this.global.openCount
             }
         },
         watch: {
             open(open){
                 if (open) {
-                    $openCount++
-                    this.zIndex = $openCount
+                    this.global.openCount++
+                    this.zIndex = this.global.openCount
                 }
                 else {
-                    $closeCount++
+                    this.global.openCount--
                 }
-                if ($openCount === $closeCount) {
-                    $openCount = $closeCount = 0
-                }
+            },
+            'global.openCount': function () {
+                this.transparent = this.global.openCount === this.zIndex ? '' : 'transparent'
             }
-        },
+        }
     }
 </script>
 
