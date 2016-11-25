@@ -8,6 +8,7 @@ import Button from './components/button'
 import AppBar from './components/appBar'
 import Tooltip from './components/tooltip'
 import {VerticalMenu, MenuItemList, MenuItem} from './components/verticalMenu'
+import {Popup, Test} from './components/popup'
 
 Vue.component(Icon.name, Icon)
 Vue.component(Button.name, Button)
@@ -16,13 +17,15 @@ Vue.component(Tooltip.name, Tooltip)
 Vue.component(VerticalMenu.name, VerticalMenu)
 Vue.component(MenuItemList.name, MenuItemList)
 Vue.component(MenuItem.name, MenuItem)
+Vue.component(Popup.name, Popup)
+Vue.component(Test.name, Test)
 
 
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: {
-    App
-  },
-  store
+    el: '#app',
+    template: '<App/>',
+    components: {
+        App
+    },
+    store
 })
