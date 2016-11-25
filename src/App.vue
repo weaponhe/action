@@ -16,11 +16,9 @@
         <div class="main">
             <ac-button type="danger">查看详情</ac-button>
             <ac-button type="success">查看详情</ac-button>
+            <message :show="true" message="asdasd"></message>
         </div>
 
-        <test></test>
-        <test></test>
-        <test></test>
     </div>
 </template>
 
