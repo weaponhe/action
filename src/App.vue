@@ -14,9 +14,8 @@
         </nav>
 
         <div class="main">
-            <!--<div>{{global.sum}}</div>-->
-            <!--<ac-button type="danger" @click="add">查看详情</ac-button>-->
-            <!--<ac-button type="success" @click="minus">查看详情</ac-button>-->
+            <ac-button type="danger">查看详情</ac-button>
+            <ac-button type="success">查看详情</ac-button>
         </div>
 
         <test></test>
@@ -71,29 +70,18 @@
             ]
         }
     ]
-    let global = {
-        sum: 0
-    }
     export default {
         name: 'app',
         data(){
             return {
-                navTree: navTree,
-                global: global
+                navTree: navTree
             }
         },
-        methods: {
-            add(){
-                this.global.sum++
-            },
-            minus(){
-                this.global.sum--
-            }
-        }
+        methods: {}
     }
 </script>
 
-<style>
+<style lang="less" rel="stylesheet/less">
     body {
         background: #ededed;
     }
@@ -111,5 +99,10 @@
     .main {
         margin-top: 56px;
         margin-left: 250px;
+        padding: 10px;
+
+        > div {
+            margin: 10px;
+        }
     }
 </style>

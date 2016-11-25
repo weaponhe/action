@@ -53,21 +53,24 @@
   }
 
   .size--default {
-    width: 100px;
-    height: 30px;
     margin: 0 5px;
-    line-height: 28px;
+    padding: 8px 20px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .size--lg {
+    margin: 0 5px;
+    padding: 10px 30px;
+    border-radius: 6px;
+    font-size: 18px;
   }
 
   .size--sm {
-  }
-
-  .size--xs {
+    margin: 0 3px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 10px;
   }
 
   .button--default {
@@ -102,7 +105,7 @@
     background: #5cb85c linear-gradient(to bottom, #5cb85c ,#408439);
     color: #FFF;
     &:hover {
-      /*background: #5cb85c linear-gradient(180deg, #5cb85c, #408439);*/
+      background: #449d44 linear-gradient(180deg, #449d44, #408439);
     }
   }
 
