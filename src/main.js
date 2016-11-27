@@ -23,7 +23,6 @@ Vue.component(Test.name, Test)
 Vue.component(Message.name, Message)
 
 
-
 new Vue({
     el: '#app',
     template: '<App/>',

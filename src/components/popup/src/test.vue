@@ -1,5 +1,5 @@
 <template>
-    <popup :open="open">
+    <popup :open="open" modal>
         <div class="content">
             <ac-button type="primary" @click="open=false">关闭</ac-button>
         </div>
@@ -11,7 +11,6 @@
         name: 'test',
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App',
                 open: true
             }
         }

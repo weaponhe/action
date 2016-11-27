@@ -12,13 +12,18 @@
         <nav>
             <vertical-menu :data="navTree"></vertical-menu>
         </nav>
-
         <div class="main">
-            <ac-button type="danger">查看详情</ac-button>
-            <ac-button type="success">查看详情</ac-button>
-            <message :show="true" message="asdasd"></message>
+            <div class="left">
+                <ac-button type="success" @click="show=!show">open</ac-button>
+            </div>
+            <div class="right">
+                <test></test>
+                <test></test>
+                <test></test>
+                <message :open="show" message="测试"></message>
+                <test></test>
+            </div>
         </div>
-
     </div>
 </template>
 
@@ -72,7 +77,8 @@
         name: 'app',
         data(){
             return {
-                navTree: navTree
+                navTree: navTree,
+                show: false
             }
         },
         methods: {}
@@ -95,12 +101,24 @@
     }
 
     .main {
-        margin-top: 56px;
-        margin-left: 250px;
-        padding: 10px;
-
-        > div {
-            margin: 10px;
+        position: absolute;
+        top: 56px;
+        bottom: 0;
+        left: 250px;
+        right: 0;
+        .left {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+        }
+        .right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 50%;
         }
     }
 </style>
