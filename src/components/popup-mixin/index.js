@@ -1,57 +1,56 @@
 let global = {
-    openCount: 0,
-    modalCount: 0
+  popupOpenCount: 0,
+  popupCloseCount: 0,
+  modalArray: []
 }
 export default {
-    data(){
-        return {
-            popupIndex: 0,
-            modalIndex: 0,
-            transparent: '',
-            global
-        }
-    },
-    props: {
-        open: {
-            type: Boolean,
-            default: false
-        },
-        modal: {
-            type: Boolean,
-            default: false
-        }
-    },
-    mounted(){
-        if (this.open) {
-            this.global.openCount++
-            this.popupIndex = this.global.openCount
-            if (this.modal) {
-                this.global.modalCount++
-                this.modalIndex = this.global.modalCount
-            }
-        }
-    },
-    watch: {
-        open(open){
-            if (open) {
-                this.global.openCount++
-                this.popupIndex = this.global.openCount
-                if (this.modal) {
-                    this.global.modalCount++
-                    this.modalIndex = this.global.modalCount
-                }
-            }
-            else {
-                this.global.openCount--
-                if (this.modal) {
-                    this.global.modalCount--
-                }
-            }
-        },
-        'global.modalCount': function () {
-            if (this.modal) {
-                this.transparent = this.global.modalCount === this.modalIndex ? '' : 'transparent'
-            }
-        }
+  data(){
+    return {
+      popupIndex: 0,
+      modalIndex: 0,
+      global
     }
+  },
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    },
+    modal: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    close(){
+      this.$emit('close')
+    }
+  },
+  mounted(){
+    if (this.open) {
+      this.popupIndex = ++this.global.popupOpenCount
+      this.modal && this.global.modalArray.push(this.popupIndex)
+    }
+  },
+  watch: {
+    open(open){
+      if (open) {
+        this.popupIndex = ++this.global.popupOpenCount
+        this.modal && this.global.modalArray.push(this.popupIndex)
+      }
+      else {
+        this.global.popupCloseCount++
+        this.modal && this.global.modalArray.splice(this.global.modalArray.indexOf(this.popupIndex), 1)
+      }
+
+      if (this.global.popupOpenCount === this.global.popupCloseCount) {
+        this.global.popupOpenCount = this.global.popupCloseCount = 0
+      }
+    }
+  },
+  computed: {
+    transparent(){
+      return this.modal && this.popupIndex !== this.global.modalArray[this.global.modalArray.length - 1] ? 'transparent' : ''
+    }
+  }
 }
