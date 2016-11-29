@@ -1,6 +1,10 @@
 <template>
-  <transition>
-    <popup :open="show" modal @close="close">
+  <transition name="popup">
+    <popup v-if="show"
+           :open="show"
+           modal
+           @close="close">
+
       <div class="wrapper">
 
         <div class="header">
@@ -99,5 +103,14 @@
       padding: 20px;
       text-align: right;
     }
+  }
+
+  .popup-enter-active, .popup-leave-active {
+    transition: all .3s ease;
+  }
+
+  .popup-enter, .popup-leave-active {
+    opacity: 0;
+    transform: scale(1.1);
   }
 </style>

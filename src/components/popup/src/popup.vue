@@ -1,9 +1,9 @@
 <template>
   <div v-if="open"
        class="popup"
-       :class="{modal}"
+       :class="{modal,transparent}"
        :style="{zIndex:popupIndex,backgroundColor: transparent}"
-       @click="close">
+       @click.self="close">
     <slot></slot>
   </div>
 </template>
@@ -30,7 +30,7 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less" rel="stylesheet/less">
   .popup {
     position: absolute;
     top: 0;
@@ -44,4 +44,6 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
   }
+
+
 </style>

@@ -5,7 +5,7 @@
                @ok="ok">
 
     <slot></slot>
-    <input type="text" v-model="input">
+    <div class="input"><input type="text" v-model="input"></div>
   </message-box>
 </template>
 
@@ -36,5 +36,7 @@
 </script>
 
 <style scoped>
-
+  .input {
+    margin: 20px 0;
+  }
 </style>
