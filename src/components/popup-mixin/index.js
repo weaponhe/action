@@ -21,11 +21,6 @@ export default {
       default: false
     }
   },
-  methods: {
-    close(){
-      this.$emit('close')
-    }
-  },
   mounted(){
     if (this.open) {
       console.log('%s %d', this.$options.name, this.popupIndex)

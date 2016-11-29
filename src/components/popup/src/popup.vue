@@ -13,7 +13,20 @@
 
   export default {
     name: 'popup',
-    mixins: [mixin]
+    mixins: [mixin],
+    props: {
+      closeOnClickModal: {
+        type: Boolean,
+        default: true
+      }
+    },
+    methods: {
+      close(){
+        if (this.closeOnClickModal) {
+          this.$emit('close')
+        }
+      }
+    }
   }
 </script>
 

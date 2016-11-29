@@ -1,6 +1,6 @@
 <template>
   <transition>
-    <popup :open="show" modal>
+    <popup :open="show" modal @close="close">
       <div class="wrapper">
 
         <div class="header">
