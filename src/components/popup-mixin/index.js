@@ -28,6 +28,7 @@ export default {
   },
   mounted(){
     if (this.open) {
+      console.log('%s %d', this.$options.name, this.popupIndex)
       this.popupIndex = ++this.global.popupOpenCount
       this.modal && this.global.modalArray.push(this.popupIndex)
     }

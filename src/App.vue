@@ -12,21 +12,28 @@
     <nav>
       <vertical-menu :data="navTree"></vertical-menu>
     </nav>
-    <div class="main">
-      <div class="left">
-        <ac-button type="success" @click="show=!show">message</ac-button>
-        <ac-button type="success" @click="first=!first">first</ac-button>
-        <ac-button type="success" @click="second=!second">second</ac-button>
-        <ac-button type="success" @click="third=!third">third</ac-button>
-        <ac-button type="success" @click="fourth=!fourth">fourth</ac-button>
-      </div>
-      <div class="right">
-        <test :open="first"></test>
-        <test :open="second"></test>
-        <test :open="third"></test>
-        <message type="warning" :open="show">啊实打实的按实际的冷空气我就看看千万</message>
-      </div>
-    </div>
+    <!--<div class="main">-->
+    <!--<div class="left">-->
+    <!--<ac-button type="success" @click="show=!show">message</ac-button>-->
+    <!--<ac-button type="success" @click="first=!first">first</ac-button>-->
+    <!--<ac-button type="success" @click="second=!second">second</ac-button>-->
+    <!--<ac-button type="success" @click="third=!third">third</ac-button>-->
+    <!--<ac-button type="success" @click="fourth=!fourth">fourth</ac-button>-->
+    <!--</div>-->
+    <!--<div class="right">-->
+    <!--<test :open="first"></test>-->
+    <!--<test :open="second"></test>-->
+    <!--<test :open="third"></test>-->
+    <!--<message type="warning" :open="show">啊实打实的按实际的冷空气我就看看千万</message>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <prompt
+      show
+      @EVENT_PROMPT="confirm">
+      请输入
+    </prompt>
+
   </div>
 </template>
 
@@ -87,17 +94,20 @@
         third: true,
         fourth: true
       }
+    },
+    methods: {
+      confirm(res){
+        console.log(res)
+      }
     }
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
-  body {
-    background: #ededed;
-  }
+<style scoped lang="less" rel="stylesheet/less">
+
 
   nav {
-    position: fixed;
+    position: absolute;
     top: 56px;
     bottom: 0;
     left: 0;

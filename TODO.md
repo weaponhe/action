@@ -4,7 +4,7 @@
 - [ok] collect components and divide them into General ones and special ones
     - [ok] app-bar
     - [ok] icon
-    - [ok] tool-tip
+    - [ok] tooltip
     - [ok] vertical-menu
     - [ok] popup
     - [ok] button
@@ -14,6 +14,7 @@
     - progress
     - dropdown
     - calendar
+    - list
 
 
 

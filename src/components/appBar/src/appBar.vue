@@ -1,46 +1,46 @@
 <template>
-<div class="ac-appbar" :class="{fixed}">
-  <div class="left">
-    <slot name="left"></slot>
+  <div class="ac-appbar">
+    <div class="left">
+      <slot name="left"></slot>
+    </div>
+    <div class="middle">
+      <slot>
+        <span>{{title}}</span>
+      </slot>
+    </div>
+    <div class="right">
+      <slot name="right"></slot>
+    </div>
   </div>
-  <div class="middle">
-    <slot>
-      <span>{{title}}</span>
-    </slot>
-  </div>
-  <div class="right">
-    <slot name="right"></slot>
-  </div>
-</div>
 </template>
 
 <script>
-export default {
-  name: 'appBar',
-  props:{
-  	title:{
-  		type:String,
-  		default:''
-  	},
-  	fixed:{
-  		type:Boolean,
-  		default:false
-  	}
+  export default {
+    name: 'appBar',
+    props: {
+      title: {
+        type: String,
+        default: ''
+      },
+      fixed: {
+        type: Boolean,
+        default: false
+      }
+    }
   }
-}
 </script>
 
 
-<style lang="less" rel="stylesheet/less">
-@import "../../styles/index.less";
-  .ac-appbar{
+<style scoped lang="less" rel="stylesheet/less">
+
+  .ac-appbar {
     display: flex;
     align-items: center;
     height: 56px;
     padding: 0 8px;
     background-color: #1f2f3d;
     color: #c0ccda;
-    .left,.right{
+    .left, .right {
       display: flex;
       height: 100%;
       flex-shrink: 1;
@@ -48,7 +48,7 @@ export default {
       padding: 10px;
       cursor: pointer;
     }
-    .middle{
+    .middle {
       display: flex;
       padding-left: 8px;
       padding-right: 8px;
@@ -56,13 +56,12 @@ export default {
       height: 100%;
       align-items: center;
     }
-
   }
-  .fixed{
-    position: fixed;
-    top:0;
+
+  .fixed {
+    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
-    margin-bottom: 100px;
   }
 </style>
