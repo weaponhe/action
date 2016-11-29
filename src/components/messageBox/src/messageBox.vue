@@ -7,7 +7,9 @@
           <slot name="header">
             <h3 class="clearfix">
               <span class="title">{{title}}</span>
-              <span v-if="closeIcon" class="close"><icon name="error" :size="20"></icon></span>
+              <span v-if="showCloseIcon" class="close" @click="close">
+                <icon name="error" :size="20"></icon>
+              </span>
             </h3>
           </slot>
         </div>
@@ -19,7 +21,8 @@
 
         <div class="footer">
           <slot name="footer">
-            <ac-button type="success">确定</ac-button>
+            <ac-button type="success" @click="ok">确定</ac-button>
+            <ac-button v-if="showCancelButton" @click="close">取消</ac-button>
           </slot>
         </div>
 
@@ -41,12 +44,23 @@
         default: false
       },
       title: String,
-      closeIcon: {
+      showCloseIcon: {
+        type: Boolean,
+        default: true
+      },
+      showCancelButton: {
         type: Boolean,
         default: true
       }
     },
-    methods: {}
+    methods: {
+      ok(){
+        this.$emit('ok')
+      },
+      close(){
+        this.$emit('close')
+      }
+    }
   }
 </script>
 

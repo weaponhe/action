@@ -12,25 +12,27 @@
     <nav>
       <vertical-menu :data="navTree"></vertical-menu>
     </nav>
-    <!--<div class="main">-->
-    <!--<div class="left">-->
-    <!--<ac-button type="success" @click="show=!show">message</ac-button>-->
-    <!--<ac-button type="success" @click="first=!first">first</ac-button>-->
-    <!--<ac-button type="success" @click="second=!second">second</ac-button>-->
-    <!--<ac-button type="success" @click="third=!third">third</ac-button>-->
-    <!--<ac-button type="success" @click="fourth=!fourth">fourth</ac-button>-->
-    <!--</div>-->
-    <!--<div class="right">-->
-    <!--<test :open="first"></test>-->
-    <!--<test :open="second"></test>-->
-    <!--<test :open="third"></test>-->
-    <!--<message type="warning" :open="show">啊实打实的按实际的冷空气我就看看千万</message>-->
-    <!--</div>-->
-    <!--</div>-->
-
+    <div class="main">
+      <ac-button @click="alertShow=true">Alert</ac-button>
+      <ac-button @click="confirmShow=true">Confirm</ac-button>
+      <ac-button @click="promptShow=true">Promot</ac-button>
+    </div>
+    <alert
+      :show="alertShow"
+      @ok="alertOK"
+      @close="alertClose">
+      警告
+    </alert>
+    <confirm
+      :show="confirmShow"
+      @ok="confirmOK"
+      @close="confirmClose">
+      请输入
+    </confirm>
     <prompt
-      show
-      @EVENT_PROMPT="confirm">
+      :show="promptShow"
+      @ok="promptOK"
+      @close="promptClose">
       请输入
     </prompt>
 
@@ -89,15 +91,29 @@
       return {
         navTree: navTree,
         show: true,
-        first: true,
-        second: true,
-        third: true,
-        fourth: true
+        alertShow: false,
+        confirmShow: false,
+        promptShow: false
       }
     },
     methods: {
-      confirm(res){
-        console.log(res)
+      alertOK(){
+        console.log('promptOK')
+      },
+      alertClose(){
+        this.alertShow = false
+      },
+      confirmOK(){
+        console.log('confirmOK')
+      },
+      confirmClose(){
+        this.confirmShow = false
+      },
+      promptOK(res){
+        console.log('promptOK', res)
+      },
+      promptClose(){
+        this.promptShow = false
       }
     }
   }

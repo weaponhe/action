@@ -1,7 +1,9 @@
 <template>
   <message-box :show="show"
                title="警告"
-               :closeIcon="false">
+               :showCancelButton="false"
+               @close="close"
+               @ok="ok">
     <slot></slot>
   </message-box>
 </template>
@@ -13,6 +15,15 @@
     components: [MessageBox],
     props: {
       show: Boolean
+    },
+    methods: {
+      ok(){
+        this.$emit('close')
+        this.close()
+      },
+      close(){
+        this.$emit('close')
+      }
     }
   }
 </script>

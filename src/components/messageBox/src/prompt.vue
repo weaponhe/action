@@ -1,15 +1,11 @@
 <template>
   <message-box :show="show"
-               title="提示">
+               title="提示"
+               @close="close"
+               @ok="ok">
 
     <slot></slot>
     <input type="text" v-model="input">
-
-    <template slot="footer">
-      <ac-button type="success" @click="handleYes">确定</ac-button>
-      <ac-button @click="handleNo">取消</ac-button>
-    </template>
-
   </message-box>
 </template>
 
@@ -27,11 +23,13 @@
       show: Boolean
     },
     methods: {
-      handleYes(){
-        this.$emit('EVENT_PROMPT', this.input);
+      ok(){
+        this.$emit('ok', this.input)
+        this.close()
       },
-      handleNo(){
-//        this.$emit('EVENT_PROMPT', input);
+      close(){
+        this.input = ''
+        this.$emit('close')
       }
     }
   }
