@@ -1,6 +1,12 @@
 <template>
   <nav>
-    <vertical-menu :data="navData"></vertical-menu>
+    <vertical-menu>
+      <menu-item :data="menu_today" vueRouter></menu-item>
+      <menu-item :data="menu_tomorrow" vueRouter></menu-item>
+      <menu-item :data="menu_collection" vueRouter></menu-item>
+      <menu-item :data="menu_schedule" vueRouter></menu-item>
+      <menu-item :data="menu_project" vueRouter></menu-item>
+    </vertical-menu>
   </nav>
 </template>
 
@@ -8,23 +14,41 @@
 
   export default {
     name: 'navMenu',
-    computed: {
-      menu_project_list(){
-        return this.$store.getters.menu_project_list
-      },
-      menu_book_list(){
-        return this.$store.getters.menu_book_list
-      },
-      menu_post_list(){
-        return this.$store.getters.menu_post_list
-      },
-      navData(){
-        let menu = this.$store.state.menu
-        menu.menu_project.children = this.menu_project_list
-        menu.menu_book.children = this.menu_book_list
-        menu.menu_post.children = this.menu_post_list
-        return menu.all
+    data(){
+      return {
+        menu_today: {
+          title: '今日待办',
+          path: '/today',
+          active: true
+        },
+        menu_tomorrow: {
+          title: '明日待办',
+          path: '/tomorrow'
+        },
+        menu_collection : {
+          title: '收集箱',
+          path: 'collection'
+        },
+        menu_schedule :{
+          title: '日程',
+          path: 'schedule'
+        },
+        menu_project : {
+          title: '项目',
+          path: 'project'
+        },
+        menu_book : {
+          title: '书单',
+          path: 'book'
+        },
+        menu_post : {
+          title: '文章',
+          path: 'post'
+        }
       }
+    },
+    computed: {
+
     }
   }
 </script>

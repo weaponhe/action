@@ -4,6 +4,8 @@ import App from './App'
 import store from './store'
 import Action from 'action-ui'
 require('action-ui/dist/style.css')
+
+Vue.use(VueRouter)
 Vue.use(Action)
 
 import NavMenu from './components/navMenu.vue'
@@ -26,7 +28,7 @@ let routes = [
   {path: '/bar', component: Bar}
 ]
 
-let router = new VueRouter({})
+let router = new VueRouter({routes})
 new Vue({
   el: '#app',
   template: '<App/>',
