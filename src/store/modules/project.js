@@ -7,7 +7,7 @@ let all = [{
 }, {
   title: 'project2',
   description: 'I\'m task',
-  type: 'book',
+  type: 'project',
   path: "project2",
   done: false
 }, {

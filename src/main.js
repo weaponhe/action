@@ -8,7 +8,7 @@ require('action-ui/dist/style.css')
 Vue.use(VueRouter)
 Vue.use(Action)
 
-import NavMenu from './components/navMenu.vue'
+import NavMenu from './components/Menu.vue'
 import TopBar from './components/topBar.vue'
 import AddInput from './components/addInput.vue'
 import Item from './components/item.vue'
