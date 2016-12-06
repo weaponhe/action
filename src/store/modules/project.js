@@ -1,31 +1,10 @@
-let all = [{
-  title: 'project1',
-  description: 'I\'m task',
-  type: 'project',
-  path: "project1",
-  done: false
-}, {
-  title: 'project2',
-  description: 'I\'m task',
-  type: 'project',
-  path: "project2",
-  done: false
-}, {
-  title: 'project3',
-  description: 'I\'m task',
-  type: 'post',
-  path: "project3",
-  done: false
-}, {
-  title: 'project4',
-  description: 'I\'m task',
-  type: 'book',
-  path: 'project4',
-  done: false
-}]
-//这里后面改成localStorage
+let PROJECT_LIST = 'PROJECT_LIST'
 
-const types = {
+let all = JSON.parse(localStorage.getItem(PROJECT_LIST)) || []
+console.log(all)
+//这里后面改成localStorage
+  const
+types = {
   ADD_PROJECT: 'ADD_PROJECT',
   REMOVE_PROJECT: 'REMOVE_PROJECT'
 }
@@ -78,8 +57,13 @@ let addProject = function (state, project) {
       title: project.title,
       description: project.description || '',
       type: project.type,
-      path: project.title,
+      path: '/' + project.type + '/' + project.title,
       done: false
     })
   }
+  locallySync()
+}
+
+let locallySync = function () {
+  localStorage.setItem(PROJECT_LIST, JSON.stringify(all))
 }

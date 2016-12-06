@@ -13,7 +13,7 @@
 </template>
 
 <script>
-
+  let index = 0
   export default {
     name: 'app',
     data(){
@@ -27,7 +27,7 @@
     methods: {
       test(){
         this.$store.commit(this.$store.state.project.types.ADD_PROJECT, {
-          title: "asdasd",
+          title: "Title" + index++,
           type: 'project'
         })
       }

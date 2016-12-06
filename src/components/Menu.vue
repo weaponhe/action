@@ -46,23 +46,23 @@
         },
         menu_collection: {
           title: '收集箱',
-          path: 'collection'
+          path: '/collection'
         },
         menu_schedule: {
           title: '日程',
-          path: 'schedule'
+          path: '/schedule'
         },
         menu_project: {
           title: '项目',
-          path: 'project'
+          path: '/project'
         },
         menu_book: {
           title: '书单',
-          path: 'book'
+          path: '/book'
         },
         menu_post: {
           title: '文章',
-          path: 'post'
+          path: '/post'
         }
       }
     },
