@@ -2,14 +2,16 @@
   <div>
     <top-bar></top-bar>
     <nav-menu></nav-menu>
-   <!--  <div class="main">
-      <add-input></add-input>
-      <div class="list">
+    <div class="main">
+        <ac-button @click="show=true">添加项目</ac-button>
+
+      <!-- <add-input></add-input> -->
+     <!--  <div class="list">
         <item-list></item-list>
-        <ac-button @click="test">添加项目</ac-button>
-      </div>
+      </div> -->
     </div>
-    <add-project-box></add-project-box> -->
+
+     <project-add-box v-model="show"></project-add-box>
   </div>
 </template>
 
@@ -19,24 +21,16 @@
     name: 'app',
     data(){
       return {
-        show: true,
+        show: false,
         alertShow: false,
         confirmShow: false,
         promptShow: false
-      }
-    },
-    methods: {
-      test(){
-        this.$store.commit(this.$store.state.project.types.ADD_PROJECT, {
-          title: "Title" + index++,
-          type: 'project'
-        })
       }
     }
   }
 </script>
 
-<style lang="less" rel="stylesheet/less">
+<style scoped lang="less" rel="stylesheet/less">
   body {
     margin: 0;
     padding: 0;

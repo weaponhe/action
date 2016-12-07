@@ -10,6 +10,9 @@ Vue.use(Action)
 
 import NavMenu from './components/nav-bar'
 import TopBar from './components/top-bar'
+import {
+  ProjectAddBox
+} from './components/popup'
 // import AddInput from './components/addInput.vue'
 // import Item from './components/item.vue'
 // import ItemList from './components/itemList.vue'
@@ -17,10 +20,11 @@ import TopBar from './components/top-bar'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
-// Vue.component(AddInput.name, AddInput)
-// Vue.component(Item.name, Item)
-// Vue.component(ItemList.name, ItemList)
-// Vue.component(AddProjectBox.name, AddProjectBox)
+Vue.component(ProjectAddBox.name, ProjectAddBox)
+  // Vue.component(AddInput.name, AddInput)
+  // Vue.component(Item.name, Item)
+  // Vue.component(ItemList.name, ItemList)
+  // Vue.component(AddProjectBox.name, AddProjectBox)
 
 const Foo = {
   template: '<div>foo</div>'

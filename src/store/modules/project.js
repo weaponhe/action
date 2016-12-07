@@ -1,10 +1,8 @@
 let PROJECT_LIST = 'PROJECT_LIST'
 
 let all = JSON.parse(localStorage.getItem(PROJECT_LIST)) || []
-console.log(all)
-//这里后面改成localStorage
-  const
-types = {
+
+const types = {
   ADD_PROJECT: 'ADD_PROJECT',
   REMOVE_PROJECT: 'REMOVE_PROJECT'
 }
@@ -15,17 +13,17 @@ const state = {
 }
 
 const getters = {
-  all_project(state){
+  all_project(state) {
     return state.all.filter((taskbox) => {
       return taskbox.type === 'project'
     })
   },
-  all_book(state){
+  all_book(state) {
     return state.all.filter((taskbox) => {
       return taskbox.type === 'book'
     })
   },
-  all_post(state){
+  all_post(state) {
     return state.all.filter((taskbox) => {
       return taskbox.type === 'post'
     })
@@ -33,10 +31,10 @@ const getters = {
 }
 
 const mutations = {
-  [types.ADD_PROJECT] (state, project) {
+  [types.ADD_PROJECT](state, project) {
     addProject(state, project)
   },
-  [types.REMOVE_PROJECT] (state, project) {
+  [types.REMOVE_PROJECT](state, project) {
     console.log(types.REMOVE_PROJECT)
   }
 }
