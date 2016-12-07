@@ -1,5 +1,5 @@
 <template>
-    <message-box title="新建" v-model="show" @ok="ok">
+    <message-box title="新建" v-model="vModelValue" @ok="ok">
       <ac-input placeholder="请输入名称" v-model="title"></ac-input>
       <ac-input placeholder="请输入描述" v-model="description"></ac-input>
       <select>
@@ -13,28 +13,28 @@
 <script>
     export default {
         name: 'projectAddBox',
+        mixins:[require('../../mixin')],
         data(){
           return {
-            show:false,
             title:'',
             description:'',
             type:'project'
           }
         },
-        props:{
-            value:Boolean
-        },
         methods:{
           ok(){
-            console.log(this.title,this.description,this.type)
-          }
-        },
-        watch:{
-          value(val){
-            this.show = val
+            let newProject = {
+              title:this.title,
+              description:this.description,
+              type: this.type,
+            }
+            this.$store.commit(this.$store.state.project.types.ADD_PROJECT,newProject)
+            this.reset()
           },
-          show(val){
-            this.$emit('input',val)
+          reset(){
+            this.title =''
+            this.description=''
+            this.type = 'project'
           }
         }
     }
