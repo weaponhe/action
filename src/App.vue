@@ -2,14 +2,14 @@
   <div>
     <top-bar></top-bar>
     <nav-menu></nav-menu>
-    <div class="main">
+   <!--  <div class="main">
       <add-input></add-input>
       <div class="list">
         <item-list></item-list>
         <ac-button @click="test">添加项目</ac-button>
       </div>
     </div>
-    <add-project-box show></add-project-box>
+    <add-project-box></add-project-box> -->
   </div>
 </template>
 
