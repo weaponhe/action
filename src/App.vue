@@ -9,6 +9,7 @@
         <ac-button @click="test">添加项目</ac-button>
       </div>
     </div>
+    <add-project-box show></add-project-box>
   </div>
 </template>
 
