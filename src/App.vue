@@ -9,6 +9,7 @@
      <!--  <div class="list">
         <item-list></item-list>
       </div> -->
+      <ac-input v-model="inputValue"></ac-input>
     </div>
 
      <project-add-box v-model="show"></project-add-box>
@@ -24,7 +25,13 @@
         show: false,
         alertShow: false,
         confirmShow: false,
-        promptShow: false
+        promptShow: false,
+        inputValue:'test'
+      }
+    },
+    watch:{
+      inputValue(val){
+          console.log(val)
       }
     }
   }
