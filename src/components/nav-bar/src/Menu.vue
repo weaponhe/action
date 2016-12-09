@@ -37,16 +37,16 @@
       return {
         menu_today: {
           title: '今日待办',
-          path: '/today',
+          path: '/filter/today',
           active: true
         },
         menu_tomorrow: {
           title: '明日待办',
-          path: '/tomorrow'
+          path: '/filter/tomorrow'
         },
         menu_collection: {
           title: '收集箱',
-          path: '/collection'
+          path: '/filter/collection'
         },
         menu_schedule: {
           title: '日程',
@@ -54,15 +54,15 @@
         },
         menu_project: {
           title: '项目',
-          path: '/project'
+          path: '/todo/project'
         },
         menu_book: {
           title: '书单',
-          path: '/book'
+          path: '/todo/book'
         },
         menu_post: {
           title: '文章',
-          path: '/post'
+          path: '/todo/post'
         }
       }
     },

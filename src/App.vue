@@ -3,16 +3,12 @@
     <top-bar></top-bar>
     <nav-menu></nav-menu>
     <div class="main">
-        <ac-button @click="show=true">添加项目</ac-button>
-
-      <!-- <add-input></add-input> -->
-     <!--  <div class="list">
-        <item-list></item-list>
-      </div> -->
-      <ac-input v-model="inputValue"></ac-input>
+      <ac-button @click="show=true">添加项目</ac-button>
+      <!--<ac-input v-model="inputValue"></ac-input>-->
+      <router-view></router-view>
     </div>
 
-     <project-add-box v-model="show"></project-add-box>
+    <project-add-box v-model="show"></project-add-box>
   </div>
 </template>
 
@@ -26,12 +22,12 @@
         alertShow: false,
         confirmShow: false,
         promptShow: false,
-        inputValue:'test'
+        inputValue: 'test'
       }
     },
-    watch:{
+    watch: {
       inputValue(val){
-          console.log(val)
+        console.log(val)
       }
     }
   }

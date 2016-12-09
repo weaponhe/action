@@ -55,7 +55,7 @@ let addProject = function (state, project) {
       title: project.title,
       description: project.description || '',
       type: project.type,
-      path: '/' + project.type + '/' + project.title,
+      path: '/todo/' + project.type + '/' + project.title,
       done: false
     })
   }

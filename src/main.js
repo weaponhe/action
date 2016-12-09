@@ -13,37 +13,31 @@ import TopBar from './components/top-bar'
 import {
   ProjectAddBox
 } from './components/popup'
-// import AddInput from './components/addInput.vue'
-// import Item from './components/item.vue'
-// import ItemList from './components/itemList.vue'
-// import AddProjectBox from './components/addProjectBox.vue'
+
+import ProjectListView from './components/main-view/ProjectListView.vue'
+import TaskListView from './components/main-view/TaskListView.vue'
+import ScheduleView from './components/main-view/ScheduleView.vue'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
 Vue.component(ProjectAddBox.name, ProjectAddBox)
-  // Vue.component(AddInput.name, AddInput)
-  // Vue.component(Item.name, Item)
-  // Vue.component(ItemList.name, ItemList)
-  // Vue.component(AddProjectBox.name, AddProjectBox)
-
-const Foo = {
-  template: '<div>foo</div>'
-}
-const Bar = {
-  template: '<div>bar</div>'
-}
-
-let routes = [{
-  path: '/foo',
-  component: Foo
-}, {
-  path: '/bar',
-  component: Bar
-}]
 
 let router = new VueRouter({
-  routes
+  routes: [{
+    path: '/todo/:type',
+    component: ProjectListView
+  }, {
+    path: '/todo/:type/:title',
+    component: TaskListView
+  },{
+    path: '/schedule',
+    component: ScheduleView
+  },{
+    path: '/filter/:filter',
+    component: TaskListView
+  }]
 })
+
 new Vue({
   el: '#app',
   template: '<App/>',
@@ -51,13 +45,5 @@ new Vue({
     App
   },
   store,
-  router,
-  mounted() {
-    window.onhashchange = handleHashChange.bind(this)
-    location.hash = location.hash
-  }
+  router
 })
-
-function handleHashChange() {
-  console.log(location.hash)
-}

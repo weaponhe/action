@@ -5,8 +5,10 @@
 </template>
 
 <script>
+  import Item from './Item.vue'
   export default {
     name: 'itemList',
+    components: {Item},
     props: {
       items: Array
     }
