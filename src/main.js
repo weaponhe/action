@@ -11,7 +11,8 @@ Vue.use(Action)
 import NavMenu from './components/nav-bar'
 import TopBar from './components/top-bar'
 import {
-  ProjectAddBox
+  TodoAddBox,
+  TaskAddBox
 } from './components/popup'
 
 import ProjectListView from './components/main-view/ProjectListView.vue'
@@ -20,7 +21,8 @@ import ScheduleView from './components/main-view/ScheduleView.vue'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
-Vue.component(ProjectAddBox.name, ProjectAddBox)
+Vue.component(TodoAddBox.name, TodoAddBox)
+Vue.component(TaskAddBox.name, TaskAddBox)
 
 let router = new VueRouter({
   routes: [{

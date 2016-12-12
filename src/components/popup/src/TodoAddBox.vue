@@ -32,7 +32,7 @@
           description: this.description,
           type: this.type,
         }
-        this.$store.commit(this.$store.state.project.types.ADD_PROJECT, newProject)
+        this.$store.commit(this.$store.state.todo.types.ADD_PROJECT, newProject)
         this.reset()
       },
       reset(){

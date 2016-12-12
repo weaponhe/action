@@ -4,11 +4,13 @@
     <nav-menu></nav-menu>
     <div class="main">
       <ac-button @click="show=true">添加项目</ac-button>
+      <ac-button @click="showTaskAddBox=true">添加任务</ac-button>
       <!--<ac-input v-model="inputValue"></ac-input>-->
       <router-view></router-view>
     </div>
 
     <project-add-box v-model="show"></project-add-box>
+    <Task-add-box v-model="showTaskAddBox"></Task-add-box>
   </div>
 </template>
 
@@ -19,6 +21,7 @@
     data(){
       return {
         show: false,
+        showTaskAddBox:false,
         alertShow: false,
         confirmShow: false,
         promptShow: false,

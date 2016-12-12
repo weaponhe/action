@@ -1,34 +1,76 @@
+let PROJECT_LIST = 'PROJECT_LIST'
+
+let all = JSON.parse(localStorage.getItem(PROJECT_LIST)) || []
+
 const types = {
-  ADD_TODO: 'ADD_TODO',
-  REMOVE_TODO: 'REMOVE_TODO'
+  ADD_PROJECT: 'ADD_PROJECT',
+  ADD_TASK: 'ADD_TASK',
+  REMOVE_PROJECT: 'REMOVE_PROJECT'
 }
 
 const state = {
-  all: [],
+  all: all,
   types
 }
 
-const mutations = {
-  [types.ADD_TODO] (state, todo) {
-    addTodo(state, todo)
+const getters = {
+  all_project(state) {
+    return state.all.filter((taskbox) => {
+      return taskbox.type === 'project'
+    })
   },
-  [types.REMOVE_TODO] (state, todo) {
-    console.log(types.REMOVE_TODO)
+  all_book(state) {
+    return state.all.filter((taskbox) => {
+      return taskbox.type === 'book'
+    })
+  },
+  all_post(state) {
+    return state.all.filter((taskbox) => {
+      return taskbox.type === 'post'
+    })
+  }
+}
+
+const mutations = {
+  [types.ADD_PROJECT](state, project) {
+    addProject(state, project)
+  },
+  [types.REMOVE_PROJECT](state, project) {
+    console.log(types.REMOVE_PROJECT)
+  },
+  [types.ADD_TASK](state, todo, task){
+    addTask(state, todo, task)
   }
 }
 
 export default {
   state,
-  mutations
+  mutations,
+  getters
 }
 
-let addTodo = function (state, todo = {}) {
-  state.all.unshift({
-    name: todo.name || 'New Todo',
-    description: todo.description || '',
-    tags: todo.tags || [],
-    deadline: '',
-    project: '',
-    done: false
+let addProject = function (state, project) {
+  let exist = state.all.some(item => {
+    return item.type === project.type &&
+      item.title === project.title
   })
+  if (!exist) {
+    state.all.push({
+      title: project.title,
+      description: project.description || '',
+      type: project.type,
+      path: '/todo/' + project.type + '/' + project.title,
+      done: false,
+      tasks: []
+    })
+  }
+  locallySync()
+}
+let addTask = function (state, todo, task) {
+  todo.tasks.push(task)
+  locallySync()
+}
+
+let locallySync = function () {
+  localStorage.setItem(PROJECT_LIST, JSON.stringify(all))
 }
