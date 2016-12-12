@@ -2,18 +2,12 @@
   <message-box title="新建" v-model="vModelValue" @ok="ok">
     <ac-input placeholder="请输入名称" v-model="title"></ac-input>
     <ac-input placeholder="请输入描述" v-model="description"></ac-input>
-    <select v-model="type">
-      <option value="project">项目</option>
-      <option value="book">书单</option>
-      <option value="post">文章</option>
-    </select>
+    <ac-select :options="typeArray" v-model="type"></ac-select>
   </message-box>
 </template>
 
 <script>
-  //todo
   import mixin from 'action-ui/dist/mixin'
-  //  console.log(mixin)
   export default {
     name: 'projectAddBox',
     mixins: [mixin.default.ModelMixin],
@@ -21,8 +15,17 @@
       return {
         title: '',
         description: '',
-        type: 'project'
+        type: '',
+        typeArray: [
+          {value: 'project', text: '项目'},
+          {value: 'book', text: '书单'},
+          {value: 'post', text: '文章'}
+        ]
       }
+    },
+    created(){
+      //后面改成根据页面变化而变化
+      this.type = 'project'
     },
     methods: {
       ok(){

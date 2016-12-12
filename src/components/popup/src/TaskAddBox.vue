@@ -2,9 +2,7 @@
   <message-box title="添加任务" v-model="vModelValue" @ok="ok">
     <ac-input placeholder="请输入名称" v-model="title"></ac-input>
     <ac-input placeholder="请输入描述" v-model="description"></ac-input>
-    <select v-model="targetTodo">
-      <option v-for="(todo,index) in todos" value="index">{{todo.title}}</option>
-    </select>
+    <ac-select :options="todos" v-model="selectedTodo"></ac-select>
   </message-box>
 </template>
 
@@ -18,13 +16,20 @@
       return {
         title: '',
         description: '',
-        targetTodo: this.todos && this.todos[0]
+        targetTodo: this.todos && this.todos[0],
+        selectedTodo: ''
       }
     },
     computed: {
       todos(){
-        return this.$store.state.todo.all
+        return this.$store.state.todo.all.map((todo) => {
+          return {value: todo.title, text: todo.title}
+        })
       }
+    },
+    created(){
+      //后面改为根据页面变化而变化
+      this.selectedTodo = this.todos[0].value
     },
     methods: {
       ok(){
