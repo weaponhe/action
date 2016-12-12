@@ -2,7 +2,7 @@
   <div class="item"
        @click="selected = !selected"
        :class="{selected}">
-    <input type="checkbox">
+    <ac-checkbox v-model="data.done" ></ac-checkbox>
     <span class="time">{{data.deadline}}</span>
     <span class="title">{{data.title}}</span>
     <span class="project">{{data.project}}</span>

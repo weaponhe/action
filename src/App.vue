@@ -6,6 +6,7 @@
       <ac-button @click="show=true">添加项目</ac-button>
       <ac-button @click="showTaskAddBox=true">添加任务</ac-button>
       <!--<ac-input v-model="inputValue"></ac-input>-->
+      <!--<ac-checkbox v-model="checkValue"></ac-checkbox>-->
       <router-view></router-view>
     </div>
 
@@ -21,15 +22,19 @@
     data(){
       return {
         show: false,
-        showTaskAddBox:false,
+        showTaskAddBox: false,
         alertShow: false,
         confirmShow: false,
         promptShow: false,
-        inputValue: 'test'
+        inputValue: 'test',
+        checkValue: true
       }
     },
     watch: {
       inputValue(val){
+        console.log(val)
+      },
+      checkValue(val){
         console.log(val)
       }
     }
