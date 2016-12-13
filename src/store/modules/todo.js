@@ -8,25 +8,39 @@ const types = {
   REMOVE_PROJECT: 'REMOVE_PROJECT'
 }
 
+const todoTypeMap = {
+  project: {value: 'project', text: '项目'},
+  book: {value: 'book', text: '书单'},
+  post: {value: 'post', text: '文章'}
+}
+
+
 const state = {
   all: all,
-  types
+  types,
+  todoTypeMap
 }
 
 const getters = {
-  all_project(state) {
-    return state.all.filter((taskbox) => {
-      return taskbox.type === 'project'
+  project(state) {
+    return state.all.filter((todo) => {
+      return todo.type === 'project'
     })
   },
-  all_book(state) {
-    return state.all.filter((taskbox) => {
-      return taskbox.type === 'book'
+  book(state) {
+    return state.all.filter((todo) => {
+      return todo.type === 'book'
     })
   },
-  all_post(state) {
-    return state.all.filter((taskbox) => {
-      return taskbox.type === 'post'
+  post(state) {
+    return state.all.filter((todo) => {
+      return todo.type === 'post'
+    })
+  },
+  todoTypeArray(){
+    let keys = Object.keys(todoTypeMap)
+    return keys.map((key) => {
+      return todoTypeMap[key].value
     })
   }
 }
