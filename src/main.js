@@ -15,7 +15,7 @@ import {
   TaskAddBox
 } from './components/popup'
 
-import ProjectListView from './components/main-view/ProjectListView.vue'
+import TodoListView from './components/main-view/TodoListView.vue'
 import TaskListView from './components/main-view/TaskListView.vue'
 import ScheduleView from './components/main-view/ScheduleView.vue'
 
@@ -27,7 +27,7 @@ Vue.component(TaskAddBox.name, TaskAddBox)
 let router = new VueRouter({
   routes: [{
     path: '/todo/:type',
-    component: ProjectListView
+    component: TodoListView
   }, {
     path: '/todo/:type/:title',
     component: TaskListView

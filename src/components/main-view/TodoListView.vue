@@ -5,22 +5,19 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   import ItemList from './ItemList.vue'
   export default {
-    name: 'ProjectListView',
+    name: 'TodoListView',
     components: {ItemList},
     computed: {
       items(){
         let type = this.$route.params.type
-        switch (type) {
-          case 'project':
-            return this.$store.getters.all_project
-          case 'book':
-            return this.$store.getters.all_book
-          case 'post':
-            return this.$store.getters.all_post
-        }
-      }
+        if (type && this.todoTypeArray.indexOf(type) !== -1)
+          return this.$store.getters[type]
+        else return []
+      },
+      ...mapGetters(['todoTypeArray'])
     }
   }
 </script>
