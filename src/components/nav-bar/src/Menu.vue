@@ -6,21 +6,9 @@
       <router-menu-item :data="menu_collection"></router-menu-item>
       <router-menu-item :data="menu_schedule"></router-menu-item>
 
-      <router-menu-item :data="menu_project">
+      <router-menu-item v-for="menu_todo in menu_todos" :data="menu_todo">
         <menu-item-list>
-          <router-menu-item v-for="project in all_project" :data="project"></router-menu-item>
-        </menu-item-list>
-      </router-menu-item>
-
-      <router-menu-item :data="menu_book">
-        <menu-item-list>
-          <router-menu-item v-for="book in all_book" :data="book"></router-menu-item>
-        </menu-item-list>
-      </router-menu-item>
-
-      <router-menu-item :data="menu_post">
-        <menu-item-list>
-          <router-menu-item v-for="post in all_post" :data="post"></router-menu-item>
+          <router-menu-item v-for="todo in $store.getters[menu_todo.value]" :data="todo"></router-menu-item>
         </menu-item-list>
       </router-menu-item>
 
@@ -29,6 +17,7 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   import RouterMenuItem from './routerMenuItem.vue'
   export default {
     name: 'navMenu',
@@ -51,30 +40,23 @@
         menu_schedule: {
           title: '日程',
           path: '/schedule'
-        },
-        menu_project: {
-          title: '项目',
-          path: '/todo/project'
-        },
-        menu_book: {
-          title: '书单',
-          path: '/todo/book'
-        },
-        menu_post: {
-          title: '文章',
-          path: '/todo/post'
         }
       }
     },
     computed: {
-      all_project(){
-        return this.$store.getters.all_project
-      },
-      all_book(){
-        return this.$store.getters.all_book
-      },
-      all_post(){
-        return this.$store.getters.all_post
+      menu_todos(){
+        let origin = this.$store.state.todo.todoTypeMap,
+          ret = [],
+          type
+        for (type in origin) {
+          let typeMap = origin[type]
+          ret.push({
+            title: typeMap.text,
+            value: typeMap.value,
+            path: '/todo/' + typeMap.value
+          })
+        }
+        return ret
       }
     }
   }
