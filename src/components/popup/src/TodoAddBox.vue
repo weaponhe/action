@@ -7,29 +7,29 @@
 </template>
 
 <script>
+  import {mapGetters, mapState} from 'vuex'
   import mixin from 'action-ui/dist/mixin'
   export default {
-    name: 'projectAddBox',
+    name: 'ProjectAddBox',
     mixins: [mixin.default.ModelMixin],
     data(){
       return {
         title: '',
         description: '',
-        type: '',
-        typeArray: [
-          {value: 'project', text: '项目'},
-          {value: 'book', text: '书单'},
-          {value: 'post', text: '文章'}
-        ]
+        type: ''
       }
     },
-    created(){
-      //后面改成根据页面变化而变化
-      this.type = 'project'
+    computed: {
+      typeArray(){
+        return this.todoTypeArray.map(key => this.todoTypeMap[key])
+      },
+      ...mapState({
+        todoTypeMap: state => state.todo.todoTypeMap,
+      }),
+      ...mapGetters(['todoTypeArray'])
     },
     methods: {
       ok(){
-        console.log(this.type)
         let newProject = {
           title: this.title,
           description: this.description,
@@ -41,7 +41,21 @@
       reset(){
         this.title = ''
         this.description = ''
-        this.type = 'project'
+        setType()
+      },
+      setType(val){
+        if (val && this.todoTypeArray.indexOf(val) !== -1)
+          this.type = val
+        else
+          this.type = this.todoTypeArray[0]
+      }
+    },
+    created(){
+      this.setType()
+    },
+    watch: {
+      '$route.params.type': function (val) {
+        this.setType(val)
       }
     }
   }

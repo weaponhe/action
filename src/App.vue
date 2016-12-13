@@ -50,17 +50,6 @@
     },
     created(){
       this.selectedValue = this.selectArray[2].value
-    },
-    watch: {
-      inputValue(val){
-        console.log(val)
-      },
-      checkValue(val){
-        console.log(val)
-      },
-      selectedValue(val){
-        console.log(val)
-      }
     }
   }
 </script>
