@@ -30,20 +30,29 @@
     },
     methods: {
       ok(){
-        let newProject = {
-          title: this.title,
-          description: this.description,
-          type: this.type,
+        let todos = this.$store.getters[this.type]
+        let exist = todos.some(item => {
+          return item.title === this.title
+        })
+        if (!exist) {
+          this.$store.commit(this.$store.state.todo.types.ADD_PROJECT, {
+            title: this.title,
+            description: this.description,
+            type: this.type,
+          })
         }
-        this.$store.commit(this.$store.state.todo.types.ADD_PROJECT, newProject)
+        else {
+          console.log('exist!!!')
+        }
         this.reset()
       },
       reset(){
         this.title = ''
         this.description = ''
-        setType()
+        this.setType()
       },
-      setType(val){
+      setType(){
+        let val = this.$route.params.type
         if (val && this.todoTypeArray.indexOf(val) !== -1)
           this.type = val
         else
@@ -52,11 +61,6 @@
     },
     created(){
       this.setType()
-    },
-    watch: {
-      '$route.params.type': function (val) {
-        this.setType(val)
-      }
     }
   }
 </script>

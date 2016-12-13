@@ -64,22 +64,17 @@ export default {
 }
 
 let addProject = function (state, project) {
-  let exist = state.all.some(item => {
-    return item.type === project.type &&
-      item.title === project.title
+  state.all.push({
+    title: project.title,
+    description: project.description || '',
+    type: project.type,
+    path: '/todo/' + project.type + '/' + project.title,
+    done: false,
+    tasks: []
   })
-  if (!exist) {
-    state.all.push({
-      title: project.title,
-      description: project.description || '',
-      type: project.type,
-      path: '/todo/' + project.type + '/' + project.title,
-      done: false,
-      tasks: []
-    })
-  }
   locallySync()
 }
+
 let addTask = function (state, todo, task) {
   todo.tasks.push(task)
   locallySync()
