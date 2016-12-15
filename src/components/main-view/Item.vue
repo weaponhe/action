@@ -2,9 +2,9 @@
   <div class="item"
        @click="selected = !selected"
        :class="{selected}">
-    <ac-checkbox v-model="data.done" ></ac-checkbox>
+    <ac-checkbox v-model="data.done"></ac-checkbox>
     <span class="time">{{data.deadline}}</span>
-    <span class="title">{{data.title}}</span>
+    <router-link :to="data.path"><span class="title">{{data.title}}</span></router-link>
     <span class="project">{{data.project}}</span>
   </div>
 </template>

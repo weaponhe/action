@@ -1,85 +1,78 @@
-let PROJECT_LIST = 'PROJECT_LIST'
+import {findTodoWithPath} from '../../util'
 
-let all = JSON.parse(localStorage.getItem(PROJECT_LIST)) || []
+const RE_TODO_PATH = /todo\/([^\/]+)\/([^\/]+)?/,
 
-const types = {
-  ADD_PROJECT: 'ADD_PROJECT',
-  ADD_TASK: 'ADD_TASK',
-  REMOVE_PROJECT: 'REMOVE_PROJECT'
-}
-
-const todoTypeMap = {
-  project: {value: 'project', text: '项目'},
-  book: {value: 'book', text: '书单'},
-  post: {value: 'post', text: '文章'}
-}
-
-
-const state = {
-  all: all,
-  types,
-  todoTypeMap
-}
-
-const getters = {
-  project(state) {
-    return state.all.filter((todo) => {
-      return todo.type === 'project'
-    })
+  state = {
+    types: {
+      ADD_TODO: 'ADD_TODO'
+    }
   },
-  book(state) {
-    return state.all.filter((todo) => {
-      return todo.type === 'book'
-    })
+  mutations = {
+    [state.types.ADD_TODO](state, payload) {
+      addTodo(state, payload)
+    }
   },
-  post(state) {
-    return state.all.filter((todo) => {
-      return todo.type === 'post'
-    })
-  },
-  todoTypeArray(){
-    let keys = Object.keys(todoTypeMap)
-    return keys.map((key) => {
-      return todoTypeMap[key].value
-    })
-  }
-}
 
-const mutations = {
-  [types.ADD_PROJECT](state, project) {
-    addProject(state, project)
-  },
-  [types.REMOVE_PROJECT](state, project) {
-    console.log(types.REMOVE_PROJECT)
-  },
-  [types.ADD_TASK](state, todo, task){
-    addTask(state, todo, task)
-  }
-}
+  TODO_LOCAL_STORAGE_KEY = 'TODO_LOCAL_STORAGE_KEY',
+  INBOX_LOCAL_STORAGE_KEY = 'INBOX_LOCAL_STORAGE_KEY'
 
 export default {
   state,
-  mutations,
-  getters
+  mutations
 }
 
-let addProject = function (state, project) {
-  state.all.push({
-    title: project.title,
-    description: project.description || '',
-    type: project.type,
-    path: '/todo/' + project.type + '/' + project.title,
+let data = state.data = JSON.parse(localStorage.getItem(TODO_LOCAL_STORAGE_KEY)) || new Todo({path: '', title: 'todo'})
+//初始化数据
+if (data.subTodoList.length === 0) {
+  data.subTodoList.push(new Todo({title: '收集箱', path: data.path}))
+  data.subTodoList.push(new Todo({title: '工作区', path: data.path}))
+}
+//初始化测试数据
+let todo = data.subTodoList.find(sub => sub.title === '工作区')
+if (todo.subTodoList.length === 0) {
+  todo.subTodoList.push(new Todo({title: '项目', path: todo.path}))
+  todo.subTodoList.push(new Todo({title: '书单', path: todo.path}))
+  todo.subTodoList.push(new Todo({title: '文章', path: todo.path}))
+}
+//代理设置
+proxyTree(data)
+locallySync()
+
+function Todo(payload) {
+  return {
+    title: payload.title,
+    description: payload.description || '',
+    path: payload.path + '/' + payload.title,
     done: false,
-    tasks: []
+    subTodoList: []
+  }
+}
+
+function addTodo(state, payload) {
+  let parent = state[payload.path]
+  let todo = new Todo(payload)
+  parent.subTodoList.push(todo)
+  proxy(todo)
+  locallySync()
+}
+
+function locallySync() {
+  localStorage.setItem(TODO_LOCAL_STORAGE_KEY, JSON.stringify(data))
+}
+
+function proxyTree(root) {
+  let stack = [root]
+  while (stack.length) {
+    let todo = stack.pop()
+    proxy(todo)
+    stack.push(...todo.subTodoList)
+  }
+}
+
+function proxy(todo) {
+  Object.defineProperty(state, todo.path, {
+    get(){
+      return todo
+    }
   })
-  locallySync()
-}
-
-let addTask = function (state, todo, task) {
-  todo.tasks.push(task)
-  locallySync()
-}
-
-let locallySync = function () {
-  localStorage.setItem(PROJECT_LIST, JSON.stringify(all))
 }

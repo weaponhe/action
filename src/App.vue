@@ -3,13 +3,17 @@
     <top-bar></top-bar>
     <nav-menu></nav-menu>
     <div class="main">
-      <ac-button @click="show=true">添加项目</ac-button>
-      <ac-button @click="showTaskAddBox=true">添加任务</ac-button>
-      <router-view></router-view>
+      <ac-button @click="show1=true">添加子TODO</ac-button>
+      <ac-button @click="show2=true">添加菜单项</ac-button>
+      <ac-button @click="show3=true">添加项目</ac-button>
+      <div class="content-wrapper">
+        <router-view></router-view>
+      </div>
     </div>
 
-    <project-add-box v-model="show"></project-add-box>
-    <Task-add-box v-model="showTaskAddBox"></Task-add-box>
+    <create-sub-todo-box v-model="show1"></create-sub-todo-box>
+    <create-menu-todo-box v-model="show2"></create-menu-todo-box>
+    <create-main-todo-box v-model="show3"></create-main-todo-box>
   </div>
 </template>
 
@@ -19,7 +23,9 @@
     name: 'app',
     data(){
       return {
-        show: false,
+        show1: false,
+        show2: false,
+        show3: false,
         showTaskAddBox: false,
         alertShow: false,
         confirmShow: false,
@@ -53,8 +59,8 @@
     left: 250px;
     right: 0;
     padding: 10px 20px;
-    .list {
-      margin-top: 50px;
+    .content-wrapper {
+      height: 100%;
     }
   }
 </style>

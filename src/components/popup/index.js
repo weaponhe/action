@@ -1,7 +1,9 @@
-let TodoAddBox = require('./src/TodoAddBox.vue');
-let TaskAddBox = require('./src/TaskAddBox.vue');
+let CreateSubTodoBox = require('./src/CreateSubTodoBox.vue')
+let CreateMenuTodoBox = require('./src/CreateMenuTodoBox.vue')
+let CreateMainTodoBox = require('./src/CreateMainTodoBox.vue')
 
 module.exports = {
-  TodoAddBox,
-  TaskAddBox
+  CreateSubTodoBox,
+  CreateMenuTodoBox,
+  CreateMainTodoBox
 }

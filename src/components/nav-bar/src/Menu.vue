@@ -3,12 +3,15 @@
     <vertical-menu>
       <router-menu-item :data="menu_today"></router-menu-item>
       <router-menu-item :data="menu_tomorrow"></router-menu-item>
-      <router-menu-item :data="menu_collection"></router-menu-item>
       <router-menu-item :data="menu_schedule"></router-menu-item>
 
-      <router-menu-item v-for="menu_todo in menu_todos" :data="menu_todo">
+      <router-menu-item :data="inbox"></router-menu-item>
+
+      <router-menu-item v-for="firstLevelTodo in todoList"
+                        :data="firstLevelTodo">
         <menu-item-list>
-          <router-menu-item v-for="todo in $store.getters[menu_todo.value]" :data="todo"></router-menu-item>
+          <router-menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"
+                            :data="secondLevelTodo"></router-menu-item>
         </menu-item-list>
       </router-menu-item>
 
@@ -33,10 +36,6 @@
           title: '明日待办',
           path: '/filter/tomorrow'
         },
-        menu_collection: {
-          title: '收集箱',
-          path: '/filter/collection'
-        },
         menu_schedule: {
           title: '日程',
           path: '/schedule'
@@ -44,20 +43,12 @@
       }
     },
     computed: {
-      menu_todos(){
-        let origin = this.$store.state.todo.todoTypeMap,
-          ret = [],
-          type
-        for (type in origin) {
-          let typeMap = origin[type]
-          ret.push({
-            title: typeMap.text,
-            value: typeMap.value,
-            path: '/todo/' + typeMap.value
-          })
-        }
-        return ret
-      }
+      todoList(){
+        return this.$store.state.todo['/todo/工作区'].subTodoList
+      },
+      inbox(){
+        return this.$store.state.todo['/todo/收集箱']
+      },
     }
   }
 </script>
