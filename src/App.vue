@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <top-bar></top-bar>
-    <nav-menu></nav-menu>
+  <div class="container">
+    <div class="top">
+      <top-bar></top-bar>
+    </div>
+    <div class="left">
+      <nav-menu></nav-menu>
+    </div>
     <div class="main">
-      <ac-button @click="show1=true">添加子TODO</ac-button>
-      <ac-button @click="show2=true">添加菜单项</ac-button>
-      <ac-button @click="show3=true">添加项目</ac-button>
-      <div class="content-wrapper">
-        <router-view></router-view>
-      </div>
+      <!--<ac-button @click="show2=true">添加菜单项</ac-button>-->
+      <!--<ac-button @click="show3=true">添加项目</ac-button>-->
+      <!--<div class="router-view">-->
+      <router-view></router-view>
+      <!--</div>-->
     </div>
 
-    <create-sub-todo-box v-model="show1"></create-sub-todo-box>
     <create-menu-todo-box v-model="show2"></create-menu-todo-box>
     <create-main-todo-box v-model="show3"></create-main-todo-box>
   </div>
@@ -52,15 +54,27 @@
     padding: 0;
   }
 
-  .main {
+  .container {
     position: absolute;
-    top: 56px;
+    top: 0;
     bottom: 0;
-    left: 250px;
+    left: 0;
     right: 0;
-    padding: 10px 20px;
-    .content-wrapper {
-      height: 100%;
+    overflow: hidden;
+    .top {
+
+    }
+    .left {
+      overflow: scroll;
+    }
+    .main {
+      position: absolute;
+      top: 56px;
+      bottom: 0;
+      left: 250px;
+      right: 0;
+      padding: 10px 20px;
+      overflow: hidden;
     }
   }
 </style>
