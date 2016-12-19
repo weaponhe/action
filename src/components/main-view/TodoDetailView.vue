@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <router-link v-if="parentTodoPath" :to="parentTodoPath"><ac-button @click="backward">后退</ac-button></router-link>
+    <breadcrumb></Breadcrumb>
     <div class="todo">
       <h3>#{{todo.title}}</h3>
       <ac-button @click="showSubTodoBox=true">添加子TODO</ac-button>
@@ -14,10 +14,11 @@
 
 <script>
   import ItemList from './ItemList.vue'
+  import Breadcrumb from './Breadcrumb.vue'
   import {findTodoWithPath} from '../../util'
   export default {
     name: 'TodoDetailView',
-    components: {ItemList},
+    components: {ItemList,Breadcrumb},
     data(){
       return {showSubTodoBox: false,
 
@@ -26,15 +27,6 @@
     computed: {
       todo(){
         return this.$store.state.todo[this.$route.path]
-      },
-      parentTodoPath(){
-        let path = this.$route.path,
-        res = path.split('/')
-        if(res&&res.length>3){
-          let ret = res.slice(0,-1).join('/')
-          return ret
-        }
-        return ''
       }
     },
     methods:{
