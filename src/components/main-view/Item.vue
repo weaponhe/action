@@ -1,11 +1,10 @@
 <template>
   <div class="item"
-       @click="selected = !selected"
+       @click="handleSelect"
        :class="{selected}">
-    <ac-checkbox v-model="data.done"></ac-checkbox>
-    <span class="time">{{data.deadline}}</span>
-    <router-link :to="data.path"><span class="title">{{data.title}}</span></router-link>
-    <span class="project">{{data.project}}</span>
+    <ac-checkbox size="small" v-model="data.done"></ac-checkbox>
+    <!--<span class="time">{{data.deadline}}</span>-->
+    <router-link class="title" :to="data.path">{{data.title}}</router-link>
   </div>
 </template>
 
@@ -19,21 +18,27 @@
     },
     props: {
       data: Object
+    },
+    methods:{
+        handleSelect(){
+          this.selected = !this.selected
+        }
     }
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
   .item {
-    margin: 0 10px;
     padding: 0 10px;
-    height: 50px;
-    border-bottom: 1px solid #c0ccda;
-    line-height: 50px;
-    font-size: 20px;
+    height: 40px;
+    border-top: 1px solid #c0ccda;
+    line-height: 40px;
+    font-size: 15px;
     transition: background-color .2s cubic-bezier(.645, .045, .355, 1),
     color .2s cubic-bezier(.645, .045, .355, 1);
-
+    &:last-child{
+      border-bottom: 1px solid #c0ccda;
+    }
     &:hover {
       cursor: pointer;
       background-color: #f9fafc;
@@ -41,6 +46,12 @@
     &.selected {
       background-color: #1f2f3d;
       color: #CCC;
+    }
+
+    .title{
+      display: inline-block;
+      height: 100%;
+      padding:0 20px;
     }
   }
 </style>

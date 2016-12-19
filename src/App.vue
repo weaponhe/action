@@ -6,7 +6,7 @@
     <div class="left">
       <nav-menu></nav-menu>
     </div>
-    <div class="main">
+    <div class="main-body">
       <!--<ac-button @click="show2=true">添加菜单项</ac-button>-->
       <!--<ac-button @click="show3=true">添加项目</ac-button>-->
       <!--<div class="router-view">-->
@@ -48,10 +48,20 @@
   }
 </script>
 
-<style scoped lang="less" rel="stylesheet/less">
+<style lang="less" rel="stylesheet/less">
   body {
     margin: 0;
     padding: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+    transition: color .1s;
+    &:hover {
+      text-decoration:underline;
+      color:#4078c0;
+    }
   }
 
   .container {
@@ -67,14 +77,14 @@
     .left {
       overflow: scroll;
     }
-    .main {
+    .main-body {
       position: absolute;
       top: 56px;
       bottom: 0;
       left: 250px;
       right: 0;
       padding: 10px 20px;
-      overflow: hidden;
+      overflow: auto;
     }
   }
 </style>
