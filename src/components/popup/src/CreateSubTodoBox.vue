@@ -4,6 +4,7 @@
     <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
       <ac-input placeholder="请输入名称" v-model="title"></ac-input>
       <ac-input placeholder="请输入描述" v-model="description"></ac-input>
+      <input type="date" v-model="deadline"/>
       <ac-select v-if="showSelect" :options="todoList" v-model="path"></ac-select>
     </message-box>
   </div>
@@ -21,6 +22,7 @@
         openConfictMessage: false,
         title: '',
         description: '',
+        deadline: '',
         path: '',
       }
     },
@@ -28,15 +30,14 @@
       todoList(){
         let parentTodo = this.$store.state.todo[this.$route.path]
         return parentTodo ? [parentTodo].map((sub) => {
-          return {text: sub.title, value: sub.path}
-        }) : []
+            return {text: sub.title, value: sub.path}
+          }) : []
       }
     },
     watch: {
       vModelValue(val){
-        if(val){
-          val && this.setPath()
-        }else{
+        if (val) {
+          this.setPath()
           this.reset()
         }
       }
@@ -56,11 +57,12 @@
             this.openConfictMessage = false
           }, 2000)
         }
-        this.reset()
       },
       reset(){
         this.title = ''
         this.description = ''
+        let date = new Date()
+        this.deadline = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
       },
       setPath(){
         let path = this.$route.path,

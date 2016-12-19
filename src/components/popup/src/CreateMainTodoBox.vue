@@ -4,7 +4,7 @@
     extends: require('./CreateSubTodoBox.vue'),
     data () {
       return {
-        boxTitle: '新建任务',
+        boxTitle: '新建任务'
       }
     },
     computed: {

@@ -1,7 +1,4 @@
-import {findTodoWithPath} from '../../util'
-
-const RE_TODO_PATH = /todo\/([^\/]+)\/([^\/]+)?/,
-
+const
   state = {
     types: {
       ADD_TODO: 'ADD_TODO'

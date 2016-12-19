@@ -11,7 +11,7 @@
       </section>
       <section class="footer">
         <ac-button @click="showSubTodoBox=true">添加</ac-button>
-        <ac-button @click="">编辑</ac-button>
+        <ac-button @click="showEditTodoBox=true">编辑</ac-button>
       </section>
     </div>
 
@@ -20,6 +20,7 @@
     </div>
 
     <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
+    <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
   </div>
 </template>
 
@@ -34,7 +35,7 @@
     data(){
       return {
         showSubTodoBox: false,
-
+        showEditTodoBox:false
       }
     },
     computed: {
