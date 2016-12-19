@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <router-link v-if="parentTodoPath" :to="parentTodoPath"><ac-button @click="backward">后退</ac-button></router-link>
     <div class="todo">
       <h3>#{{todo.title}}</h3>
       <ac-button @click="show=true">添加子TODO</ac-button>
@@ -7,7 +8,7 @@
     <div class="todolist">
       <item-list :items="todo.subTodoList"></item-list>
     </div>
-    <create-sub-todo-box v-model="show"></create-sub-todo-box>
+    <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
   </div>
 </template>
 
@@ -18,12 +19,27 @@
     name: 'TodoDetailView',
     components: {ItemList},
     data(){
-      return {show: false}
+      return {showSubTodoBox: false,
+
+      }
     },
     computed: {
       todo(){
         return this.$store.state.todo[this.$route.path]
       },
+      parentTodoPath(){
+        let path = this.$route.path,
+        res = path.split('/')
+        if(res&&res.length>3){
+          let ret = res.slice(0,-1).join('/')
+          return ret
+        }
+        return ''
+      }
+    },
+    methods:{
+      backward(){
+      }
     }
   }
 </script>
