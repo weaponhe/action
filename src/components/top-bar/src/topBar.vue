@@ -4,8 +4,8 @@
     <icon slot="left" name="account" :size="20"></icon>
     <div slot="right">
       <icon name="add" :size="20"></icon>
-      <ac-button @click="showMainTodoBox=true">添加菜单</ac-button>
-      <ac-button @click="showMenuTodoBox=true">添加TODO</ac-button>
+      <ac-button @click="showMainTodoBox=true">添加新任务</ac-button>
+      <ac-button @click="showMenuTodoBox=true">添加菜单</ac-button>
     </div>
   </app-bar>
     <create-main-todo-box v-model="showMainTodoBox"></create-main-todo-box>
