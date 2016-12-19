@@ -3,7 +3,7 @@
     <router-link v-if="parentTodoPath" :to="parentTodoPath"><ac-button @click="backward">后退</ac-button></router-link>
     <div class="todo">
       <h3>#{{todo.title}}</h3>
-      <ac-button @click="show=true">添加子TODO</ac-button>
+      <ac-button @click="showSubTodoBox=true">添加子TODO</ac-button>
     </div>
     <div class="todolist">
       <item-list :items="todo.subTodoList"></item-list>
