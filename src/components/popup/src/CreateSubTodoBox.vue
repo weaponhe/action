@@ -13,7 +13,7 @@
   import mixin from 'action-ui/dist/mixin'
   export default {
     name: 'CreateSubTodoBox',
-    mixins: [mixin.default.ModelMixin],
+    mixins: [mixin.ModelMixin],
     data(){
       return {
         boxTitle: '新建子任务',
@@ -34,7 +34,11 @@
     },
     watch: {
       vModelValue(val){
-        val && this.setPath()
+        if(val){
+          val && this.setPath()
+        }else{
+          this.reset()
+        }
       }
     },
     methods: {

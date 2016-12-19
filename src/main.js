@@ -20,9 +20,6 @@ import TodoDetailView from './components/main-view/TodoDetailView.vue'
 import TodoListView from './components/main-view/TodoListView.vue'
 import ScheduleView from './components/main-view/ScheduleView.vue'
 
-//test
-import Test from './components/popup/src/CreateMenuTodoBox.vue'
-Vue.component(Test.name, Test)
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
