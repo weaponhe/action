@@ -12,11 +12,16 @@
       <section class="footer">
         <ac-button @click="showSubTodoBox=true">添加</ac-button>
         <ac-button @click="showEditTodoBox=true">编辑</ac-button>
+        <ac-input placeholder="添加任务并回车"></ac-input>
       </section>
     </div>
 
     <div class="todolist">
-      <item-list :items="todo.subTodoList"></item-list>
+      <todo-list title="所有任务" :todoList="todo.subTodoList"></todo-list>
+      <todo-list title="今日之前" :todoList="todo.subTodoList | beforeToday"></todo-list>
+      <todo-list title="今日待办" :todoList="todo.subTodoList | today"></todo-list>
+      <todo-list title="明日待办" :todoList="todo.subTodoList | tomorrow"></todo-list>
+      <todo-list title="将来" :todoList="todo.subTodoList | future"></todo-list>
     </div>
 
     <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
@@ -26,26 +31,22 @@
 
 <script>
   import Item from './Item.vue'
-  import ItemList from './ItemList.vue'
+  import TodoList from './TodoList.vue'
   import Breadcrumb from './Breadcrumb.vue'
-  import {findTodoWithPath} from '../../util'
+  import {beforeToday, today, tomorrow, future, done} from '../../filters'
   export default {
     name: 'TodoDetailView',
-    components: {Item, ItemList, Breadcrumb},
+    components: {Item, TodoList, Breadcrumb},
+    filters: {beforeToday, today, tomorrow, future, done},
     data(){
       return {
         showSubTodoBox: false,
-        showEditTodoBox:false
+        showEditTodoBox: false
       }
     },
     computed: {
       todo(){
         return this.$store.state.todo[this.$route.path]
-      }
-    },
-    methods: {
-      backward(){
-
       }
     }
   }
@@ -57,6 +58,7 @@
     position: relative;
     height: 30%;
     min-height: 200px;
+    margin-top: 20px;
 
     .header {
       position: absolute;
@@ -86,14 +88,12 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 60px;
-      line-height: 60px;
       text-align: right;
     }
   }
 
   .todolist {
-    height: 60%;
+    margin-top: 30px;
   }
 
 </style>
