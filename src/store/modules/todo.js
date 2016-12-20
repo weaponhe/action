@@ -59,12 +59,15 @@ function addTodo(state, payload) {
 function updateTodo(state, payload) {
   let todo = payload.oldTodo,
     newTodo = payload.newTodo
-  unProxy(todo)
-  todo.title = newTodo.title
-  todo.path = newTodo.path + '/' + newTodo.title
+
+  //common update
   todo.description = newTodo.description
   todo.deadline = newTodo.deadline
-  proxy(todo)
+  //title and path update
+  if (newTodo.title !== todo.title) {
+    todo.title = newTodo.title
+    updatePath(todo, newTodo.path)
+  }
   locallySync()
 }
 
@@ -72,23 +75,20 @@ function moveTodo(state, payload) {
   let oldTodo = payload.oldTodo,
     newTodo = payload.newTodo
 
-  let parentPath = oldTodo.path.split('/').slice(0, -1).join('/')
-  let parent = state[parentPath]
-
+  //找到原来的父节点并删除将要移动的子节点，变成游离的节点todo
+  let parent = state[oldTodo.path.split('/').slice(0, -1).join('/')]
   let index = parent.subTodoList.findIndex(function (sub) {
     return sub.path === oldTodo.path
   })
-
   let todo = parent.subTodoList.splice(index, 1)[0]
-  unProxy(todo)
+  //更新todo,包括更新子节点的path
   todo.title = newTodo.title
-  todo.path = newTodo.path + '/' + newTodo.title
   todo.description = newTodo.description
   todo.deadline = newTodo.deadline
-  proxy(todo)
+  updatePath(todo, newTodo.path)
+  //将游离的todo节点插入新的父节点
   let newParent = state[newTodo.path]
   newParent.subTodoList.push(todo)
-
   locallySync()
 }
 
@@ -114,11 +114,21 @@ function proxy(todo) {
     }
   })
 }
+
 function unProxy(todo) {
   Object.defineProperty(state, todo.path, {
     configurable: true,
     get(){
       return false
     }
+  })
+}
+
+function updatePath(todo, parentPath) {
+  unProxy(todo)
+  todo.path = parentPath + '/' + todo.title
+  proxy(todo)
+  todo.subTodoList.map(function (sub) {
+    updatePath(sub, todo.path)
   })
 }

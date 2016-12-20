@@ -65,6 +65,7 @@
                 oldTodo: this.store[this.currentTodo]
               })
               this.vModelValue = false
+              this.$router.replace(this.parentTodo + '/' + this.title)
             }
           } else {
             console.log('changed')
