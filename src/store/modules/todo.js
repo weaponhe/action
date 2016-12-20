@@ -10,8 +10,7 @@ const
     }
   },
 
-  TODO_LOCAL_STORAGE_KEY = 'TODO_LOCAL_STORAGE_KEY',
-  INBOX_LOCAL_STORAGE_KEY = 'INBOX_LOCAL_STORAGE_KEY'
+  TODO_LOCAL_STORAGE_KEY = 'TODO_LOCAL_STORAGE_KEY'
 
 export default {
   state,
@@ -22,11 +21,12 @@ let data = state.data = JSON.parse(localStorage.getItem(TODO_LOCAL_STORAGE_KEY))
 //初始化数据
 if (data.subTodoList.length === 0) {
   data.subTodoList.push(new Todo({title: '收集箱', path: data.path}))
-  data.subTodoList.push(new Todo({title: '工作区', path: data.path}))
-}
-//初始化测试数据
-let todo = data.subTodoList.find(sub => sub.title === '工作区')
-if (todo.subTodoList.length === 0) {
+  // data.subTodoList.push(new Todo({title: '工作区', path: data.path}))
+// }
+// //初始化测试数据
+// let todo = data.subTodoList.find(sub => sub.title === '工作区')
+// if (todo.subTodoList.length === 0) {
+  let todo = data
   todo.subTodoList.push(new Todo({title: '项目', path: todo.path}))
   todo.subTodoList.push(new Todo({title: '书单', path: todo.path}))
   todo.subTodoList.push(new Todo({title: '文章', path: todo.path}))

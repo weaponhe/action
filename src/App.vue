@@ -7,15 +7,10 @@
       <nav-menu></nav-menu>
     </div>
     <div class="main-body">
-      <!--<ac-button @click="show2=true">添加菜单项</ac-button>-->
-      <!--<ac-button @click="show3=true">添加项目</ac-button>-->
-      <!--<div class="router-view">-->
-      <router-view></router-view>
-      <!--</div>-->
+      <div class="router-view">
+        <router-view></router-view>
+      </div>
     </div>
-
-    <create-menu-todo-box v-model="show2"></create-menu-todo-box>
-    <create-main-todo-box v-model="show3"></create-main-todo-box>
   </div>
 </template>
 
@@ -59,8 +54,8 @@
     color: #333;
     transition: color .1s;
     &:hover {
-      text-decoration:underline;
-      color:#4078c0;
+      text-decoration: underline;
+      color: #4078c0;
     }
   }
 

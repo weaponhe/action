@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   import mixin from 'action-ui/dist/mixin'
   export default {
     name: 'TodoBox',
@@ -29,31 +29,71 @@
     },
     computed: {
       todoList(){
-        return []
+        return this.parentTodo.subTodoList.map((sub) => {
+          return {text: sub.title, value: sub.path}
+        })
       },
-      todo(){
-        return this.$store.state.todo[this.$route.path]
+      parentTodo(){
+        //todo页面则返回改todo的父节点,否则返回根todo
+        let isTodoReg = /^\/todo/,
+          todoStore = this.$store.state.todo,
+          path = this.$route.path
+        if (isTodoReg.test(path)) {
+          let parentPath = path.split('/').slice(0, -1).join('/')
+          return todoStore[parentPath]
+        } else {
+          return todoStore['/todo']
+        }
       }
     },
     watch: {
       vModelValue(val){
-        if (val) {
-          this.reset()
-        }
+        val && this.reset()
       }
     },
     methods: {
-      ok(){
-
-      },
       reset(){
-        this.title = ''
-        this.description = ''
-        this.deadline = ''
+        this.setTitle()
+        this.setDesc()
+        this.setDate()
         this.setPath()
       },
+      setTitle(){
+        //默认设置为空
+        this.title = ''
+      },
+      setDesc(){
+        //默认设置为空
+        this.description = ''
+      },
+      setDate(){
+        //默认设置为今天的时间
+        let date = new Date()
+        this.deadline = date.getFullYear() + '-' +
+          (date.getMonth() + 1) + '-' +
+          date.getDate();
+      },
       setPath(){
-        this.path = ''
+        //默认设置为和路径匹配的todo.path，如果找不到匹配，则设置为第一个todo.path
+        let path = this.$route.path,
+          defaultSelectedTodo = this.todoList.find(todo => todo.value === path)
+        this.path = defaultSelectedTodo ? defaultSelectedTodo.value : this.todoList[0].value
+      },
+      ok(){
+        if (!this.$store.state.todo[this.path + '/' + this.title]) {
+          this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
+            title: this.title,
+            description: this.description,
+            path: this.path,
+            deadline: this.deadline
+          })
+        }
+        else {
+          this.openMessage = true
+          setTimeout(() => {
+            this.openMessage = false
+          }, 2000)
+        }
       }
     }
   }
