@@ -1,11 +1,17 @@
 <template>
   <div>
-    <message type="error" :open="openMessage">任务名冲突,请重新输入。</message>
+    <message type="error" :open="!!message">{{message}}</message>
     <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
       <ac-input placeholder="请输入名称" v-model="title"></ac-input>
       <ac-input placeholder="请输入描述" v-model="description"></ac-input>
       <input v-if="showDate" type="date" v-model="deadline"/>
       <ac-select v-if="showSelect" :options="todoList" v-model="path"></ac-select>
+
+      <template slot="footer">
+        <ac-button type="success" @click="ok">确定</ac-button>
+        <ac-button @click="close">取消</ac-button>
+      </template>
+
     </message-box>
   </div>
 </template>
@@ -18,6 +24,7 @@
     data(){
       return {
         boxTitle: '新建子任务',
+        message:'',
         showSelect: true,
         showDate: true,
         openMessage: false,
@@ -79,23 +86,37 @@
         this.path = this.currentTodo
       },
       validate(){
-
+        //检测是否title为空
+        if(!this.title.trim()){
+          this.message = '任务名不能为空，请重新输入。'
+          setTimeout(() => {
+            this.message = ''
+          }, 2000)
+          return false
+        }
+        //检测是否已经存在
+        if(this.$store.state.todo[this.path + '/' + this.title]) {
+          this.message = '任务名冲突，请重新输入。'
+          setTimeout(() => {
+            this.message = ''
+          }, 2000)
+          return false
+        }
+        return true
       },
       ok(){
-        if (!this.$store.state.todo[this.path + '/' + this.title]) {
+        if (this.validate()) {
           this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
             title: this.title,
             description: this.description,
             path: this.path,
             deadline: this.deadline
           })
+          this.vModelValue = false
         }
-        else {
-          this.openMessage = true
-          setTimeout(() => {
-            this.openMessage = false
-          }, 2000)
-        }
+      },
+      close(){
+          this.vModelValue = false
       }
     }
   }

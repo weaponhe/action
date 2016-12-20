@@ -12,6 +12,9 @@
     methods: {
       setPath(){
         this.path = '/todo'
+      },
+      setDate(){
+          this.deadline = null
       }
     }
   }
