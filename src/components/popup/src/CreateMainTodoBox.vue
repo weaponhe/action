@@ -10,7 +10,16 @@
     computed: {
       parentTodo(){
         //直接返回根todo
-        return this.$store.state.todo['/todo']
+        return '/todo'
+      }
+    },
+    methods: {
+      setPath(){
+        let parent = this.store[this.parentTodo]
+        let targetTodo = parent.subTodoList.find(sub => {
+          return sub.path === this.currentTodo
+        })
+        this.path = (targetTodo && targetTodo.path) || parent.subTodoList[0].path
       }
     }
   }

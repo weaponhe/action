@@ -28,23 +28,25 @@
       }
     },
     computed: {
+      store(){
+        return this.$store.state.todo
+      },
+      currentTodo(){
+        let isTodoReg = /^\/todo/,
+          path = this.$route.path
+        return isTodoReg.test(path) ? path : ''
+      },
+      parentTodo(){
+        return this.currentTodo.split('/').slice(0, -1).join('/')
+      },
+      grandTodo(){
+        return this.parentTodo.split('/').slice(0, -1).join('/')
+      },
       todoList(){
-        return this.parentTodo.subTodoList.map((sub) => {
+        return this.store[this.parentTodo].subTodoList.map((sub) => {
           return {text: sub.title, value: sub.path}
         })
       },
-      parentTodo(){
-        //todo页面则返回改todo的父节点,否则返回根todo
-        let isTodoReg = /^\/todo/,
-          todoStore = this.$store.state.todo,
-          path = this.$route.path
-        if (isTodoReg.test(path)) {
-          let parentPath = path.split('/').slice(0, -1).join('/')
-          return todoStore[parentPath]
-        } else {
-          return todoStore['/todo']
-        }
-      }
     },
     watch: {
       vModelValue(val){
@@ -74,10 +76,10 @@
           date.getDate();
       },
       setPath(){
-        //默认设置为和路径匹配的todo.path，如果找不到匹配，则设置为第一个todo.path
-        let path = this.$route.path,
-          defaultSelectedTodo = this.todoList.find(todo => todo.value === path)
-        this.path = defaultSelectedTodo ? defaultSelectedTodo.value : this.todoList[0].value
+        this.path = this.currentTodo
+      },
+      validate(){
+
       },
       ok(){
         if (!this.$store.state.todo[this.path + '/' + this.title]) {
@@ -98,7 +100,3 @@
     }
   }
 </script>
-
-<style scoped lang="less" rel="stylesheet/less">
-
-</style>

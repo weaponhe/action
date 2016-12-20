@@ -2,37 +2,64 @@
   export default {
     name: 'EditTodoBox',
     extends: require('./TodoBox.vue'),
+    data(){
+      return {
+        boxTitle: '编辑任务'
+      }
+    },
     computed: {
-      todo(){
-        return this.$store.state.todo[this.$route.path]
+      store(){
+        return this.$store.state.todo
+      },
+      currentTodo(){
+        let isTodoReg = /^\/todo/,
+          path = this.$route.path
+        return isTodoReg.test(path) ? path : ''
+      },
+      parentTodo(){
+        return this.currentTodo.split('/').slice(0, -1).join('/')
+      },
+      grandTodo(){
+        return this.parentTodo.split('/').slice(0, -1).join('/')
+      },
+      todoList(){
+        if (this.store[this.grandTodo]) {
+          return this.store[this.grandTodo].subTodoList.map((sub) => {
+            return {text: sub.title, value: sub.path}
+          })
+        }
       },
       showDate(){
-        return this.parentTodo !== this.$store.state.todo['/todo']
+        return !!this.grandTodo
       },
       showSelect(){
-        return this.parentTodo !== this.$store.state.todo['/todo']
+        return !!this.grandTodo
       }
     },
     methods: {
       setTitle(){
-        this.title = this.todo.title
+        this.title = this.store[this.currentTodo].title
       },
       setDesc(){
-        this.description = this.todo.description
+        this.description = this.store[this.currentTodo].description
       },
       setDate(){
-        this.deadline = this.todo.deadline
+        this.deadline = this.store[this.currentTodo].deadline
       },
       setPath(){
-        this.path = this.todo.path
+        this.path = this.parentTodo
       },
       ok(){
-        console.log(this.title, this.description, this.deadline, this.path)
+        this.$store.commit(this.$store.state.todo.types.UPDATE_TODO, {
+          newTodo: {
+            title: this.title,
+            description: this.description,
+            path: this.path,
+            deadline: this.deadline
+          },
+          oldTodo: this.todo
+        })
       }
     }
   }
 </script>
-
-<style scoped lang="less" rel="stylesheet/less">
-
-</style>
