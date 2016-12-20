@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <vertical-menu>
+    <vertical-menu :activeShow="false">
       <router-menu-item :data="menu_today"></router-menu-item>
       <router-menu-item :data="menu_tomorrow"></router-menu-item>
       <router-menu-item :data="menu_schedule"></router-menu-item>
@@ -62,5 +62,8 @@
     width: 250px;
     overflow-y: auto;
     overflow-x: hidden;
+    border-right: 1px solid #ccc;
+    background: #fafafa;
   }
+
 </style>
