@@ -3,8 +3,8 @@
        @click="handleSelect"
        :class="{selected}">
     <ac-checkbox size="small" v-model="data.done"></ac-checkbox>
-    <!--<span class="time">{{data.deadline}}</span>-->
     <router-link class="title" :to="data.path">{{data.title}}</router-link>
+    <span>{{data.deadline}}</span>
   </div>
 </template>
 
@@ -19,10 +19,10 @@
     props: {
       data: Object
     },
-    methods:{
-        handleSelect(){
-          this.selected = !this.selected
-        }
+    methods: {
+      handleSelect(){
+        this.selected = !this.selected
+      }
     }
   }
 </script>
@@ -31,14 +31,14 @@
   .item {
     padding: 0 10px;
     height: 40px;
-    border-top: 1px solid #c0ccda;
+    border-bottom: 1px solid #eee;
     line-height: 40px;
     font-size: 15px;
     transition: background-color .2s cubic-bezier(.645, .045, .355, 1),
     color .2s cubic-bezier(.645, .045, .355, 1);
-    &:last-child{
-      border-bottom: 1px solid #c0ccda;
-    }
+    /*&:last-child{*/
+    /*border-bottom: 1px solid #c0ccda;*/
+    /*}*/
     &:hover {
       cursor: pointer;
       background-color: #f9fafc;
@@ -48,10 +48,10 @@
       color: #CCC;
     }
 
-    .title{
+    .title {
       display: inline-block;
       height: 100%;
-      padding:0 20px;
+      padding: 0 20px;
     }
   }
 </style>

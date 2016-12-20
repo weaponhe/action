@@ -18,7 +18,7 @@ import {
 } from './components/popup'
 
 import TodoDetailView from './components/main-view/TodoDetailView.vue'
-import TodoListView from './components/main-view/TodoListView.vue'
+import TodoListView from './components/main-view/TodoList.vue'
 import ScheduleView from './components/main-view/ScheduleView.vue'
 
 Vue.component(NavMenu.name, NavMenu)

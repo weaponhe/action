@@ -13,16 +13,16 @@
       </span>
     </div>
     <div v-show="myUnfold" class="content">
-      <item-list :items="todoList"></item-list>
+      <item v-for="todo in todoList" :data="todo"></item>
     </div>
   </div>
 </template>
 
 <script>
-  import ItemList from './ItemList.vue'
+  import Item from './Item.vue'
   export default {
     name: 'TodoList',
-    components: {ItemList},
+    components: {Item},
     props: {
       title: String,
       todoList: Array,

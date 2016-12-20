@@ -16,13 +16,7 @@
       </section>
     </div>
 
-    <div class="todolist">
-      <todo-list title="所有任务" :todoList="todo.subTodoList"></todo-list>
-      <todo-list title="今日之前" :todoList="todo.subTodoList | beforeToday"></todo-list>
-      <todo-list title="今日待办" :todoList="todo.subTodoList | today"></todo-list>
-      <todo-list title="明日待办" :todoList="todo.subTodoList | tomorrow"></todo-list>
-      <todo-list title="将来" :todoList="todo.subTodoList | future"></todo-list>
-    </div>
+    <todo-list-view :todo="todo"></todo-list-view>
 
     <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
     <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
@@ -30,13 +24,12 @@
 </template>
 
 <script>
-  import Item from './Item.vue'
-  import TodoList from './TodoList.vue'
+  import TodoListView from './TodoListView.vue'
   import Breadcrumb from './Breadcrumb.vue'
   import {beforeToday, today, tomorrow, future, done} from '../../filters'
   export default {
     name: 'TodoDetailView',
-    components: {Item, TodoList, Breadcrumb},
+    components: {TodoListView, Breadcrumb},
     filters: {beforeToday, today, tomorrow, future, done},
     data(){
       return {

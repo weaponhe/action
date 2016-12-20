@@ -78,7 +78,7 @@
       bottom: 0;
       left: 250px;
       right: 0;
-      padding: 10px 20px;
+      padding: 20px;
       overflow: auto;
     }
   }
