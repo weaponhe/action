@@ -24,7 +24,7 @@
     data(){
       return {
         boxTitle: '新建子任务',
-        message:'',
+        message: '',
         showSelect: true,
         showDate: true,
         openMessage: false,
@@ -85,17 +85,20 @@
       setPath(){
         this.path = this.currentTodo
       },
-      validate(){
+      validateEmpty(){
         //检测是否title为空
-        if(!this.title.trim()){
+        if (!this.title.trim()) {
           this.message = '任务名不能为空，请重新输入。'
           setTimeout(() => {
             this.message = ''
           }, 2000)
           return false
         }
+        return true
+      },
+      validateDuplicate(){
         //检测是否已经存在
-        if(this.$store.state.todo[this.path + '/' + this.title]) {
+        if (this.$store.state.todo[this.path + '/' + this.title]) {
           this.message = '任务名冲突，请重新输入。'
           setTimeout(() => {
             this.message = ''
@@ -105,7 +108,7 @@
         return true
       },
       ok(){
-        if (this.validate()) {
+        if (this.validateEmpty() && this.validateDuplicate()) {
           this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
             title: this.title,
             description: this.description,
@@ -116,7 +119,7 @@
         }
       },
       close(){
-          this.vModelValue = false
+        this.vModelValue = false
       }
     }
   }

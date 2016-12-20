@@ -50,15 +50,39 @@
         this.path = this.parentTodo
       },
       ok(){
-        this.$store.commit(this.$store.state.todo.types.UPDATE_TODO, {
-          newTodo: {
-            title: this.title,
-            description: this.description,
-            path: this.path,
-            deadline: this.deadline
-          },
-          oldTodo: this.todo
-        })
+        if (this.validateEmpty()) {
+          //检测是否更改了path,
+          if (this.parentTodo === this.path) {
+            console.log('same')
+            if (this.validateDuplicate()) {
+              this.$store.commit(this.store.types.UPDATE_TODO, {
+                newTodo: {
+                  title: this.title,
+                  description: this.description,
+                  path: this.path,
+                  deadline: this.deadline
+                },
+                oldTodo: this.store[this.currentTodo]
+              })
+              this.vModelValue = false
+            }
+          } else {
+            console.log('changed')
+            if (this.validateDuplicate()) {
+              this.$store.commit(this.store.types.MOVE_TODO, {
+                newTodo: {
+                  title: this.title,
+                  description: this.description,
+                  path: this.path,
+                  deadline: this.deadline
+                },
+                oldTodo: this.store[this.currentTodo]
+              })
+              this.vModelValue = false
+              this.$router.replace(this.parentTodo)
+            }
+          }
+        }
       }
     }
   }

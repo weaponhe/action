@@ -2,7 +2,8 @@ const
   state = {
     types: {
       ADD_TODO: 'ADD_TODO',
-      UPDATE_TODO: 'UPDATE_TODO'
+      UPDATE_TODO: 'UPDATE_TODO',
+      MOVE_TODO: 'MOVE_TODO'
     }
   },
   mutations = {
@@ -11,6 +12,9 @@ const
     },
     [state.types.UPDATE_TODO](state, payload){
       updateTodo(state, payload)
+    },
+    [state.types.MOVE_TODO](state, payload){
+      moveTodo(state, payload)
     }
   },
 
@@ -53,9 +57,39 @@ function addTodo(state, payload) {
 }
 
 function updateTodo(state, payload) {
+  let todo = payload.oldTodo,
+    newTodo = payload.newTodo
+  unProxy(todo)
+  todo.title = newTodo.title
+  todo.path = newTodo.path + '/' + newTodo.title
+  todo.description = newTodo.description
+  todo.deadline = newTodo.deadline
+  proxy(todo)
+  locallySync()
+}
+
+function moveTodo(state, payload) {
   let oldTodo = payload.oldTodo,
     newTodo = payload.newTodo
-  console.log(oldTodo.path, newTodo.path)
+
+  let parentPath = oldTodo.path.split('/').slice(0, -1).join('/')
+  let parent = state[parentPath]
+
+  let index = parent.subTodoList.findIndex(function (sub) {
+    return sub.path === oldTodo.path
+  })
+
+  let todo = parent.subTodoList.splice(index, 1)[0]
+  unProxy(todo)
+  todo.title = newTodo.title
+  todo.path = newTodo.path + '/' + newTodo.title
+  todo.description = newTodo.description
+  todo.deadline = newTodo.deadline
+  proxy(todo)
+  let newParent = state[newTodo.path]
+  newParent.subTodoList.push(todo)
+
+  locallySync()
 }
 
 function locallySync() {
@@ -67,14 +101,24 @@ function proxyTree(root) {
   while (stack.length) {
     let todo = stack.pop()
     proxy(todo)
-    stack.push(...todo.subTodoList)
+    stack.push(...todo.subTodoList
+  )
   }
 }
 
 function proxy(todo) {
   Object.defineProperty(state, todo.path, {
+    configurable: true,
     get(){
       return todo
+    }
+  })
+}
+function unProxy(todo) {
+  Object.defineProperty(state, todo.path, {
+    configurable: true,
+    get(){
+      return false
     }
   })
 }
