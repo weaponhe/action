@@ -19,7 +19,9 @@ import {
 
 import Breadcrumb from './components/Breadcrumb'
 
-import TodoDetailView from './components/TodoDetailView'
+import {
+  TodoDetailView
+} from './components/TodoDetailView'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)

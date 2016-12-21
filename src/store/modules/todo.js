@@ -1,5 +1,5 @@
 const
-  state = {
+  state                  = {
     types: {
       ADD_TODO: 'ADD_TODO',
       UPDATE_TODO: 'UPDATE_TODO',
@@ -7,7 +7,7 @@ const
       DONE_TODO: 'DONE_TODO',
     }
   },
-  mutations = {
+  mutations              = {
     [state.types.ADD_TODO](state, payload) {
       addTodo(state, payload)
     },
@@ -18,8 +18,8 @@ const
       moveTodo(state, payload)
     },
     [state.types.DONE_TODO](state, payload){
-      let path = payload.path,
-        done = payload.done
+      let path         = payload.path,
+          done         = payload.done
       state[path].done = done
       locallySync()
     }
@@ -36,16 +36,17 @@ let data = state.data = JSON.parse(localStorage.getItem(TODO_LOCAL_STORAGE_KEY))
 //初始化数据
 if (data.subTodoList.length === 0)
 {
-  data.subTodoList.push(new Todo({title: '收集箱', path: data.path}))
-  data.subTodoList.push(new Todo({title: '项目', path: data.path}))
-  data.subTodoList.push(new Todo({title: '书单', path: data.path}))
-  data.subTodoList.push(new Todo({title: '文章', path: data.path}))
+  data.subTodoList.push(new Todo({title: 'INBOX', path: data.path}))
+  data.subTodoList.push(new Todo({title: 'PROJECT', path: data.path}))
+  data.subTodoList.push(new Todo({title: 'BOOK', path: data.path}))
+  data.subTodoList.push(new Todo({title: 'POST', path: data.path}))
 }
 //代理设置
 proxyTree(data)
 locallySync()
 
-function Todo(payload) {
+function Todo(payload)
+{
   return {
     title: payload.title,
     description: payload.description || '',
@@ -56,21 +57,23 @@ function Todo(payload) {
   }
 }
 
-function addTodo(state, payload) {
+function addTodo(state, payload)
+{
   let parent = state[payload.path]
-  let todo = new Todo(payload)
+  let todo   = new Todo(payload)
   parent.subTodoList.push(todo)
   proxy(todo)
   locallySync()
 }
 
-function updateTodo(state, payload) {
-  let todo = payload.oldTodo,
-    newTodo = payload.newTodo
+function updateTodo(state, payload)
+{
+  let todo    = payload.oldTodo,
+      newTodo = payload.newTodo
 
   //common update
   todo.description = newTodo.description
-  todo.deadline = newTodo.deadline
+  todo.deadline    = newTodo.deadline
   //title and path update
   if (newTodo.title !== todo.title)
   {
@@ -80,20 +83,22 @@ function updateTodo(state, payload) {
   locallySync()
 }
 
-function moveTodo(state, payload) {
+function moveTodo(state, payload)
+{
   let oldTodo = payload.oldTodo,
-    newTodo = payload.newTodo
+      newTodo = payload.newTodo
 
   //找到原来的父节点并删除将要移动的子节点，变成游离的节点todo
-  let parent = state[oldTodo.path.split('/').slice(0, -1).join('/')]
-  let index = parent.subTodoList.findIndex(function (sub) {
+  let parent       = state[oldTodo.path.split('/').slice(0, -1).join('/')]
+  let index        = parent.subTodoList.findIndex(function (sub)
+  {
     return sub.path === oldTodo.path
   })
-  let todo = parent.subTodoList.splice(index, 1)[0]
+  let todo         = parent.subTodoList.splice(index, 1)[0]
   //更新todo,包括更新子节点的path
-  todo.title = newTodo.title
+  todo.title       = newTodo.title
   todo.description = newTodo.description
-  todo.deadline = newTodo.deadline
+  todo.deadline    = newTodo.deadline
   updatePath(todo, newTodo.path)
   //将游离的todo节点插入新的父节点
   let newParent = state[newTodo.path]
@@ -101,11 +106,13 @@ function moveTodo(state, payload) {
   locallySync()
 }
 
-function locallySync() {
+function locallySync()
+{
   localStorage.setItem(TODO_LOCAL_STORAGE_KEY, JSON.stringify(data))
 }
 
-function proxyTree(root) {
+function proxyTree(root)
+{
   let stack = [root]
   while (stack.length)
   {
@@ -116,7 +123,8 @@ function proxyTree(root) {
   }
 }
 
-function proxy(todo) {
+function proxy(todo)
+{
   Object.defineProperty(state, todo.path, {
     configurable: true,
     get(){
@@ -125,7 +133,8 @@ function proxy(todo) {
   })
 }
 
-function unProxy(todo) {
+function unProxy(todo)
+{
   Object.defineProperty(state, todo.path, {
     configurable: true,
     get(){
@@ -134,11 +143,13 @@ function unProxy(todo) {
   })
 }
 
-function updatePath(todo, parentPath) {
+function updatePath(todo, parentPath)
+{
   unProxy(todo)
   todo.path = parentPath + '/' + todo.title
   proxy(todo)
-  todo.subTodoList.map(function (sub) {
+  todo.subTodoList.map(function (sub)
+  {
     updatePath(sub, todo.path)
   })
 }

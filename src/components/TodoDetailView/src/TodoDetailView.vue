@@ -23,19 +23,12 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+
   import TodoListView from './TodoListView.vue'
-  import {
-    beforeToday,
-    today,
-    tomorrow,
-    future,
-    done
-  } from '../../../filter/src/TimeFilter'
   export default {
     name: 'TodoDetailView',
     components: {TodoListView},
-    filters: {beforeToday, today, tomorrow, future, done},
     data(){
       return {
         showSubTodoBox: false, showEditTodoBox: false
