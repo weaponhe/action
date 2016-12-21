@@ -3,7 +3,8 @@ const
     types: {
       ADD_TODO: 'ADD_TODO',
       UPDATE_TODO: 'UPDATE_TODO',
-      MOVE_TODO: 'MOVE_TODO'
+      MOVE_TODO: 'MOVE_TODO',
+      DONE_TODO: 'DONE_TODO'
     }
   },
   mutations = {
@@ -15,6 +16,13 @@ const
     },
     [state.types.MOVE_TODO](state, payload){
       moveTodo(state, payload)
+    },
+    [state.types.DONE_TODO](state, payload){
+      // locallySync()
+      let path = payload.path,
+        done = payload.done
+      console.log(state[path], done)
+      state[path].done = done
     }
   },
 
@@ -27,7 +35,8 @@ export default {
 
 let data = state.data = JSON.parse(localStorage.getItem(TODO_LOCAL_STORAGE_KEY)) || new Todo({path: '', title: 'todo'})
 //初始化数据
-if (data.subTodoList.length === 0) {
+if (data.subTodoList.length === 0)
+{
   data.subTodoList.push(new Todo({title: '收集箱', path: data.path}))
   data.subTodoList.push(new Todo({title: '项目', path: data.path}))
   data.subTodoList.push(new Todo({title: '书单', path: data.path}))
@@ -64,7 +73,8 @@ function updateTodo(state, payload) {
   todo.description = newTodo.description
   todo.deadline = newTodo.deadline
   //title and path update
-  if (newTodo.title !== todo.title) {
+  if (newTodo.title !== todo.title)
+  {
     todo.title = newTodo.title
     updatePath(todo, newTodo.path)
   }
@@ -98,11 +108,12 @@ function locallySync() {
 
 function proxyTree(root) {
   let stack = [root]
-  while (stack.length) {
+  while (stack.length)
+  {
     let todo = stack.pop()
     proxy(todo)
     stack.push(...todo.subTodoList
-  )
+    )
   }
 }
 

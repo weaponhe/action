@@ -4,10 +4,12 @@ export function beforeToday(todoList) {
   return todoList.filter((todo) => {
     if (todo.done) return false
     if (!todo.deadline)return false
-    try {
+    try
+    {
       todoDate = new Date(todo.deadline)
       return todoDate < today
-    } catch (e) {
+    } catch (e)
+    {
       console.error(e)
     }
     return false
@@ -20,12 +22,14 @@ export function today(todoList) {
   return todoList.filter((todo) => {
     if (todo.done) return false
     if (!todo.deadline)return false
-    try {
+    try
+    {
       todoDate = new Date(todo.deadline)
       return now.getFullYear() === todoDate.getFullYear() &&
         now.getMonth() === todoDate.getMonth() &&
         now.getDate() === todoDate.getDate()
-    } catch (e) {
+    } catch (e)
+    {
       console.error(e)
     }
     return false
@@ -39,10 +43,12 @@ export function tomorrow(todoList) {
   return todoList.filter((todo) => {
     if (todo.done) return false
     if (!todo.deadline)return false
-    try {
+    try
+    {
       todoDate = new Date(todo.deadline)
       return tomorrow <= todoDate && todoDate < afterTomorrow
-    } catch (e) {
+    } catch (e)
+    {
       console.error(e)
     }
     return false
@@ -56,10 +62,12 @@ export function future(todoList) {
   return todoList.filter((todo) => {
     if (todo.done) return false
     if (!todo.deadline)return true
-    try {
+    try
+    {
       todoDate = new Date(todo.deadline)
       return todoDate >= afterTomorrow
-    } catch (e) {
+    } catch (e)
+    {
       console.error(e)
     }
     return false

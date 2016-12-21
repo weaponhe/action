@@ -1,10 +1,10 @@
 <template>
-  <div v-if="todoList && todoList.length"
+  <div v-if="show"
        class="wrapper">
     <div class="header"
-         @click="myUnfold = !myUnfold">
+         @click="unfold = !unfold">
       <icon class="icon-arrow"
-            :class="{unfold:myUnfold}"
+            :class="{unfold:unfold}"
             name="arrow-down-filling"
             :size="14"></icon>
       <span class="title">
@@ -12,8 +12,8 @@
         <span class="number">({{todoList.length}})</span>
       </span>
     </div>
-    <div v-show="myUnfold" class="content">
-      <item v-for="todo in todoList" :data="todo"></item>
+    <div v-show="unfold" class="content">
+      <item v-for="todo in todoList" :todo="todo"></item>
     </div>
   </div>
 </template>
@@ -25,15 +25,16 @@
     components: {Item},
     props: {
       title: String,
-      todoList: Array,
-      unfold: {
-        type: Boolean,
-        default: false
-      }
+      todoList: Array
     },
     data(){
       return {
-        myUnfold: this.unfold
+        unfold: false
+      }
+    },
+    computed: {
+      show(){
+        return this.todoList && this.todoList.length
       }
     }
   }

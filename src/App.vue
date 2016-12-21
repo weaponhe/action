@@ -52,10 +52,12 @@
   a {
     text-decoration: none;
     color: #333;
-    transition: color .1s;
+    transition: color .1s cubic-bezier(.645, .045, .355, 1);
+
     &:hover {
+      cursor: pointer;
       text-decoration: underline;
-      color: #4078c0;
+      color: #4fc08d;
     }
   }
 

@@ -3,7 +3,7 @@
     <breadcrumb></breadcrumb>
     <div class="todo">
       <section class="header">
-        <ac-checkbox></ac-checkbox>
+        <ac-checkbox v-model="todo.done"></ac-checkbox>
         <h3 class="title">{{todo.title}}</h3>
       </section>
       <section class="content">

@@ -17,6 +17,10 @@
     filters: {beforeToday, today, tomorrow, future, done},
     props: {
       todo: Object
+    },
+    mounted(){
+      let firstShowChildren = this.$children.find(todolist => todolist.show)
+      firstShowChildren && (firstShowChildren.unfold = true)
     }
   }
 </script>

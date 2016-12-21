@@ -1,57 +1,52 @@
 <template>
-  <div class="item"
-       @click="handleSelect"
-       :class="{selected}">
-    <ac-checkbox size="small" v-model="data.done"></ac-checkbox>
-    <router-link class="title" :to="data.path">{{data.title}}</router-link>
-    <span>{{data.deadline}}</span>
+  <div class="todo"
+       :class="{done:todo.done}">
+    <ac-checkbox size="small" v-model="todo.done" :title="todo.title"></ac-checkbox>
+    <router-link class="title"
+                 :to="todo.path">
+      {{todo.title}}
+    </router-link>
+    <span>@{{todo.deadline}}</span>
   </div>
 </template>
 
 <script>
   export default {
     name: 'item',
-    data() {
+    data(){
       return {
-        selected: false
+        done: this.todo.done
       }
     },
     props: {
-      data: Object
-    },
-    methods: {
-      handleSelect(){
-        this.selected = !this.selected
-      }
+      todo: Object
     }
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .item {
-    padding: 0 10px;
+  .todo {
     height: 40px;
+    padding: 0 10px;
     border-bottom: 1px solid #eee;
     line-height: 40px;
     font-size: 15px;
     transition: background-color .2s cubic-bezier(.645, .045, .355, 1),
     color .2s cubic-bezier(.645, .045, .355, 1);
-    /*&:last-child{*/
-    /*border-bottom: 1px solid #c0ccda;*/
-    /*}*/
+
     &:hover {
-      cursor: pointer;
       background-color: #f9fafc;
-    }
-    &.selected {
-      background-color: #1f2f3d;
-      color: #CCC;
     }
 
     .title {
-      display: inline-block;
-      height: 100%;
       padding: 0 20px;
+      color: inherit;
+    }
+    &.done {
+      color: #ccc;
+      .title {
+        text-decoration: line-through;
+      }
     }
   }
 </style>
