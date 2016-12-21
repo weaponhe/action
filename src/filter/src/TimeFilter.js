@@ -1,11 +1,16 @@
-export function beforeToday(todoList) {
+export function beforeToday(todoList)
+{
   let today = getToday(),
-    todoDate
-  return todoList.filter((todo) => {
-    if (todo.done) return false
-    if (!todo.deadline)return false
-    try
-    {
+      todoDate
+  return todoList.filter((todo) =>
+  {
+    if (todo.done) {
+      return false
+    }
+    if (!todo.deadline) {
+      return false
+    }
+    try {
       todoDate = new Date(todo.deadline)
       return todoDate < today
     } catch (e)
@@ -16,14 +21,19 @@ export function beforeToday(todoList) {
   })
 }
 
-export function today(todoList) {
+export function today(todoList)
+{
   let now = new Date(),
-    todoDate
-  return todoList.filter((todo) => {
-    if (todo.done) return false
-    if (!todo.deadline)return false
-    try
-    {
+      todoDate
+  return todoList.filter((todo) =>
+  {
+    if (todo.done) {
+      return false
+    }
+    if (!todo.deadline) {
+      return false
+    }
+    try {
       todoDate = new Date(todo.deadline)
       return now.getFullYear() === todoDate.getFullYear() &&
         now.getMonth() === todoDate.getMonth() &&
@@ -36,15 +46,20 @@ export function today(todoList) {
   })
 }
 
-export function tomorrow(todoList) {
-  let tomorrow = getTomorrow()
+export function tomorrow(todoList)
+{
+  let tomorrow      = getTomorrow()
   let afterTomorrow = getAfterTomorrow()
   let todoDate
-  return todoList.filter((todo) => {
-    if (todo.done) return false
-    if (!todo.deadline)return false
-    try
-    {
+  return todoList.filter((todo) =>
+  {
+    if (todo.done) {
+      return false
+    }
+    if (!todo.deadline) {
+      return false
+    }
+    try {
       todoDate = new Date(todo.deadline)
       return tomorrow <= todoDate && todoDate < afterTomorrow
     } catch (e)
@@ -56,14 +71,19 @@ export function tomorrow(todoList) {
 }
 
 
-export function future(todoList) {
+export function future(todoList)
+{
   let afterTomorrow = getAfterTomorrow()
   let todoDate
-  return todoList.filter((todo) => {
-    if (todo.done) return false
-    if (!todo.deadline)return true
-    try
-    {
+  return todoList.filter((todo) =>
+  {
+    if (todo.done) {
+      return false
+    }
+    if (!todo.deadline) {
+      return true
+    }
+    try {
       todoDate = new Date(todo.deadline)
       return todoDate >= afterTomorrow
     } catch (e)
@@ -75,24 +95,21 @@ export function future(todoList) {
 }
 
 
-export function done(todoList) {
-  return todoList.filter((todo) => {
-    return todo.done
-  })
-}
-
-function getToday(indicateDate) {
+function getToday(indicateDate)
+{
   let date = indicateDate || new Date()
   return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
 
-function getTomorrow(indicateDate) {
+function getTomorrow(indicateDate)
+{
   let date = indicateDate || new Date()
   date.setDate(date.getDate() + 1)
   return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
 
-function getAfterTomorrow(indicateDate) {
+function getAfterTomorrow(indicateDate)
+{
   let date = indicateDate || new Date()
   date.setDate(date.getDate() + 2)
   return new Date(date.getFullYear(), date.getMonth(), date.getDate())

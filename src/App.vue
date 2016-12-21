@@ -4,7 +4,7 @@
       <top-bar></top-bar>
     </div>
     <div class="left">
-      <nav-menu></nav-menu>
+      <nav-bar></nav-bar>
     </div>
     <div class="main-body">
       <div class="router-view">
@@ -15,31 +15,8 @@
 </template>
 
 <script>
-  let index = 0
   export default {
-    name: 'app',
-    data(){
-      return {
-        show1: false,
-        show2: false,
-        show3: false,
-        showTaskAddBox: false,
-        alertShow: false,
-        confirmShow: false,
-        promptShow: false,
-        inputValue: 'test',
-        checkValue: true,
-        selectArray: [
-          {value: 'project', text: 'a'},
-          {value: 'post', text: 'b'},
-          {value: 'book', text: 'c'}
-        ],
-        selectedValue: ''
-      }
-    },
-    created(){
-      this.selectedValue = this.selectArray[2].value
-    }
+    name: 'app'
   }
 </script>
 

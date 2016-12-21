@@ -3,16 +3,10 @@
     <vertical-menu :activeShow="false">
       <router-menu-item :data="menu_today"></router-menu-item>
       <router-menu-item :data="menu_tomorrow"></router-menu-item>
-      <router-menu-item :data="menu_schedule"></router-menu-item>
-
-      <!--<router-menu-item :data="inbox"></router-menu-item>-->
+      <!--<router-menu-item :data="menu_schedule"></router-menu-item>-->
 
       <router-menu-item v-for="firstLevelTodo in todoList"
                         :data="firstLevelTodo">
-        <!--<menu-item-list>-->
-          <!--<router-menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"-->
-                            <!--:data="secondLevelTodo"></router-menu-item>-->
-        <!--</menu-item-list>-->
       </router-menu-item>
 
     </vertical-menu>
@@ -23,7 +17,7 @@
   import {mapGetters} from 'vuex'
   import RouterMenuItem from './routerMenuItem.vue'
   export default {
-    name: 'navMenu',
+    name: 'NavBar',
     components: {RouterMenuItem},
     data(){
       return {
@@ -45,10 +39,7 @@
     computed: {
       todoList(){
         return this.$store.state.todo['/todo'].subTodoList
-      },
-//      inbox(){
-//        return this.$store.state.todo['/todo/收集箱']
-//      },
+      }
     }
   }
 </script>

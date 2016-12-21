@@ -8,18 +8,18 @@ require('action-ui/dist/style.css')
 Vue.use(VueRouter)
 Vue.use(Action)
 
-import NavMenu from './components/nav-bar'
-import TopBar from './components/top-bar'
+import TopBar from './components/TopBar'
+import NavMenu from './components/NavBar'
 import {
   CreateSubTodoBox,
   CreateMenuTodoBox,
   CreateMainTodoBox,
   EditTodoBox
-} from './components/popup'
+} from './components/TodoPopupBox'
 
-import TodoDetailView from './components/main-view/TodoDetailView.vue'
-import TodoListView from './components/main-view/TodoList.vue'
-import ScheduleView from './components/main-view/ScheduleView.vue'
+import Breadcrumb from './components/Breadcrumb'
+
+import TodoDetailView from './components/TodoDetailView'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
@@ -27,21 +27,25 @@ Vue.component(CreateSubTodoBox.name, CreateSubTodoBox)
 Vue.component(CreateMenuTodoBox.name, CreateMenuTodoBox)
 Vue.component(CreateMainTodoBox.name, CreateMainTodoBox)
 Vue.component(EditTodoBox.name, EditTodoBox)
+Vue.component(Breadcrumb.name, Breadcrumb)
 
 let router = new VueRouter({
   routes: [
     {
+      path: '/',
+      redirect: '/filter/today'
+    },
+    {
       path: '/todo/(.*)',
       component: TodoDetailView
-    }, {
-      path: '/inbox(/.*)*',
-      component: TodoDetailView
-    }, {
-      path: '/schedule',
-      component: ScheduleView
-    }, {
+    },
+    // {
+    //   path: '/schedule',
+    //   component: ScheduleView
+    // },
+    {
       path: '/filter/:filter',
-      component: TodoListView
+      // component: TodoListView
     }]
 })
 

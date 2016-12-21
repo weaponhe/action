@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import Item from './Item.vue'
+  import Item from './TodoItem.vue'
   export default {
     name: 'TodoList',
     components: {Item},

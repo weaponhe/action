@@ -3,7 +3,7 @@
     <breadcrumb></breadcrumb>
     <div class="todo">
       <section class="header">
-        <ac-checkbox v-model="todo.done"></ac-checkbox>
+        <ac-checkbox v-model="done"></ac-checkbox>
         <h3 class="title">{{todo.title}}</h3>
       </section>
       <section class="content">
@@ -25,21 +25,49 @@
 
 <script>
   import TodoListView from './TodoListView.vue'
-  import Breadcrumb from './Breadcrumb.vue'
-  import {beforeToday, today, tomorrow, future, done} from '../../filters'
+  import {
+    beforeToday,
+    today,
+    tomorrow,
+    future,
+    done
+  } from '../../../filter/src/TimeFilter'
   export default {
     name: 'TodoDetailView',
-    components: {TodoListView, Breadcrumb},
+    components: {TodoListView},
     filters: {beforeToday, today, tomorrow, future, done},
     data(){
       return {
-        showSubTodoBox: false,
-        showEditTodoBox: false
+        showSubTodoBox: false, showEditTodoBox: false
       }
     },
     computed: {
       todo(){
         return this.$store.state.todo[this.$route.path]
+      },
+      done: {
+        get(){
+          return this.todo.done
+        },
+        set(val){
+          if (!val) {
+            return
+          }
+          let path = this.todo.path
+          console.log('todo[%s] done changed to %s', path, val)
+          this.$store.commit(this.$store.state.todo.types.DONE_TODO, {
+            path: path, done: val
+          })
+          //返回父节点
+          let targetPath = '/'
+          let parentPath = path.split('/').slice(0, -1).join('/')
+          console.log('parentPath:', parentPath)
+          if (parentPath !== '/todo') {
+            targetPath = parentPath
+          }
+          console.log('targetPath:', targetPath)
+          this.$router.replace(targetPath)
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 <script type="text/ecmascript-6">
   export default {
     name: 'CreateMainTodoBox',
-    extends: require('./TodoBox.vue'),
+    extends: require('./BaseTodoBox.vue'),
     data () {
       return {
         boxTitle: '新建任务'

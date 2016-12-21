@@ -9,12 +9,18 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import TodoList from './TodoList.vue'
-  import {beforeToday, today, tomorrow, future, done} from '../../filters'
+  import TodoList from '../../TodoList'
+  import {
+    TimeFilter,
+    DoneFilter
+  } from '../../../filter'
   export default {
     name: 'TodoListView',
     components: {TodoList},
-    filters: {beforeToday, today, tomorrow, future, done},
+    filters: {
+      ...TimeFilter,
+      ...DoneFilter
+    },
     props: {
       todo: Object
     },

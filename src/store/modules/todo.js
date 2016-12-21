@@ -4,6 +4,7 @@ const
       ADD_TODO: 'ADD_TODO',
       UPDATE_TODO: 'UPDATE_TODO',
       MOVE_TODO: 'MOVE_TODO',
+      DONE_TODO: 'DONE_TODO',
     }
   },
   mutations = {
