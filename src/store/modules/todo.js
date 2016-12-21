@@ -4,7 +4,6 @@ const
       ADD_TODO: 'ADD_TODO',
       UPDATE_TODO: 'UPDATE_TODO',
       MOVE_TODO: 'MOVE_TODO',
-      DONE_TODO: 'DONE_TODO'
     }
   },
   mutations = {
@@ -18,11 +17,10 @@ const
       moveTodo(state, payload)
     },
     [state.types.DONE_TODO](state, payload){
-      // locallySync()
       let path = payload.path,
         done = payload.done
-      console.log(state[path], done)
       state[path].done = done
+      locallySync()
     }
   },
 

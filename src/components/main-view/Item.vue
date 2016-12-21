@@ -1,7 +1,7 @@
 <template>
   <div class="todo"
        :class="{done:todo.done}">
-    <ac-checkbox size="small" v-model="todo.done" :title="todo.title"></ac-checkbox>
+    <ac-checkbox size="small" v-model="done" :title="todo.title"></ac-checkbox>
     <router-link class="title"
                  :to="todo.path">
       {{todo.title}}
@@ -13,13 +13,20 @@
 <script>
   export default {
     name: 'item',
-    data(){
-      return {
-        done: this.todo.done
-      }
-    },
     props: {
       todo: Object
+    },
+    computed: {
+      done: {
+        get(){
+          return this.todo.done
+        },
+        set(val){
+          this.$store.commit(this.$store.state.todo.types.DONE_TODO, {
+            path: this.todo.path, done: val
+          })
+        }
+      }
     }
   }
 </script>
