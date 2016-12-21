@@ -1,10 +1,10 @@
 <template>
   <div class="todolist">
-    <todo-list title="所有任务" :todoList="todo.subTodoList"></todo-list>
     <todo-list title="今日之前" :todoList="todo.subTodoList | beforeToday"></todo-list>
     <todo-list title="今日待办" :todoList="todo.subTodoList | today"></todo-list>
     <todo-list title="明日待办" :todoList="todo.subTodoList | tomorrow"></todo-list>
     <todo-list title="将来" :todoList="todo.subTodoList | future"></todo-list>
+    <todo-list title="已完成" :todoList="todo.subTodoList | done"></todo-list>
   </div>
 </template>
 
