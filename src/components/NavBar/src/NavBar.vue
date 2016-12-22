@@ -38,7 +38,13 @@
     },
     computed: {
       todoList(){
-        return this.$store.state.todo['/todo'].subTodoList
+        return this.$store.state.todo['/todo'].subTodoList.map(
+          (todo) => {
+            return {
+              title: todo.title,
+              path: '/menu' + todo.path
+            }
+          })
       }
     }
   }

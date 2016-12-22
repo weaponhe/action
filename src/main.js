@@ -30,6 +30,7 @@ Vue.component(Breadcrumb.name, Breadcrumb)
 Vue.component(TodoList.name, TodoList)
 
 import TodoDetailView from './components/TodoDetailView'
+import MenuTodoView from './components/MenuTodoView'
 import FilterView from './components/FilterView'
 
 
@@ -39,9 +40,14 @@ let router = new VueRouter({
       path: '/',
       redirect: '/filter/today'
     },
+
     {
-      path: '/todo/(.*)',
+      path: '/todo/*',
       component: TodoDetailView
+    },
+    {
+      path: '/menu/*',
+      component: MenuTodoView
     },
     // {
     //   path: '/schedule',
