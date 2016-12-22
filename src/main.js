@@ -17,11 +17,8 @@ import {
   EditTodoBox
 } from './components/TodoPopupBox'
 
+import TodoList from './components/TodoList'
 import Breadcrumb from './components/Breadcrumb'
-
-import {
-  TodoDetailView
-} from './components/TodoDetailView'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
@@ -30,6 +27,11 @@ Vue.component(CreateMenuTodoBox.name, CreateMenuTodoBox)
 Vue.component(CreateMainTodoBox.name, CreateMainTodoBox)
 Vue.component(EditTodoBox.name, EditTodoBox)
 Vue.component(Breadcrumb.name, Breadcrumb)
+Vue.component(TodoList.name, TodoList)
+
+import TodoDetailView from './components/TodoDetailView'
+import FilterView from './components/FilterView'
+
 
 let router = new VueRouter({
   routes: [
@@ -47,7 +49,7 @@ let router = new VueRouter({
     // },
     {
       path: '/filter/:filter',
-      // component: TodoListView
+      component: FilterView
     }]
 })
 

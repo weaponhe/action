@@ -25,7 +25,11 @@
     components: {Item},
     props: {
       title: String,
-      todoList: Array
+      todoList: Array,
+      expandable: {
+        type: Boolean,
+        default: true
+      }
     },
     data(){
       return {

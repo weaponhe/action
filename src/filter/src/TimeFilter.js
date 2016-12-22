@@ -23,6 +23,7 @@ export function beforeToday(todoList)
 
 export function today(todoList)
 {
+  console.log("asdas")
   let now = new Date(),
       todoDate
   return todoList.filter((todo) =>
