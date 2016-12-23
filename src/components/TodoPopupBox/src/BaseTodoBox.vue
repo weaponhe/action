@@ -40,7 +40,7 @@
       },
       currentTodo(){
         let isTodoReg = /^\/todo/,
-          path = this.$route.path
+            path      = this.$route.query.path
         return isTodoReg.test(path) ? path : ''
       },
       parentTodo(){
@@ -50,10 +50,11 @@
         return this.parentTodo.split('/').slice(0, -1).join('/')
       },
       todoList(){
-        return this.store[this.parentTodo].subTodoList.map((sub) => {
+        return this.store[this.parentTodo].subTodoList.map(function (sub)
+        {
           return {text: sub.title, value: sub.path}
         })
-      },
+      }
     },
     watch: {
       vModelValue(val){
@@ -77,9 +78,10 @@
       },
       setDate(){
         //默认设置为今天的时间
-        let date = new Date()
+        let date      = new Date()
         this.deadline = date.getFullYear() + '-' +
-          (date.getMonth() + 1) + '-' +
+          (
+          date.getMonth() + 1) + '-' +
           date.getDate();
       },
       setPath(){
@@ -89,8 +91,10 @@
         //检测是否title为空
         if (!this.title.trim()) {
           this.message = '任务名不能为空，请重新输入。'
-          setTimeout(() => {
-            this.message = ''
+          let that     = this
+          setTimeout(function ()
+          {
+            that.message = ''
           }, 2000)
           return false
         }
@@ -100,8 +104,10 @@
         //检测是否已经存在
         if (this.$store.state.todo[this.path + '/' + this.title]) {
           this.message = '任务名冲突，请重新输入。'
-          setTimeout(() => {
-            this.message = ''
+          let that     = this
+          setTimeout(function ()
+          {
+            that.message = ''
           }, 2000)
           return false
         }

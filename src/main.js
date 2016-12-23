@@ -44,17 +44,22 @@ let router = new VueRouter({
     {
       name: 'todo',
       path: '/todo',
-      // component: TodoDetailView
+      component: TodoDetailView
     },
     {
       name: 'menu',
       path: '/menu',
-      // component: MenuTodoView
+      component: MenuTodoView
     },
     {
       name: 'filter',
       path: '/filter/:filter',
-      // component: FilterView
+      component: FilterView
+    },
+    {
+      name: 'default',
+      path: '/*',
+      redirect: '/'
     }]
 })
 

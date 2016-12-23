@@ -1,5 +1,6 @@
 <template>
   <div>
+    Fileter
     <todo-list v-for="todo in todoList"
                :title="todo.title"
                :todoList="filter(todo.subTodoList)"
@@ -35,7 +36,6 @@
             queue.push(...todo.subTodoList)
           }
         }
-//        console.log(queue)
         return queue
       }
     }

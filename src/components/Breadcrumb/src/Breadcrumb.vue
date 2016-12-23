@@ -14,10 +14,11 @@
     name: 'breadcrumb',
     computed: {
       itemList(){
-        let titleList = this.$route.path.split('/'),
-          path = titleList.slice(0, 2).join('/'),
-          ret = []
-        titleList.slice(2).forEach(title => {
+        let titleList = this.$route.query.path.split('/'),
+            path      = titleList.slice(0, 2).join('/'),
+            ret       = []
+        titleList.slice(2).forEach(title =>
+        {
           path += '/' + title
           ret.push(this.$store.state.todo[path])
         })
@@ -34,7 +35,7 @@
     font-size: 14px;
     .router-link {
       color: #aaa;
-      &:hover{
+      &:hover {
         color: #4fc08d
       }
     }

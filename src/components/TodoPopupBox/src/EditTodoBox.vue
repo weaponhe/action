@@ -13,7 +13,7 @@
       },
       currentTodo(){
         let isTodoReg = /^\/todo/,
-          path = this.$route.path
+            path      = this.$route.query.path
         return isTodoReg.test(path) ? path : ''
       },
       parentTodo(){
@@ -24,7 +24,8 @@
       },
       todoList(){
         if (this.store[this.grandTodo]) {
-          return this.store[this.grandTodo].subTodoList.map((sub) => {
+          return this.store[this.grandTodo].subTodoList.map((sub) =>
+          {
             return {text: sub.title, value: sub.path}
           })
         }
@@ -65,7 +66,7 @@
                 oldTodo: this.store[this.currentTodo]
               })
               this.vModelValue = false
-              this.$router.replace(this.parentTodo + '/' + this.title)
+              this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.title}})
             }
           } else {
             console.log('changed')
@@ -80,7 +81,8 @@
                 oldTodo: this.store[this.currentTodo]
               })
               this.vModelValue = false
-              this.$router.replace(this.parentTodo)
+              this.$router.replace({name: 'todo', query: {path: this.parentTodo}})
+//              this.$router.replace(this.parentTodo)
             }
           }
         }

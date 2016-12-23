@@ -5,10 +5,12 @@
       <menu-item :title="menu_tomorrow.title" :path="menu_tomorrow.path"></menu-item>
 
       <menu-group v-for="firstLevelTodo in todoList"
+                  v-if="!firstLevelTodo.done"
                   :title="firstLevelTodo.title"
                   :path="{name:'menu',query:{path:firstLevelTodo.path}}">
 
         <menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"
+                   v-if="!secondLevelTodo.done"
                    :title="secondLevelTodo.title"
                    :path="{name:'todo',query:{path:secondLevelTodo.path}}">
         </menu-item>
