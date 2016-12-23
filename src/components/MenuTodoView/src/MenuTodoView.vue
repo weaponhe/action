@@ -14,7 +14,7 @@
     name: 'MenuTodoView',
     computed: {
       path(){
-        return this.$route.path.replace('/menu', '')
+        return this.$route.query.path
       },
       todo(){
         return this.$store.state.todo[this.path]

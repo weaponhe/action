@@ -42,20 +42,19 @@ let router = new VueRouter({
     },
 
     {
-      path: '/todo/*',
-      component: TodoDetailView
+      name: 'todo',
+      path: '/todo',
+      // component: TodoDetailView
     },
     {
-      path: '/menu/*',
-      component: MenuTodoView
+      name: 'menu',
+      path: '/menu',
+      // component: MenuTodoView
     },
-    // {
-    //   path: '/schedule',
-    //   component: ScheduleView
-    // },
     {
+      name: 'filter',
       path: '/filter/:filter',
-      component: FilterView
+      // component: FilterView
     }]
 })
 

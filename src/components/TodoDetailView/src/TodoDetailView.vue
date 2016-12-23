@@ -1,25 +1,26 @@
 <template>
   <div class="wrapper">
-    <breadcrumb></breadcrumb>
-    <div class="todo">
-      <section class="header">
-        <ac-checkbox v-model="done"></ac-checkbox>
-        <h3 class="title">{{todo.title}}</h3>
-      </section>
-      <section class="content">
-        <p class="description">{{todo.description}}</p>
-      </section>
-      <section class="footer">
-        <ac-button @click="showSubTodoBox=true">添加</ac-button>
-        <ac-button @click="showEditTodoBox=true">编辑</ac-button>
-        <ac-input placeholder="添加任务并回车"></ac-input>
-      </section>
-    </div>
+    <div>{{todo.path}}</div>
+    <!--<breadcrumb></breadcrumb>-->
+    <!--<div class="todo">-->
+    <!--<section class="header">-->
+    <!--<ac-checkbox v-model="done"></ac-checkbox>-->
+    <!--<h3 class="title">{{todo.title}}</h3>-->
+    <!--</section>-->
+    <!--<section class="content">-->
+    <!--<p class="description">{{todo.description}}</p>-->
+    <!--</section>-->
+    <!--<section class="footer">-->
+    <!--<ac-button @click="showSubTodoBox=true">添加</ac-button>-->
+    <!--<ac-button @click="showEditTodoBox=true">编辑</ac-button>-->
+    <!--<ac-input placeholder="添加任务并回车"></ac-input>-->
+    <!--</section>-->
+    <!--</div>-->
 
-    <todo-list-view :todo="todo"></todo-list-view>
+    <!--<todo-list-view :todo="todo"></todo-list-view>-->
 
-    <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
-    <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
+    <!--<create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>-->
+    <!--<edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>-->
   </div>
 </template>
 
@@ -36,7 +37,7 @@
     },
     computed: {
       todo(){
-        return this.$store.state.todo[this.$route.path]
+        return this.$store.state.todo[this.$route.query.path]
       },
       done: {
         get(){

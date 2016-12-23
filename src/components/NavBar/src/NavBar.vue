@@ -1,30 +1,31 @@
 <template>
   <nav>
-    <vertical-menu :activeShow="false">
-      <router-menu-item :data="menu_today"></router-menu-item>
-      <router-menu-item :data="menu_tomorrow"></router-menu-item>
-      <!--<router-menu-item :data="menu_schedule"></router-menu-item>-->
+    <vertical-menu :activeShow="false" router>
+      <menu-item :title="menu_today.title" :path="menu_today.path"></menu-item>
+      <menu-item :title="menu_tomorrow.title" :path="menu_tomorrow.path"></menu-item>
 
-      <router-menu-item v-for="firstLevelTodo in todoList"
-                        :data="firstLevelTodo">
-      </router-menu-item>
+      <menu-group v-for="firstLevelTodo in todoList"
+                  :title="firstLevelTodo.title"
+                  :path="{name:'menu',query:{path:firstLevelTodo.path}}">
 
+        <menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"
+                   :title="secondLevelTodo.title"
+                   :path="{name:'todo',query:{path:secondLevelTodo.path}}">
+        </menu-item>
+
+      </menu-group>
     </vertical-menu>
   </nav>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import RouterMenuItem from './routerMenuItem.vue'
   export default {
     name: 'NavBar',
-    components: {RouterMenuItem},
     data(){
       return {
         menu_today: {
           title: '今日待办',
-          path: '/filter/today',
-          active: true
+          path: '/filter/today'
         },
         menu_tomorrow: {
           title: '明日待办',
@@ -38,13 +39,7 @@
     },
     computed: {
       todoList(){
-        return this.$store.state.todo['/todo'].subTodoList.map(
-          (todo) => {
-            return {
-              title: todo.title,
-              path: '/menu' + todo.path
-            }
-          })
+        return this.$store.state.todo['/todo'].subTodoList
       }
     }
   }
@@ -57,10 +52,9 @@
     bottom: 0;
     left: 0;
     width: 250px;
-    overflow-y: auto;
-    overflow-x: hidden;
     border-right: 1px solid #ccc;
     background: #fafafa;
+    padding-bottom: 2em;
   }
 
 </style>
