@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div v-if="allSubTodoList.length">
     <todo-list v-for="todo in todoList"
                :title="todo.title"
                :todoList="filter(todo.subTodoList)"
                :expandable="false">
     </todo-list>
   </div>
+  <nothing v-else></nothing>
 </template>
 
 <script type="text/ecmascript-6">
@@ -34,6 +35,15 @@
           }
         }
         return queue
+      },
+      allSubTodoList(){
+        let ret = []
+        this.todoList.forEach((todo) =>
+          {
+            ret.push(...this.filter(todo.subTodoList))
+          }
+        )
+        return ret
       }
     }
   }
