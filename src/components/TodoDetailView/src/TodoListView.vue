@@ -26,7 +26,7 @@
     },
     mounted(){
       let firstShowChildren = this.$children.find(todolist => todolist.show)
-      firstShowChildren && (firstShowChildren.unfold = true)
+      firstShowChildren && (firstShowChildren.expanded = true)
     }
   }
 </script>

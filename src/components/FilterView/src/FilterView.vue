@@ -3,7 +3,7 @@
     <todo-list v-for="todo in todoList"
                :title="todo.title"
                :todoList="filter(todo.subTodoList)"
-               :expandable="false">
+               :defaultExpanded="true">
     </todo-list>
   </div>
   <nothing v-else></nothing>
