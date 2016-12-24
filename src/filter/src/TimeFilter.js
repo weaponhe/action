@@ -70,7 +70,6 @@ export function tomorrow(todoList)
   })
 }
 
-
 export function future(todoList)
 {
   let afterTomorrow = getAfterTomorrow()
@@ -93,7 +92,6 @@ export function future(todoList)
     return false
   })
 }
-
 
 function getToday(indicateDate)
 {

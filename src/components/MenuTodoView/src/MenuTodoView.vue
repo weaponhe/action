@@ -7,7 +7,10 @@
     </div>
     <todo-list
       :todoList="todo.subTodoList | unDone"
-      :expandable="false"></todo-list>
+      :expandable="false">
+    </todo-list>
+    <nothing v-if="todo.subTodoList.length===0"></nothing>
+
   </div>
 </template>
 

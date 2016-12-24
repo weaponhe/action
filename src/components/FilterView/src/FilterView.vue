@@ -1,6 +1,5 @@
 <template>
   <div>
-    Fileter
     <todo-list v-for="todo in todoList"
                :title="todo.title"
                :todoList="filter(todo.subTodoList)"
@@ -10,13 +9,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {TimeFilter} from '../../../filter'
   export default {
     name: 'FilterView',
-    filters: {...TimeFilter},
     computed: {
       filter(){
-        return TimeFilter[this.$route.params.filter]
+        return this.$options.filters[this.$route.params.filter]
       },
       rootTodo(){
         return this.$store.state.todo['/todo']

@@ -3,12 +3,15 @@ import VueRouter from 'vue-router'
 import App from './App'
 import store from './store'
 import Action from 'action-ui'
+import Filter from './filter'
+
 require('action-ui/dist/style.css')
 
 Vue.use(VueRouter)
 Vue.use(Action)
-import Filter from './filter'
 Vue.use(Filter)
+
+
 import TopBar from './components/TopBar'
 import NavMenu from './components/NavBar'
 import {
@@ -17,9 +20,9 @@ import {
   CreateMainTodoBox,
   EditTodoBox
 } from './components/TodoPopupBox'
-
 import TodoList from './components/TodoList'
 import Breadcrumb from './components/Breadcrumb'
+import Nothing from './components/Nothing'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
@@ -29,12 +32,12 @@ Vue.component(CreateMainTodoBox.name, CreateMainTodoBox)
 Vue.component(EditTodoBox.name, EditTodoBox)
 Vue.component(Breadcrumb.name, Breadcrumb)
 Vue.component(TodoList.name, TodoList)
+Vue.component(Nothing.name, Nothing)
+
 
 import TodoDetailView from './components/TodoDetailView'
 import MenuTodoView from './components/MenuTodoView'
 import FilterView from './components/FilterView'
-
-
 let router = new VueRouter({
   routes: [
     {
@@ -63,6 +66,7 @@ let router = new VueRouter({
       redirect: '/'
     }]
 })
+
 
 new Vue({
   el: '#app',
