@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="todo">
-      <router-link :to="path">
+      <router-link :to="{name:'todo',query:{path:todo.path}}">
         <h3 class="title">{{todo.title}}</h3>
       </router-link>
     </div>
-    <todo-list title="" :todoList="todo.subTodoList"></todo-list>
+    <todo-list title="" :todoList="todo.subTodoList | unDone"></todo-list>
   </div>
 </template>
 

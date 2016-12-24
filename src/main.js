@@ -7,7 +7,8 @@ require('action-ui/dist/style.css')
 
 Vue.use(VueRouter)
 Vue.use(Action)
-
+import Filter from './filter'
+Vue.use(Filter)
 import TopBar from './components/TopBar'
 import NavMenu from './components/NavBar'
 import {
