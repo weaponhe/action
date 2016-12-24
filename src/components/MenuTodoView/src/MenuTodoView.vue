@@ -5,7 +5,9 @@
         <h3 class="title">{{todo.title}}</h3>
       </router-link>
     </div>
-    <todo-list title="" :todoList="todo.subTodoList | unDone"></todo-list>
+    <todo-list
+      :todoList="todo.subTodoList | unDone"
+      :expandable="false"></todo-list>
   </div>
 </template>
 

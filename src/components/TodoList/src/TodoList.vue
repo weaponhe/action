@@ -2,9 +2,10 @@
   <div v-if="show"
        class="wrapper">
     <div class="header"
-         @click="unfold = !unfold">
+         :class="expandable?'clickable':'unclickable'"
+         @click="handleClick">
       <icon class="icon-arrow"
-            :class="{unfold:unfold}"
+            :class="{expanded:expanded}"
             name="arrow-down-filling"
             :size="14"></icon>
       <span class="title">
@@ -12,7 +13,7 @@
         <span class="number">({{todoList.length}})</span>
       </span>
     </div>
-    <div v-show="unfold" class="content">
+    <div v-show="expanded" class="content">
       <item v-for="todo in todoList" :todo="todo"></item>
     </div>
   </div>
@@ -29,39 +30,66 @@
       expandable: {
         type: Boolean,
         default: true
+      },
+      defaultExpanded: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
       return {
-        unfold: false
+        expanded: !this.expandable || this.defaultExpanded
       }
     },
     computed: {
       show(){
         return this.todoList && this.todoList.length
       }
+    },
+    methods: {
+      handleClick(){
+        if (this.expandable) {
+          this.expanded = !this.expanded
+        }
+      }
     }
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
+  .clickable() {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .unclickable() {
+    cursor: not-allowed;
+    user-select: none;
+  }
+
   .wrapper {
     margin: 40px 0;
+
     .header {
-      color: #aaa;
-      cursor: pointer;
-      user-select: none;
+      &.clickable {
+        .clickable;
+        &:hover {
+          color: #888;
+        }
+      }
+      &.unclickable {
+        .unclickable;
+      }
+      color: #aaa; //待提取
       font-size: 14px;
       margin-bottom: 15px;
-      &:hover {
-        color: #888;
-      }
+
       .icon-arrow {
         display: inline-block;
         margin-right: 5px;
         transform: rotate(-90deg);
       }
-      .unfold.icon-arrow {
+      .expanded.icon-arrow {
         transform: rotate(0deg);
       }
       .title {
