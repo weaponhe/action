@@ -1,12 +1,15 @@
 <template>
-  <div v-if="allSubTodoList.length">
-    <todo-list v-for="todo in todoList"
-               :title="todo.title"
-               :todoList="filter(todo.subTodoList)"
-               :defaultExpanded="true">
-    </todo-list>
+  <div>
+    <h3>{{filter.title}}</h3>
+    <div v-if="allSubTodoList.length">
+      <todo-list v-for="todo in todoList"
+                 :title="todo.title"
+                 :todoList="filter(todo.subTodoList)"
+                 :defaultExpanded="true">
+      </todo-list>
+    </div>
+    <nothing v-else></nothing>
   </div>
-  <nothing v-else></nothing>
 </template>
 
 <script type="text/ecmascript-6">

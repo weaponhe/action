@@ -20,6 +20,7 @@ export function beforeToday(todoList)
     return false
   })
 }
+beforeToday.title = "今日之前"
 
 export function today(todoList)
 {
@@ -45,6 +46,7 @@ export function today(todoList)
     return false
   })
 }
+today.title = "今日待办"
 
 export function tomorrow(todoList)
 {
@@ -69,6 +71,7 @@ export function tomorrow(todoList)
     return false
   })
 }
+tomorrow.title = "明日待办"
 
 export function future(todoList)
 {
@@ -92,6 +95,7 @@ export function future(todoList)
     return false
   })
 }
+future.title = "将来"
 
 function getToday(indicateDate)
 {
