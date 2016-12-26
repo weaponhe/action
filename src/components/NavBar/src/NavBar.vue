@@ -1,6 +1,9 @@
 <template>
   <nav>
-
+    <!--<div class="menu-option">-->
+    <!--<div class="option-add">add</div>-->
+    <!--<div class="option-expand">expand</div>-->
+    <!--</div>-->
     <v-menu router>
       <v-menu-item :title="menu_today.title" :path="menu_today.path"></v-menu-item>
       <v-menu-item :title="menu_tomorrow.title" :path="menu_tomorrow.path"></v-menu-item>
@@ -81,6 +84,27 @@
     border-right: 1px solid #ccc;
     background: #fafafa;
     padding-bottom: 2em;
+    /*.menu-option {*/
+    /*height: 40px;*/
+    /*border-bottom: 1px solid #ccc;*/
+    /*> div {*/
+    /*float: left;*/
+    /*width: 50%;*/
+    /*height: 100%;*/
+    /*line-height: 40px;*/
+    /*box-sizing: border-box;*/
+    /*text-align: center;*/
+    /*&:hover {*/
+    /*background-color: #ccc;*/
+    /*}*/
+    /*}*/
+    /*.option-add {*/
+    /*border-right: 1px solid #ccc;*/
+    /*}*/
+    /*.option-expand {*/
+
+    /*}*/
+    /*}*/
   }
 
 </style>

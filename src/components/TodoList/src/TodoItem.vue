@@ -7,7 +7,7 @@
                  exact>
       {{todo.title}}
     </router-link>
-    <span>@{{todo.deadline}}</span>
+    <span class="count">{{todos||''}}</span>
   </div>
 </template>
 
@@ -27,6 +27,13 @@
             path: this.todo.path, done: val
           })
         }
+      },
+      todos(){
+        return this.todo.subTodoList.reduce(function (count, subTodo)
+        {
+          return count + (
+              subTodo.done ? 0 : 1)
+        }, 0)
       }
     }
   }
@@ -55,6 +62,10 @@
       .title {
         text-decoration: line-through;
       }
+    }
+    .count {
+      float: right;
+      margin-right: 1em;
     }
   }
 </style>
