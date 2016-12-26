@@ -3,7 +3,7 @@
        :class="{done:todo.done}">
     <ac-checkbox size="small" v-model="done" :title="todo.title"></ac-checkbox>
     <router-link class="title"
-                 :to="todo.path">
+                 :to="{name:'todo',query:{path:todo.path}}">
       {{todo.title}}
     </router-link>
     <span>@{{todo.deadline}}</span>

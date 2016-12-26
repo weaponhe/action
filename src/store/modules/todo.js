@@ -36,10 +36,10 @@ let data = state.data = JSON.parse(localStorage.getItem(TODO_LOCAL_STORAGE_KEY))
 //初始化数据
 if (data.subTodoList.length === 0)
 {
-  data.subTodoList.push(new Todo({title: 'INBOX', path: data.path}))
-  data.subTodoList.push(new Todo({title: 'PROJECT', path: data.path}))
-  data.subTodoList.push(new Todo({title: 'BOOK', path: data.path}))
-  data.subTodoList.push(new Todo({title: 'POST', path: data.path}))
+  data.subTodoList.push(new Todo({title: '收集箱', path: data.path}))
+  data.subTodoList.push(new Todo({title: '项目', path: data.path}))
+  data.subTodoList.push(new Todo({title: '书单', path: data.path}))
+  data.subTodoList.push(new Todo({title: '文章', path: data.path}))
 }
 //代理设置
 proxyTree(data)

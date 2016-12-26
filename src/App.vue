@@ -51,7 +51,7 @@
       bottom: 0;
       left: 250px;
       right: 0;
-      padding: 20px;
+      padding: 0 20px;
       overflow: auto;
     }
   }
