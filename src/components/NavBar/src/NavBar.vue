@@ -16,6 +16,11 @@
         </menu-item>
 
       </menu-group>
+
+      <menu-group :title="menu_history.title">
+        <menu-item :title="menu_done.title" :path="menu_done.path"></menu-item>
+        <menu-item :title="menu_archive.title" :path="menu_archive.path"></menu-item>
+      </menu-group>
     </vertical-menu>
   </nav>
 </template>
@@ -36,6 +41,17 @@
         menu_schedule: {
           title: '日程',
           path: '/schedule'
+        },
+        menu_history: {
+          title: '时光机'
+        },
+        menu_archive: {
+          title: '已归档',
+          path: '/history/archive'
+        },
+        menu_done: {
+          title: '已完成',
+          path: '/history/done'
         }
       }
     },

@@ -38,17 +38,19 @@ Vue.component(Nothing.name, Nothing)
 import TodoDetailView from './components/TodoDetailView'
 import MenuTodoView from './components/MenuTodoView'
 import FilterView from './components/FilterView'
+import DoneView from './components/DoneView'
+import ArchiveView from './components/ArchiveView'
+
 let router = new VueRouter({
   routes: [
     {
       path: '/',
       redirect: '/filter/today'
     },
-
     {
-      name: 'todo',
-      path: '/todo',
-      component: TodoDetailView
+      name: 'filter',
+      path: '/filter/:filter',
+      component: FilterView
     },
     {
       name: 'menu',
@@ -56,9 +58,18 @@ let router = new VueRouter({
       component: MenuTodoView
     },
     {
-      name: 'filter',
-      path: '/filter/:filter',
-      component: FilterView
+      name: 'todo',
+      path: '/todo',
+      component: TodoDetailView
+    },
+    {
+      // name: 'done',
+      path: '/history/done',
+      component: DoneView
+    }, {
+      // name: 'archive',
+      path: '/history/archive',
+      component: ArchiveView
     },
     {
       name: 'default',
