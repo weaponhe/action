@@ -17,6 +17,11 @@
 <script type="text/ecmascript-6">
   export default {
     name: 'MenuTodoView',
+    filters:{
+      unDone(todoList){
+        return todoList.filter(todo=>!todo.done)
+      }
+    },
     computed: {
       path(){
         return this.$route.query.path
