@@ -1,13 +1,5 @@
 <template>
   <div>
-    <!--<div v-for="menuTodo in todo.subTodoList">-->
-    <!--<h4>#{{menuTodo.title}}</h4>-->
-    <!--<todo-list v-for="todo in menuTodo.subTodoList"-->
-    <!--:title="todo.title"-->
-    <!--:todoList="todo.subTodoList"-->
-    <!--defaultExpanded>-->
-    <!--</todo-list>-->
-    <!--</div>-->
     <menu-done-list v-for="menuTodo in todo.subTodoList" :menuTodo="menuTodo"></menu-done-list>
   </div>
 </template>

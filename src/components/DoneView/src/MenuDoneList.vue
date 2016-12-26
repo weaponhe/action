@@ -1,9 +1,7 @@
 <template>
   <div v-if="!menuTodo.done && show">
-    <h4>#{{menuTodo.title}}</h4>
-    <todo-list v-for="todo in menuTodo.subTodoList"
-               :title="todo.title"
-               :todoList="todo.subTodoList | done"
+    <todo-list :title="menuTodo.title"
+               :todoList="menuTodo.subTodoList | done"
                defaultExpanded>
     </todo-list>
   </div>
@@ -16,8 +14,7 @@
     computed: {
       show(){
         let todoList = this.menuTodo.subTodoList
-        //只有当menuTodo.subTodoList.subTodoList|done
-        return todoList.some(todo => todo.subTodoList.some(subTodo => subTodo.done))
+        return todoList.some(todo => todo.done)
       }
     }
   }
