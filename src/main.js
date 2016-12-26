@@ -71,11 +71,11 @@ let router = new VueRouter({
       path: '/history/archive',
       component: ArchiveView
     },
-    {
-      name: 'default',
-      path: '/*',
-      redirect: '/'
-    }]
+    /*{
+     name: 'default',
+     path: '/!*',
+     redirect: '/'
+     }*/]
 })
 
 

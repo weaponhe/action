@@ -40,7 +40,6 @@
   .breadcrumb {
     margin-top: 1em;
     color: #ccc;
-    /*border-bottom: 1px dashed rgba(0, 0, 0, 0.1);*/
     vertical-align: baseline;
     font-size: 14px;
     line-height: 30px;
