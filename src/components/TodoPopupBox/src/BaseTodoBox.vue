@@ -101,7 +101,7 @@
         return true
       },
       validateDuplicate(){
-        //检测是否已经存在
+        console.log(this.title)
         if (this.$store.state.todo[this.path + '/' + this.title]) {
           this.message = '任务名冲突，请重新输入。'
           let that     = this

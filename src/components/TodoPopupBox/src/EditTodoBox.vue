@@ -55,19 +55,20 @@
           //检测是否更改了path,
           if (this.parentTodo === this.path) {
             console.log('same')
-            if (this.validateDuplicate()) {
-              this.$store.commit(this.store.types.UPDATE_TODO, {
-                newTodo: {
-                  title: this.title,
-                  description: this.description,
-                  path: this.path,
-                  deadline: this.deadline
-                },
-                oldTodo: this.store[this.currentTodo]
-              })
-              this.vModelValue = false
-              this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.title}})
-            }
+            //same的情况下是不要检查重复
+//            if (this.validateDuplicate()) {
+            this.$store.commit(this.store.types.UPDATE_TODO, {
+              newTodo: {
+                title: this.title,
+                description: this.description,
+                path: this.path,
+                deadline: this.deadline
+              },
+              oldTodo: this.store[this.currentTodo]
+            })
+            this.vModelValue = false
+            this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.title}})
+//            }
           } else {
             console.log('changed')
             if (this.validateDuplicate()) {
