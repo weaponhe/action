@@ -78,7 +78,6 @@ let router = new VueRouter({
      }*/]
 })
 
-
 new Vue({
   el: '#app',
   template: '<App/>',

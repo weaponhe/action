@@ -1,9 +1,5 @@
 <template>
   <nav>
-    <!--<div class="menu-option">-->
-    <!--<div class="option-add">add</div>-->
-    <!--<div class="option-expand">expand</div>-->
-    <!--</div>-->
     <v-menu router>
       <v-menu-item :title="menu_today.title" :path="menu_today.path"></v-menu-item>
       <v-menu-item :title="menu_tomorrow.title" :path="menu_tomorrow.path"></v-menu-item>
