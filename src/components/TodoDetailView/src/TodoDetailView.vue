@@ -25,6 +25,7 @@
     <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
 
     <message type="error" :open="!!message">{{message}}</message>
+    <!--<message type="success" :open="!!successMessage">{{successMessage}}</message>-->
 
   </div>
 </template>

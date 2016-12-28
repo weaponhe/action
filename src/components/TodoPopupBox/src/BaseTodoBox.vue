@@ -4,7 +4,7 @@
     <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
       <ac-input placeholder="请输入名称" v-model="title"></ac-input>
       <ac-input placeholder="请输入描述" v-model="description"></ac-input>
-      <input v-if="showDate" type="date" v-model="deadline"/>
+      <ac-input v-model="deadline" type="date"></ac-input>
       <ac-select v-if="showSelect" :options="todoList" v-model="path"></ac-select>
 
       <template slot="footer">
@@ -115,7 +115,6 @@
       },
       ok(){
         if (this.validateEmpty() && this.validateDuplicate()) {
-          console.log(this.deadline)
           this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
             title: this.title,
             description: this.description,
@@ -131,3 +130,9 @@
     }
   }
 </script>
+
+<style>
+  .date-input {
+
+  }
+</style>
