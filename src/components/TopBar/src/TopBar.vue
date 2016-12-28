@@ -1,11 +1,11 @@
 <template>
   <div>
     <app-bar :fixed="true">
-      <icon slot="left" name="account" :size="20"></icon>
+      <div slot="left">
+        <icon name="add" :size="20" @click="showMainTodoBox=true"></icon>
+      </div>
       <div slot="right">
-        <icon name="add" :size="20"></icon>
-        <ac-button @click="showMainTodoBox=true">添加新任务</ac-button>
-        <ac-button @click="showMenuTodoBox=true">添加菜单</ac-button>
+        <icon name="account" :size="20" @click="showMenuTodoBox=true"></icon>
       </div>
     </app-bar>
     <create-main-todo-box v-model="showMainTodoBox"></create-main-todo-box>
