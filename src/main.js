@@ -52,11 +52,11 @@ let router = new VueRouter({
       path: '/filter/:filter',
       component: FilterView
     },
-    {
-      name: 'menu',
-      path: '/menu',
-      component: MenuTodoView
-    },
+    // {
+    //   name: 'menu',
+    //   path: '/menu',
+    //   component: MenuTodoView
+    // },
     {
       name: 'todo',
       path: '/todo',

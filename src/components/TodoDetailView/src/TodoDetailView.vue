@@ -18,7 +18,8 @@
       </section>
     </div>
 
-    <todo-list-view :todo="todo"></todo-list-view>
+    <todo-list v-if="isMenu" :todoList="todo.subTodoList |undone" defaultExpanded></todo-list>
+    <todo-list-view v-else :todo="todo"></todo-list-view>
 
     <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
     <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
@@ -34,6 +35,11 @@
   export default {
     name: 'TodoDetailView',
     components: {TodoListView},
+    filters: {
+      undone(todoList){
+        return todoList.filter(todo => !todo.done)
+      }
+    },
     data(){
       return {
         showSubTodoBox: false,
@@ -45,6 +51,10 @@
     computed: {
       todo(){
         return this.$store.state.todo[this.$route.query.path]
+      },
+      isMenu(){
+        let menuTodoReg = /^\/todo\/[^\/]+$/
+        return menuTodoReg.test(this.todo.path)
       },
       done: {
         get(){
@@ -69,6 +79,12 @@
           this.$router.replace({name: 'todo', query: {path: targetPath}})
         }
       }
+//      nothing(){
+//        return this.todo.subTodoList.every((todo) =>
+//        {
+//          return todo.done
+//        })
+//      }
     },
     methods: {
       onEnter(){
