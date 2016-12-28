@@ -115,6 +115,7 @@
       },
       ok(){
         if (this.validateEmpty() && this.validateDuplicate()) {
+          console.log(this.deadline)
           this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
             title: this.title,
             description: this.description,

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" @keyup.enter="onEnter">
     <breadcrumb></breadcrumb>
     <div class="todo">
       <section class="header">
@@ -12,7 +12,9 @@
       <section class="footer">
         <ac-button @click="showSubTodoBox=true">添加</ac-button>
         <ac-button @click="showEditTodoBox=true">编辑</ac-button>
-        <ac-input placeholder="添加任务并回车"></ac-input>
+        <ac-input placeholder="添加任务并回车"
+                  v-model="inputContent" autofocus>
+        </ac-input>
       </section>
     </div>
 
@@ -20,6 +22,9 @@
 
     <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
     <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
+
+    <message type="error" :open="!!message">{{message}}</message>
+
   </div>
 </template>
 
@@ -31,7 +36,10 @@
     components: {TodoListView},
     data(){
       return {
-        showSubTodoBox: false, showEditTodoBox: false
+        showSubTodoBox: false,
+        showEditTodoBox: false,
+        inputContent: '',
+        message: ''
       }
     },
     computed: {
@@ -60,6 +68,35 @@
           }
           this.$router.replace({name: 'todo', query: {path: targetPath}})
         }
+      }
+    },
+    methods: {
+      onEnter(){
+        let title = this.inputContent
+        if
+        (
+          this.inputContent.trim())
+        {
+          if (this.$store.state.todo[this.todo.path + '/' + title]) {
+            this.message = '任务名冲突，请重新输入。'
+          } else {
+            let today    = new Date()
+            let deadline = [today.getFullYear(), today.getMonth() + 1, today.getDate()].join('-')
+            this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
+              title,
+              deadline,
+              path: this.todo.path
+            })
+            this.inputContent = ''
+          }
+        }
+        else {
+          this.message = '任务名不能为空，请重新输入。'
+        }
+        this.message && setTimeout(() =>
+        {
+          this.message = ''
+        }, 2000)
       }
     }
   }
