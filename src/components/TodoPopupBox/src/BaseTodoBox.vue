@@ -17,10 +17,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  let Mixin =
-    process.env.NODE_ENV === 'production' ?
-      require('action-ui').Mixin :
-      require('../../../../deps/action-ui').Mixin
+  import Mixin from '../../mixin'
   export default {
     name: 'TodoBox',
     mixins: [Mixin.ModelMixin],
