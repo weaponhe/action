@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from './App'
+import App from './App.vue'
 import store from './store'
-import Action from 'action-ui/src/main'
+import Action from '../deps/action-ui'
 import Filter from './filter'
 console.log(Action)
 // require('action-ui/dist/style.css')
