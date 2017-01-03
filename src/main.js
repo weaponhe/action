@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import store from './store'
-import Action from 'action-ui'
+import Action from 'action-ui/src/main'
 import Filter from './filter'
-
-require('action-ui/dist/style.css')
+console.log(Action)
+// require('action-ui/dist/style.css')
 
 Vue.use(VueRouter)
 Vue.use(Action)

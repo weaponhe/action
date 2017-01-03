@@ -14,7 +14,7 @@
     "start": "http-server ./dist"
   },
   "dependencies": {
-    "action-ui": "^0.0.5",
+    "action-ui": "0.0.6",
     "babel-runtime": "^6.18.0",
     "vue": "^2.0.1",
     "vue-router": "^2.1.1",
