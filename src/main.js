@@ -4,9 +4,10 @@ import App from './App.vue'
 import store from './store'
 import Filter from './filter'
 
-let Action = process.env.NODE_ENV === 'production' ?
-  require('action-ui') :
-  require('../deps/action-ui')
+let Action =
+      process.env.NODE_ENV === 'production' ?
+        require('action-ui') :
+        require('../deps/action-ui')
 
 Vue.use(VueRouter)
 Vue.use(Action)

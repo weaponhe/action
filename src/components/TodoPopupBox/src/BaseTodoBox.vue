@@ -17,10 +17,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import mixin from 'action-ui/dist/mixin'
+  let Mixin =
+    process.env.NODE_ENV === 'production' ?
+      require('action-ui').Mixin :
+      require('../../../../deps/action-ui').Mixin
   export default {
     name: 'TodoBox',
-    mixins: [mixin.ModelMixin],
+    mixins: [Mixin.ModelMixin],
     data(){
       return {
         boxTitle: '新建子任务',
