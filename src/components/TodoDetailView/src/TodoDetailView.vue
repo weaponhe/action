@@ -1,33 +1,33 @@
 <template>
-  <div class="wrapper" @keyup.enter="onEnter">
-    <breadcrumb></breadcrumb>
-    <div class="todo">
-      <section class="header">
-        <ac-checkbox v-model="done"></ac-checkbox>
-        <h3 class="title">{{todo.title}}</h3>
-      </section>
-      <section class="content">
-        <p class="description">{{todo.description}}</p>
-      </section>
-      <section class="footer">
-        <ac-button @click="showSubTodoBox=true">添加</ac-button>
-        <ac-button @click="showEditTodoBox=true">编辑</ac-button>
-        <ac-input placeholder="添加任务并回车"
-                  v-model="inputContent" autofocus>
-        </ac-input>
-      </section>
+    <div class="wrapper" @keyup.enter="onEnter">
+        <breadcrumb></breadcrumb>
+        <div class="todo">
+            <section class="header">
+                <ac-checkbox v-model="done"></ac-checkbox>
+                <h3 class="title">{{todo.title}}</h3>
+            </section>
+            <section class="content">
+                <p class="description">{{todo.description}}</p>
+            </section>
+            <section class="footer">
+                <ac-button @click="showSubTodoBox=true">添加</ac-button>
+                <ac-button @click="showEditTodoBox=true">编辑</ac-button>
+                <ac-input placeholder="添加任务并回车"
+                          v-model="inputContent" autofocus>
+                </ac-input>
+            </section>
+        </div>
+
+        <todo-list v-if="isMenu" :todoList="todo.subTodoList |undone" defaultExpanded></todo-list>
+        <todo-list-view v-else :todo="todo"></todo-list-view>
+
+        <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
+        <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
+
+        <message type="error" :open="!!message">{{message}}</message>
+        <!--<message type="success" :open="!!successMessage">{{successMessage}}</message>-->
+
     </div>
-
-    <todo-list v-if="isMenu" :todoList="todo.subTodoList |undone" defaultExpanded></todo-list>
-    <todo-list-view v-else :todo="todo"></todo-list-view>
-
-    <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
-    <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
-
-    <message type="error" :open="!!message">{{message}}</message>
-    <!--<message type="success" :open="!!successMessage">{{successMessage}}</message>-->
-
-  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -80,14 +80,16 @@
           this.$router.replace({name: 'todo', query: {path: targetPath}})
         }
       }
-//      nothing(){
-//        return this.todo.subTodoList.every((todo) =>
-//        {
-//          return todo.done
-//        })
-//      }
     },
     methods: {
+      dateFormat(date){
+        let year  = date.getFullYear(),
+            month = date.getMonth() + 1,
+            day   = date.getDate()
+        return [year,
+          month < 10 ? '0' + month : month,
+          day < 10 ? '0' + day : day].join('-')
+      },
       onEnter(){
         let title = this.inputContent
         if
@@ -97,8 +99,7 @@
           if (this.$store.state.todo[this.todo.path + '/' + title]) {
             this.message = '任务名冲突，请重新输入。'
           } else {
-            let today    = new Date()
-            let deadline = [today.getFullYear(), today.getMonth() + 1, today.getDate()].join('-')
+            let deadline = this.dateFormat(new Date())
             this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
               title,
               deadline,
@@ -110,10 +111,10 @@
         else {
           this.message = '任务名不能为空，请重新输入。'
         }
-        this.message && setTimeout(() =>
+        this.message && setTimeout(()=>
         {
           this.message = ''
-        }, 2000)
+        },2000)
       }
     }
   }
@@ -121,46 +122,46 @@
 
 <style scoped lang="less" rel="stylesheet/less">
 
-  .todo {
-    position: relative;
-    height: 30%;
-    min-height: 200px;
-    margin-top: 20px;
+    .todo {
+        position: relative;
+        height: 30%;
+        min-height: 200px;
+        margin-top: 20px;
 
-    .header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      line-height: 60px;
-      .title {
-        display: inline;
-        padding: 0 15px;
-      }
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            line-height: 60px;
+            .title {
+                display: inline;
+                padding: 0 15px;
+            }
+        }
+
+        .content {
+            position: absolute;
+            top: 60px;
+            bottom: 60px;
+            left: 0;
+            width: 90%;
+            overflow: auto;
+            text-indent: 2em;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: right;
+        }
     }
 
-    .content {
-      position: absolute;
-      top: 60px;
-      bottom: 60px;
-      left: 0;
-      width: 90%;
-      overflow: auto;
-      text-indent: 2em;
+    .todolist {
+        margin-top: 30px;
     }
-
-    .footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      text-align: right;
-    }
-  }
-
-  .todolist {
-    margin-top: 30px;
-  }
 
 </style>

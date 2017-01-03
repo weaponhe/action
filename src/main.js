@@ -4,8 +4,6 @@ import App from './App.vue'
 import store from './store'
 import Action from '../deps/action-ui'
 import Filter from './filter'
-console.log(Action)
-// require('action-ui/dist/style.css')
 
 Vue.use(VueRouter)
 Vue.use(Action)
@@ -36,7 +34,6 @@ Vue.component(Nothing.name, Nothing)
 
 
 import TodoDetailView from './components/TodoDetailView'
-import MenuTodoView from './components/MenuTodoView'
 import FilterView from './components/FilterView'
 import DoneView from './components/DoneView'
 import ArchiveView from './components/ArchiveView'
@@ -52,11 +49,6 @@ let router = new VueRouter({
       path: '/filter/:filter',
       component: FilterView
     },
-    // {
-    //   name: 'menu',
-    //   path: '/menu',
-    //   component: MenuTodoView
-    // },
     {
       name: 'todo',
       path: '/todo',

@@ -1,17 +1,17 @@
 <template>
-  <div class="container">
-    <div class="top">
-      <top-bar></top-bar>
+    <div class="container">
+        <div class="top">
+            <top-bar></top-bar>
+        </div>
+        <div class="left">
+            <nav-bar></nav-bar>
+        </div>
+        <div class="main-body">
+            <div class="router-view">
+                <router-view></router-view>
+            </div>
+        </div>
     </div>
-    <div class="left">
-      <nav-bar></nav-bar>
-    </div>
-    <div class="main-body">
-      <div class="router-view">
-        <router-view></router-view>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -21,38 +21,38 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    text-decoration: none;
-    color: #333;
-    transition: color .1s cubic-bezier(.645, .045, .355, 1);
-  }
-
-  .container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-    .top {
-
+    body {
+        margin: 0;
+        padding: 0;
     }
-    .left {
-      overflow: scroll;
+
+    a {
+        text-decoration: none;
+        color: #333;
+        transition: color .1s cubic-bezier(.645, .045, .355, 1);
     }
-    .main-body {
-      position: absolute;
-      top: 56px;
-      bottom: 0;
-      left: 250px;
-      right: 0;
-      padding: 0 20px;
-      overflow: auto;
+
+    .container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        .top {
+
+        }
+        .left {
+            overflow: scroll;
+        }
+        .main-body {
+            position: absolute;
+            top: 56px;
+            bottom: 0;
+            left: 250px;
+            right: 0;
+            padding: 0 20px;
+            overflow: auto;
+        }
     }
-  }
 </style>

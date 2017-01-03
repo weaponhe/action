@@ -4,9 +4,15 @@
     extends: require('./BaseTodoBox.vue'),
     data(){
       return {
-        boxTitle: '新建菜单项',
-        showSelect: false,
-        showDate:false
+        boxTitle: '新建菜单项'
+      }
+    },
+    computed: {
+      showSelect() {
+        return false
+      },
+      showDate() {
+        return false
       }
     },
     methods: {
@@ -14,7 +20,7 @@
         this.path = '/todo'
       },
       setDate(){
-          this.deadline = null
+        this.deadline = null
       }
     }
   }
