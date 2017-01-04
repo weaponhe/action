@@ -26,7 +26,7 @@
         if (this.store[this.grandTodo]) {
           return this.store[this.grandTodo].subTodoList.map((sub) =>
           {
-            return {text: sub.title, value: sub.path}
+            return {text: decodeURIComponent(sub.title), value: sub.path}
           })
         }
       },
@@ -39,7 +39,7 @@
     },
     methods: {
       setTitle(){
-        this.title = this.store[this.currentTodo].title
+        this.title = decodeURIComponent(this.store[this.currentTodo].title)
       },
       setDesc(){
         this.description = this.store[this.currentTodo].description
@@ -57,7 +57,7 @@
             console.log('same')
             this.$store.commit(this.store.types.UPDATE_TODO, {
               newTodo: {
-                title: this.title,
+                title: this.encodedTitle,
                 description: this.description,
                 path: this.path,
                 deadline: this.deadline
@@ -65,13 +65,13 @@
               oldTodo: this.store[this.currentTodo]
             })
             this.vModelValue = false
-            this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.title}})
+            this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.encodedTitle}})
           } else {
             console.log('changed')
             if (this.validateDuplicate()) {
               this.$store.commit(this.store.types.MOVE_TODO, {
                 newTodo: {
-                  title: this.title,
+                  title: this.encodedTitle,
                   description: this.description,
                   path: this.path,
                   deadline: this.deadline

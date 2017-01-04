@@ -4,7 +4,7 @@
         <div class="todo">
             <section class="header">
                 <ac-checkbox v-model="done"></ac-checkbox>
-                <h3 class="title">{{todo.title}}</h3>
+                <h3 class="title">{{todo.title | decode}}</h3>
             </section>
             <section class="content">
                 <p class="description">{{todo.description}}</p>
@@ -92,6 +92,7 @@
       },
       onEnter(){
         let title = this.inputContent
+        title     = encodeURIComponent(title)
         if
         (
           this.inputContent.trim())
@@ -114,7 +115,7 @@
         this.message && setTimeout(()=>
         {
           this.message = ''
-        },2000)
+      },2000)
       }
     }
   }

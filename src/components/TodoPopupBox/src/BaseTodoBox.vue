@@ -50,7 +50,7 @@
       todoList(){
         return this.store[this.parentTodo].subTodoList.map(function (sub)
         {
-          return {text: sub.title, value: sub.path}
+          return {text: decodeURIComponent(sub.title), value: sub.path}
         })
       },
       showSelect() {
@@ -58,6 +58,9 @@
       },
       showDate() {
         return true
+      },
+      encodedTitle(){
+        return encodeURIComponent(this.title)
       }
     },
     watch: {
@@ -108,8 +111,8 @@
         return true
       },
       validateDuplicate(){
-        console.log(this.title)
-        if (this.$store.state.todo[this.path + '/' + this.title]) {
+        console.log(this.encodedTitle)
+        if (this.$store.state.todo[this.path + '/' + this.encodedTitle]) {
           this.message = '任务名冲突，请重新输入。'
           let that     = this
           setTimeout(function ()
@@ -123,7 +126,7 @@
       ok(){
         if (this.validateEmpty() && this.validateDuplicate()) {
           this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
-            title: this.title,
+            title: this.encodedTitle,
             description: this.description,
             path: this.path,
             deadline: this.deadline

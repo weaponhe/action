@@ -6,13 +6,13 @@
 
             <v-menu-group v-for="firstLevelTodo in todoList"
                           v-if="!firstLevelTodo.done"
-                          :title="firstLevelTodo.title"
+                          :title="firstLevelTodo.title | decode"
                           :path="{name:'todo',query:{path:firstLevelTodo.path}}"
                           :expandable="expandable(firstLevelTodo)">
 
                 <v-menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"
                              v-if="!secondLevelTodo.done"
-                             :title="secondLevelTodo.title"
+                             :title="secondLevelTodo.title | decode"
                              :path="{name:'todo',query:{path:secondLevelTodo.path}}">
                 </v-menu-item>
 

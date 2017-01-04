@@ -1,14 +1,14 @@
 <template>
-  <div class="breadcrumb">
-    <span class="backward router-link" @click="backward">&lt; 返回</span>
-    |
-    <span v-for="(todo,index) in itemList">
+    <div class="breadcrumb">
+        <span class="backward router-link" @click="backward">&lt; 返回</span>
+        |
+        <span v-for="(todo,index) in itemList">
         {{index===0?'':'/'}}
         <router-link :to="{name:'todo',query:{path:todo.path}}" class="router-link">
-         {{todo.title}}
+         {{todo.title | decode}}
         </router-link>
       </span>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -37,18 +37,18 @@
 
 <style scoped lang="less" rel="stylesheet/less">
 
-  .breadcrumb {
-    margin-top: 1em;
-    color: #ccc;
-    vertical-align: baseline;
-    font-size: 14px;
-    line-height: 30px;
-    .router-link {
-      color: #aaa;
-      cursor: pointer;
-      &:hover {
-        color: #4fc08d
-      }
+    .breadcrumb {
+        margin-top: 1em;
+        color: #ccc;
+        vertical-align: baseline;
+        font-size: 14px;
+        line-height: 30px;
+        .router-link {
+            color: #aaa;
+            cursor: pointer;
+            &:hover {
+                color: #4fc08d
+            }
+        }
     }
-  }
 </style>
