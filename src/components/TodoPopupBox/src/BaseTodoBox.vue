@@ -1,6 +1,5 @@
 <template>
     <div>
-        <message type="error" :open="!!message">{{message}}</message>
         <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
             <ac-input placeholder="请输入名称" v-model="title"></ac-input>
             <ac-input placeholder="请输入描述" v-model="description"></ac-input>
@@ -100,12 +99,7 @@
       validateEmpty(){
         //检测是否title为空
         if (!this.title.trim()) {
-          this.message = '任务名不能为空，请重新输入。'
-          let that     = this
-          setTimeout(function ()
-          {
-            that.message = ''
-          }, 2000)
+          this.$Message.add({type: 'error', text: '任务名不能为空，请重新输入。'})
           return false
         }
         return true
@@ -113,12 +107,7 @@
       validateDuplicate(){
         console.log(this.encodedTitle)
         if (this.$store.state.todo[this.path + '/' + this.encodedTitle]) {
-          this.message = '任务名冲突，请重新输入。'
-          let that     = this
-          setTimeout(function ()
-          {
-            that.message = ''
-          }, 2000)
+          this.$Message.add({type: 'error', text: '任务名冲突，请重新输入。'})
           return false
         }
         return true
@@ -132,6 +121,7 @@
             deadline: this.deadline
           })
           this.vModelValue = false
+          this.$Message.add('创建成功。')
         }
       },
       close(){

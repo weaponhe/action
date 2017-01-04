@@ -28,6 +28,6 @@
 <style scoped lang="less" rel="stylesheet/less">
     .wrapper {
         position: relative;
-        z-index: 1000;
+        z-index: 1;
     }
 </style>

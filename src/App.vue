@@ -7,6 +7,7 @@
                 <router-view></router-view>
             </div>
         </div>
+        <message></message>
     </div>
 </template>
 

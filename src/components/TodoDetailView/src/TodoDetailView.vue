@@ -24,9 +24,6 @@
         <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
         <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
 
-        <message type="error" :open="!!message">{{message}}</message>
-        <!--<message type="success" :open="!!successMessage">{{successMessage}}</message>-->
-
     </div>
 </template>
 
@@ -93,13 +90,12 @@
       onEnter(){
         let title = this.inputContent
         title     = encodeURIComponent(title)
-        if
-        (
-          this.inputContent.trim())
+        if (this.inputContent.trim())
         {
           if (this.$store.state.todo[this.todo.path + '/' + title]) {
-            this.message = '任务名冲突，请重新输入。'
-          } else {
+            this.$Message.add({type: 'error', text: '任务名冲突，请重新输入。'})
+          }
+          else {
             let deadline = this.dateFormat(new Date())
             this.$store.commit(this.$store.state.todo.types.ADD_TODO, {
               title,
@@ -107,15 +103,12 @@
               path: this.todo.path
             })
             this.inputContent = ''
+            this.$Message.add('创建成功。')
           }
         }
         else {
-          this.message = '任务名不能为空，请重新输入。'
+          this.$Message.add({type: 'error', text: '任务名不能为空，请重新输入。'})
         }
-        this.message && setTimeout(()=>
-        {
-          this.message = ''
-      },2000)
       }
     }
   }
