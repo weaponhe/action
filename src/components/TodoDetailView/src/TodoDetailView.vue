@@ -43,7 +43,6 @@
         showSubTodoBox: false,
         showEditTodoBox: false,
         inputContent: '',
-        message: ''
       }
     },
     computed: {

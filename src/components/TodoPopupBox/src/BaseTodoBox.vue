@@ -23,8 +23,6 @@
     data(){
       return {
         boxTitle: '新建子任务',
-        message: '',
-        openMessage: false,
         title: '',
         description: '',
         deadline: '',
@@ -105,7 +103,6 @@
         return true
       },
       validateDuplicate(){
-        console.log(this.encodedTitle)
         if (this.$store.state.todo[this.path + '/' + this.encodedTitle]) {
           this.$Message.add({type: 'error', text: '任务名冲突，请重新输入。'})
           return false
