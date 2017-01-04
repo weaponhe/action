@@ -1,29 +1,29 @@
 <template>
-  <nav>
-    <v-menu router>
-      <v-menu-item :title="menu_today.title" :path="menu_today.path"></v-menu-item>
-      <v-menu-item :title="menu_tomorrow.title" :path="menu_tomorrow.path"></v-menu-item>
+    <nav>
+        <v-menu router>
+            <v-menu-item :title="menu_today.title" :path="menu_today.path"></v-menu-item>
+            <v-menu-item :title="menu_tomorrow.title" :path="menu_tomorrow.path"></v-menu-item>
 
-      <v-menu-group v-for="firstLevelTodo in todoList"
-                    v-if="!firstLevelTodo.done"
-                    :title="firstLevelTodo.title"
-                    :path="{name:'todo',query:{path:firstLevelTodo.path}}"
-                    :expandable="expandable(firstLevelTodo)">
+            <v-menu-group v-for="firstLevelTodo in todoList"
+                          v-if="!firstLevelTodo.done"
+                          :title="firstLevelTodo.title"
+                          :path="{name:'todo',query:{path:firstLevelTodo.path}}"
+                          :expandable="expandable(firstLevelTodo)">
 
-        <v-menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"
-                     v-if="!secondLevelTodo.done"
-                     :title="secondLevelTodo.title"
-                     :path="{name:'todo',query:{path:secondLevelTodo.path}}">
-        </v-menu-item>
+                <v-menu-item v-for="secondLevelTodo in firstLevelTodo.subTodoList"
+                             v-if="!secondLevelTodo.done"
+                             :title="secondLevelTodo.title"
+                             :path="{name:'todo',query:{path:secondLevelTodo.path}}">
+                </v-menu-item>
 
-      </v-menu-group>
+            </v-menu-group>
 
-      <v-menu-group :title="menu_history.title">
-        <v-menu-item :title="menu_done.title" :path="menu_done.path"></v-menu-item>
-        <v-menu-item :title="menu_archive.title" :path="menu_archive.path"></v-menu-item>
-      </v-menu-group>
-    </v-menu>
-  </nav>
+            <v-menu-group :title="menu_history.title">
+                <v-menu-item :title="menu_done.title" :path="menu_done.path"></v-menu-item>
+                <v-menu-item :title="menu_archive.title" :path="menu_archive.path"></v-menu-item>
+            </v-menu-group>
+        </v-menu>
+    </nav>
 </template>
 
 <script>
@@ -71,36 +71,15 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  nav {
-    position: absolute;
-    top: 56px;
-    bottom: 0;
-    left: 0;
-    width: 250px;
-    border-right: 1px solid #ccc;
-    background: #fafafa;
-    padding-bottom: 2em;
-    /*.menu-option {*/
-    /*height: 40px;*/
-    /*border-bottom: 1px solid #ccc;*/
-    /*> div {*/
-    /*float: left;*/
-    /*width: 50%;*/
-    /*height: 100%;*/
-    /*line-height: 40px;*/
-    /*box-sizing: border-box;*/
-    /*text-align: center;*/
-    /*&:hover {*/
-    /*background-color: #ccc;*/
-    /*}*/
-    /*}*/
-    /*.option-add {*/
-    /*border-right: 1px solid #ccc;*/
-    /*}*/
-    /*.option-expand {*/
-
-    /*}*/
-    /*}*/
-  }
+    nav {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 250px;
+        border-right: 1px solid #ccc;
+        background: #fafafa;
+        padding: 56px 0 20px;
+    }
 
 </style>

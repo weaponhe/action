@@ -1,11 +1,7 @@
 <template>
     <div class="container">
-        <div class="top">
-            <top-bar></top-bar>
-        </div>
-        <div class="left">
-            <nav-bar></nav-bar>
-        </div>
+        <top-bar></top-bar>
+        <nav-bar></nav-bar>
         <div class="main-body">
             <div class="router-view">
                 <router-view></router-view>
@@ -39,19 +35,13 @@
         left: 0;
         right: 0;
         overflow: hidden;
-        .top {
-
-        }
-        .left {
-            overflow: scroll;
-        }
         .main-body {
             position: absolute;
             top: 56px;
             bottom: 0;
             left: 250px;
             right: 0;
-            padding: 0 20px;
+            padding: 0 20px 20px 20px;
             overflow: auto;
         }
     }
