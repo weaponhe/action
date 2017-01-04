@@ -4,9 +4,9 @@ import * as DoneFilter from './src/DoneFilter'
 function install(Vue)
 {
   let FilterMap = Object.assign({}, TimeFilter, DoneFilter)
-  Object.entries(FilterMap).forEach(([key, fn]) =>
+  Object.keys(FilterMap).forEach((key) =>
   {
-    Vue.filter(key, fn)
+    Vue.filter(key, FilterMap[key])
   })
 }
 
