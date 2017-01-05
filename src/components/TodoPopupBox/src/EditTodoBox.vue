@@ -55,21 +55,24 @@
         if (this.validateEmpty()) {
           //检测是否更改了path,
           if (this.parentTodo === this.path) {
-            console.log('相同，这里也要检测是否存在重复吧？')
-            this.$store.commit(this.store.types.UPDATE_TODO, {
-              newTodo: {
-                title: this.encodedTitle,
-                description: this.description,
-                path: this.path,
-                deadline: this.deadline
-              },
-              oldTodo: this.store[this.currentTodo]
-            })
-            this.vModelValue = false
-            this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.encodedTitle}})
-            this.$Message.add('修改成功。')
+            if (this.validateDuplicate()) {
+              this.$store.commit(this.store.types.UPDATE_TODO, {
+                newTodo: {
+                  title: this.encodedTitle,
+                  description: this.description,
+                  path: this.path,
+                  deadline: this.deadline
+                },
+                oldTodo: this.store[this.currentTodo]
+              })
+              this.vModelValue = false
+              this.$router.replace({name: 'todo', query: {path: this.parentTodo + '/' + this.encodedTitle}})
+              this.$Message.add('修改成功。')
+            }
+            else {
+//              this.$Message.add({type: 'error', text: '任务名冲突，请重新输入。'})
+            }
           } else {
-            console.log('changed')
             if (this.validateDuplicate()) {
               this.$store.commit(this.store.types.MOVE_TODO, {
                 newTodo: {
@@ -85,7 +88,7 @@
               this.$Message.add('修改成功。')
             }
             else {
-              this.$Message.add({type: 'error', text: '任务名冲突，请重新输入。'})
+//              this.$Message.add({type: 'error', text: '任务名冲突，请重新输入。'})
             }
           }
         } else {
