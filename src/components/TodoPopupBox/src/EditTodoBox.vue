@@ -55,7 +55,9 @@
         if (this.validateEmpty()) {
           //检测是否更改了path,
           if (this.parentTodo === this.path) {
-            if (this.validateDuplicate()) {
+            if (this.store[this.currentTodo].title === this.encodedTitle ||
+              this.validateDuplicate())
+            {
               this.$store.commit(this.store.types.UPDATE_TODO, {
                 newTodo: {
                   title: this.encodedTitle,
