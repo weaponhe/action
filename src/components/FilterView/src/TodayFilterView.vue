@@ -4,12 +4,7 @@
         <div v-if="allSubTodoList.length">
             <todo-list v-for="todo in todoList"
                        :title="todo.title"
-                       :todoList="todo.subTodoList | beforeToday"
-                       :defaultExpanded="true">
-            </todo-list>
-            <todo-list v-for="todo in todoList"
-                       :title="todo.title"
-                       :todoList="todo.subTodoList | today"
+                       :todoList="todo.subTodoList | todayOrBeforeToday"
                        :defaultExpanded="true">
             </todo-list>
         </div>
@@ -28,7 +23,6 @@
     },
     computed: {
       allSubTodoList(){
-        console.log('asdads')
         let ret = []
         this.todoList.forEach((todo) =>
           {

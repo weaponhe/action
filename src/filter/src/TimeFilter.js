@@ -24,7 +24,8 @@ beforeToday.title = "今日之前"
 
 export function today(todoList)
 {
-  let now = new Date(),
+  let today    = getToday(),
+      tomorrow = getTomorrow(),
       todoDate
   return todoList.filter((todo) =>
   {
@@ -36,9 +37,7 @@ export function today(todoList)
     }
     try {
       todoDate = new Date(todo.deadline)
-      return now.getFullYear() === todoDate.getFullYear() &&
-        now.getMonth() === todoDate.getMonth() &&
-        now.getDate() === todoDate.getDate()
+      return today <= todoDate && todoDate < tomorrow
     } catch (e)
     {
       console.error(e)
@@ -47,6 +46,29 @@ export function today(todoList)
   })
 }
 today.title = "今日待办"
+
+export function todayOrBeforeToday(todoList)
+{
+  let tomorrow = getTomorrow(),
+      todoDate
+  return todoList.filter((todo) =>
+  {
+    if (todo.done) {
+      return false
+    }
+    if (!todo.deadline) {
+      return false
+    }
+    try {
+      todoDate = new Date(todo.deadline)
+      return todoDate < tomorrow
+    } catch (e)
+    {
+      console.error(e)
+    }
+    return false
+  })
+}
 
 export function tomorrow(todoList)
 {
