@@ -24,6 +24,10 @@
           return this.todo.done
         },
         set(val){
+          if (val && this.todos) {
+            this.$Message.add({type: 'error', text: '还有子任务未完成，请先完成子任务。'})
+            return
+          }
           this.$store.commit(this.$store.state.todo.types.DONE_TODO, {
             path: this.todo.path, done: val
           })

@@ -60,7 +60,13 @@
         set(val){
           if (val === this.todo.done)
             return
-
+          //点击才执行
+          //检测是否有未完成子任务
+          if (val && this.todo.subTodoList.some(sub => sub.done === false))
+          {
+            this.$Message.add({type: 'error', text: '还有子任务未完成，请先完成子任务。'})
+            return
+          }
           let path = this.todo.path
           this.$store.commit(this.$store.state.todo.types.DONE_TODO, {
             path: path, done: val
