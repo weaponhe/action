@@ -1,6 +1,7 @@
 <template>
     <div class="todo"
-         :class="{done:todo.done}">
+         :class="{done:todo.done,active}"
+         @click="handleClick">
         <ac-checkbox size="small" v-model="done" :title="todo.title"></ac-checkbox>
         <router-link class="title"
                      :to="{name:'todo',query:{path:todo.path}}"
@@ -17,6 +18,11 @@
     name: 'item',
     props: {
       todo: Object
+    },
+    data(){
+      return {
+        active: false
+      }
     },
     computed: {
       done: {
@@ -40,6 +46,17 @@
               subTodo.done ? 0 : 1)
         }, 0)
       }
+    },
+    methods: {
+      handleClick(){
+        this.active = !this.active
+        this.$emit('changeActiveState', this.todo.path)
+      }
+    },
+    destroyed(){
+      if (this.active) {
+        this.$emit('changeActiveState', this.todo.path)
+      }
     }
   }
 </script>
@@ -51,22 +68,31 @@
         border-bottom: 1px solid #eee;
         line-height: 40px;
         font-size: 15px;
+        color: #555;
         transition: background-color .2s cubic-bezier(.645, .045, .355, 1),
         color .2s cubic-bezier(.645, .045, .355, 1);
-
+        a {
+            color: #555;
+        }
         &:hover {
             background-color: #f9fafc;
-        }
-
-        .title {
-            padding: 0 20px;
-            color: inherit;
         }
         &.done {
             color: #ccc;
             .title {
                 text-decoration: line-through;
             }
+        }
+        &.active {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            .title {
+                color: #fff;
+            }
+        }
+        .title {
+            padding: 0 20px;
+            /*color: inherit;*/
         }
         .count {
             float: right;

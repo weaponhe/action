@@ -25,7 +25,7 @@
 
     a {
         text-decoration: none;
-        color: #333;
+        /*color: #333;*/
         transition: color .1s cubic-bezier(.645, .045, .355, 1);
     }
 

@@ -1,22 +1,22 @@
 <template>
-  <div v-if="show"
-       class="wrapper">
-    <div class="header"
-         :class="expandable?'clickable':'unclickable'"
-         @click="handleClick">
-      <icon class="icon-arrow"
-            :class="{expanded:expanded}"
-            name="arrow-down-filling"
-            :size="14"></icon>
-      <span class="title">
+    <div v-if="show"
+         class="wrapper">
+        <div class="header"
+             :class="expandable?'clickable':'unclickable'"
+             @click="handleClick">
+            <icon class="icon-arrow"
+                  :class="{expanded:expanded}"
+                  name="arrow-down-filling"
+                  :size="14"></icon>
+            <span class="title">
         {{title}}
         <span class="number">({{todoList.length}})</span>
       </span>
+        </div>
+        <div v-show="expanded" class="content">
+            <item v-for="todo in todoList" :key="todo.path" :todo="todo" @changeActiveState="changeActiveState"></item>
+        </div>
     </div>
-    <div v-show="expanded" class="content">
-      <item v-for="todo in todoList" :todo="todo"></item>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -51,50 +51,53 @@
         if (this.expandable) {
           this.expanded = !this.expanded
         }
+      },
+      changeActiveState(path){
+        this.$emit('changeActiveState', path)
       }
     }
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .clickable() {
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .unclickable() {
-    cursor: not-allowed;
-    user-select: none;
-  }
-
-  .wrapper {
-    margin: 40px 0;
-
-    .header {
-      &.clickable {
-        .clickable;
-        &:hover {
-          color: #888;
-        }
-      }
-      &.unclickable {
-        .unclickable;
-      }
-      color: #aaa; //待提取
-      font-size: 14px;
-      margin-bottom: 15px;
-
-      .icon-arrow {
-        display: inline-block;
-        margin-right: 5px;
-        transform: rotate(-90deg);
-      }
-      .expanded.icon-arrow {
-        transform: rotate(0deg);
-      }
-      .title {
-        vertical-align: middle;
-      }
+    .clickable() {
+        cursor: pointer;
+        user-select: none;
     }
-  }
+
+    .unclickable() {
+        cursor: not-allowed;
+        user-select: none;
+    }
+
+    .wrapper {
+        margin: 40px 0;
+
+        .header {
+            &.clickable {
+                .clickable;
+                &:hover {
+                    color: #888;
+                }
+            }
+            &.unclickable {
+                .unclickable;
+            }
+            color: #aaa; //待提取
+            font-size: 14px;
+            margin-bottom: 20px;
+
+            .icon-arrow {
+                display: inline-block;
+                margin-right: 5px;
+                transform: rotate(-90deg);
+            }
+            .expanded.icon-arrow {
+                transform: rotate(0deg);
+            }
+            .title {
+                vertical-align: middle;
+            }
+        }
+    }
 </style>
