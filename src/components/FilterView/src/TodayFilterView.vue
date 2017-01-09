@@ -3,7 +3,7 @@
         <h3>{{title}}</h3>
         <div v-if="allSubTodoList.length">
             <todo-list v-for="todo in todoList"
-                       :title="todo.title"
+                       :title="todo.title | decode"
                        :todoList="todo.subTodoList | todayOrBeforeToday"
                        :defaultExpanded="true">
             </todo-list>
