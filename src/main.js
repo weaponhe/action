@@ -23,6 +23,7 @@ import {
 import TodoList from './components/TodoList'
 import Breadcrumb from './components/Breadcrumb'
 import Nothing from './components/Nothing'
+import BatchOptionPopup from './components/BatchOptionPopup'
 
 Vue.component(NavMenu.name, NavMenu)
 Vue.component(TopBar.name, TopBar)
@@ -33,6 +34,7 @@ Vue.component(EditTodoBox.name, EditTodoBox)
 Vue.component(Breadcrumb.name, Breadcrumb)
 Vue.component(TodoList.name, TodoList)
 Vue.component(Nothing.name, Nothing)
+Vue.component(BatchOptionPopup.name, BatchOptionPopup)
 
 
 import TodoDetailView from './components/TodoDetailView'

@@ -29,6 +29,8 @@
                    :todoList="todo.subTodoList | done"
                    @changeActiveState="changeActiveState">
         </todo-list>
+
+        <batch-option-popup v-model="popup"></batch-option-popup>
     </div>
 </template>
 
@@ -42,7 +44,8 @@
     },
     data(){
       return {
-        activePaths: []
+        activePaths: [],
+        popup: false
       }
     },
     methods: {
@@ -53,7 +56,13 @@
           this.activePaths.splice(index, 1)
       },
       handleBatchOption(){
-        console.log(this.activePaths)
+        if (this.activePaths.length)
+        {
+          this.popup = true
+        }
+        else {
+          this.$Message.add({type: 'warning', text: '请选择至少一个任务。'})
+        }
       }
     }
   }
