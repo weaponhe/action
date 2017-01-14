@@ -1,21 +1,13 @@
 <template>
-    <popup v-if="vModelValue"
-           :open="vModelValue"
-           modal
-           @close="close">
-    </popup>
+    <ac-mask v-model="vModelValue">
+    </ac-mask>
 </template>
 
 <script type="text/ecmascript-6">
   import Mixin from '../../mixin'
   export default {
     name: 'BatchOptionPopup',
-    mixins: [Mixin.ModelMixin],
-    methods: {
-      close(){
-        this.vModelValue = false
-      }
-    }
+    mixins: [Mixin.ModelMixin]
   }
 </script>
 
