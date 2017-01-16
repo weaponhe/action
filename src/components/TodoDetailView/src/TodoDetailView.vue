@@ -74,12 +74,13 @@
           if (val === false)
             return
           //返回父节点
-          let targetPath = '/'
+          console.log(this.todo.path)
           let parentPath = path.split('/').slice(0, -1).join('/')
-          if (parentPath !== '/todo') {
-            targetPath = parentPath
+          if (parentPath === '/todo') {
+            this.$router.replace('/')
+          } else {
+            this.$router.replace({name: 'todo', query: {path: parentPath}})
           }
-          this.$router.replace({name: 'todo', query: {path: targetPath}})
         }
       }
     },
