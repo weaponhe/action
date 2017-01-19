@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @keyup.enter="onEnter">
         <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
             <ac-input placeholder="请输入名称" v-model="title" autofocus></ac-input>
             <ac-input placeholder="请输入描述" v-model="description"></ac-input>
@@ -120,6 +120,9 @@
           this.vModelValue = false
           this.$Message.add('创建成功。')
         }
+      },
+      onEnter(){
+        this.ok()
       },
       close(){
         this.vModelValue = false

@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" @keyup.enter="onEnter">
+    <div class="wrapper">
         <breadcrumb></breadcrumb>
         <div class="todo">
             <section class="header">
@@ -12,9 +12,12 @@
             <section class="footer">
                 <ac-button @click="showSubTodoBox=true">添加</ac-button>
                 <ac-button @click="showEditTodoBox=true">编辑</ac-button>
-                <ac-input placeholder="添加任务并回车"
-                          v-model="inputContent" autofocus>
-                </ac-input>
+                <div @keyup.enter="onEnter">
+                    <ac-input placeholder="添加任务并回车"
+                              v-model="inputContent"
+                              autofocus>
+                    </ac-input>
+                </div>
             </section>
         </div>
 
