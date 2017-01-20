@@ -1,36 +1,41 @@
 <template>
     <div class="todolist">
-        <div class="batch-option">
+        <div class="batch-option" v-if="activePaths.length">
             <ac-button @click="handleBatchOption">批量操作</ac-button>
         </div>
         <todo-list title="今日之前"
                    :todoList="todo.subTodoList | beforeToday"
                    :defaultExpanded="true"
-                   @changeActiveState="changeActiveState">
+                   @changeActiveState="changeActiveState"
+                   :selectable="true">
         </todo-list>
 
         <todo-list title="今日待办"
                    :todoList="todo.subTodoList | today"
                    :defaultExpanded="true"
-                   @changeActiveState="changeActiveState">
+                   @changeActiveState="changeActiveState"
+                   :selectable="true">
         </todo-list>
 
         <todo-list title="明日待办"
                    :todoList="todo.subTodoList | tomorrow"
-                   @changeActiveState="changeActiveState">
+                   @changeActiveState="changeActiveState"
+                   :selectable="true">
         </todo-list>
 
         <todo-list title="将来"
                    :todoList="todo.subTodoList | future"
-                   @changeActiveState="changeActiveState">
+                   @changeActiveState="changeActiveState"
+                   :selectable="true">
         </todo-list>
 
         <todo-list title="已完成"
                    :todoList="todo.subTodoList | done"
-                   @changeActiveState="changeActiveState">
+                   @changeActiveState="changeActiveState"
+                   :selectable="true">
         </todo-list>
 
-        <batch-option-popup v-model="popup"></batch-option-popup>
+        <Patch-Todo-Box :todoPathList="activePaths" v-model="showPatchTodoBox"></Patch-Todo-Box>
     </div>
 </template>
 
@@ -45,7 +50,7 @@
     data(){
       return {
         activePaths: [],
-        popup: false
+        showPatchTodoBox: false
       }
     },
     methods: {
@@ -58,7 +63,7 @@
       handleBatchOption(){
         if (this.activePaths.length)
         {
-          this.popup = true
+          this.showPatchTodoBox = true
         }
         else {
           this.$Message.add({type: 'warning', text: '请选择至少一个任务。'})

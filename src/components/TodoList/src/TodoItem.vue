@@ -17,7 +17,8 @@
   export default {
     name: 'item',
     props: {
-      todo: Object
+      todo: Object,
+      selectable: Boolean
     },
     data(){
       return {
@@ -26,10 +27,13 @@
     },
     computed: {
       done: {
-        get(){
+        get()
+        {
           return this.todo.done
-        },
-        set(val){
+        }
+        ,
+        set(val)
+        {
           if (val && this.todos) {
             this.$Message.add({type: 'error', text: '还有子任务未完成，请先完成子任务。'})
             return
@@ -38,23 +42,31 @@
             path: this.todo.path, done: val
           })
         }
-      },
-      todos(){
+      }
+      ,
+      todos()
+      {
         return this.todo.subTodoList.reduce(function (count, subTodo)
         {
           return count + (
               subTodo.done ? 0 : 1)
         }, 0)
       }
-    },
+    }
+    ,
     methods: {
-      handleClick(){
-        this.active = !this.active
-        this.$emit('changeActiveState', this.todo.path)
+      handleClick()
+      {
+        if (this.selectable) {
+          this.active = !this.active
+          this.$emit('changeActiveState', this.todo.path)
+        }
       }
-    },
-    destroyed(){
-      if (this.active) {
+    }
+    ,
+    destroyed()
+    {
+      if (this.selectable && this.active) {
         this.$emit('changeActiveState', this.todo.path)
       }
     }

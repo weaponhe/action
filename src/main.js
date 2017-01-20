@@ -18,7 +18,8 @@ import {
   CreateSubTodoBox,
   CreateMenuTodoBox,
   CreateMainTodoBox,
-  EditTodoBox
+  EditTodoBox,
+  PatchTodoBox
 } from './components/TodoPopupBox'
 import TodoList from './components/TodoList'
 import Breadcrumb from './components/Breadcrumb'
@@ -31,6 +32,7 @@ Vue.component(CreateSubTodoBox.name, CreateSubTodoBox)
 Vue.component(CreateMenuTodoBox.name, CreateMenuTodoBox)
 Vue.component(CreateMainTodoBox.name, CreateMainTodoBox)
 Vue.component(EditTodoBox.name, EditTodoBox)
+Vue.component(PatchTodoBox.name, PatchTodoBox)
 Vue.component(Breadcrumb.name, Breadcrumb)
 Vue.component(TodoList.name, TodoList)
 Vue.component(Nothing.name, Nothing)

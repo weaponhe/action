@@ -70,12 +70,15 @@ function updateTodo(state, payload)
 {
   let todo    = payload.oldTodo,
       newTodo = payload.newTodo
-
   //common update
-  todo.description = newTodo.description
-  todo.deadline    = newTodo.deadline
+  if (newTodo.description !== undefined) {
+    todo.description = newTodo.description
+  }
+  if (newTodo.deadline !== undefined) {
+    todo.deadline = newTodo.deadline
+  }
   //title and path update
-  if (newTodo.title !== todo.title)
+  if (newTodo.title !== undefined && newTodo.title !== todo.title)
   {
     todo.title = newTodo.title
     updatePath(todo, newTodo.path)
@@ -89,16 +92,22 @@ function moveTodo(state, payload)
       newTodo = payload.newTodo
 
   //找到原来的父节点并删除将要移动的子节点，变成游离的节点todo
-  let parent       = state[oldTodo.path.split('/').slice(0, -1).join('/')]
-  let index        = parent.subTodoList.findIndex(function (sub)
+  let parent = state[oldTodo.path.split('/').slice(0, -1).join('/')]
+  let index  = parent.subTodoList.findIndex(function (sub)
   {
     return sub.path === oldTodo.path
   })
-  let todo         = parent.subTodoList.splice(index, 1)[0]
+  let todo   = parent.subTodoList.splice(index, 1)[0]
   //更新todo,包括更新子节点的path
-  todo.title       = newTodo.title
-  todo.description = newTodo.description
-  todo.deadline    = newTodo.deadline
+  if (newTodo.title !== undefined) {
+    todo.title = newTodo.title
+  }
+  if (newTodo.description !== undefined) {
+    todo.description = newTodo.description
+  }
+  if (newTodo.deadline !== undefined) {
+    todo.deadline = newTodo.deadline
+  }
   updatePath(todo, newTodo.path)
   //将游离的todo节点插入新的父节点
   let newParent = state[newTodo.path]

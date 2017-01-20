@@ -14,7 +14,11 @@
       </span>
         </div>
         <div v-show="expanded" class="content">
-            <item v-for="todo in todoList" :key="todo.path" :todo="todo" @changeActiveState="changeActiveState"></item>
+            <item v-for="todo in todoList"
+                  :key="todo.path"
+                  :todo="todo"
+                  :selectable="selectable"
+                  @changeActiveState="changeActiveState"></item>
         </div>
     </div>
 </template>
@@ -34,6 +38,9 @@
       defaultExpanded: {
         type: Boolean,
         default: false
+      },
+      selectable: {
+        type: Boolean
       }
     },
     data(){

@@ -1,8 +1,8 @@
 <template>
     <div @keyup.enter="onEnter">
         <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
-            <ac-input placeholder="请输入名称" v-model="title" autofocus></ac-input>
-            <ac-input placeholder="请输入描述" v-model="description"></ac-input>
+            <ac-input v-if="showTitle" placeholder="请输入名称" v-model="title" autofocus></ac-input>
+            <ac-input v-if="showDesc" placeholder="请输入描述" v-model="description"></ac-input>
             <ac-input v-if="showDate" v-model="deadline" type="date"></ac-input>
             <ac-select v-if="showSelect" :options="todoList" v-model="path"></ac-select>
 
@@ -49,6 +49,12 @@
         {
           return {text: decodeURIComponent(sub.title), value: sub.path}
         })
+      },
+      showTitle(){
+        return true
+      },
+      showDesc(){
+        return true
       },
       showSelect() {
         return true
