@@ -10,7 +10,7 @@
     "start": "http-server -p 8932"
   },
   "dependencies": {
-    "action-ui": "0.0.9",
+    "action-ui": "0.0.10",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
     "vuex": "^2.1.1"
