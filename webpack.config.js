@@ -1,7 +1,6 @@
-var path              = require('path')
-var webpack           = require('webpack')
+var path    = require('path')
+var webpack = require('webpack')
 // var ExtractTextPlugin = require("extract-text-webpack-plugin")
-
 
 module.exports = {
   entry: './src/main.js',
@@ -20,10 +19,6 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
