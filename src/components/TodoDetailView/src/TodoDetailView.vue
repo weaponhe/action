@@ -7,7 +7,7 @@
                 <h3 class="title">{{todo.title | decode}}</h3>
             </section>
             <section class="content">
-                <p class="description">{{todo.description}}</p>
+                <p class="description" contenteditable="true">{{todo.description}}</p>
             </section>
             <section class="footer">
                 <ac-button @click="showSubTodoBox=true">添加</ac-button>
@@ -20,9 +20,10 @@
                 </div>
             </section>
         </div>
-
-        <todo-list v-if="isMenu" :todoList="todo.subTodoList |undone" defaultExpanded></todo-list>
-        <todo-list-view v-else :todo="todo"></todo-list-view>
+        <div class="todolist">
+            <todo-list v-if="isMenu" :todoList="todo.subTodoList |undone" defaultExpanded></todo-list>
+            <todo-list-view v-else :todo="todo"></todo-list-view>
+        </div>
 
         <create-sub-todo-box v-model="showSubTodoBox"></create-sub-todo-box>
         <edit-todo-box :todo="todo" v-model="showEditTodoBox"></edit-todo-box>
@@ -127,15 +128,11 @@
 
     .todo {
         position: relative;
-        height: 30%;
         min-height: 200px;
         margin-top: 20px;
+        overflow: visible;
 
         .header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             height: 60px;
             line-height: 60px;
             .title {
@@ -145,20 +142,28 @@
         }
 
         .content {
-            position: absolute;
-            top: 60px;
-            bottom: 60px;
-            left: 0;
-            width: 90%;
-            overflow: auto;
-            text-indent: 2em;
+            width: 100%;
+            .description {
+                min-height: 36px;
+                max-height: 200px;
+                line-height: 30px;
+                padding: 3px 10px;
+                overflow: scroll;
+                box-sizing: border-box;
+                background-color: #fff;
+                background-image: none;
+                outline: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+                font-size: 14px;
+                &:focus {
+                    border: 1px solid #20a0ff;
+                }
+            }
         }
 
         .footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             text-align: right;
         }
     }
