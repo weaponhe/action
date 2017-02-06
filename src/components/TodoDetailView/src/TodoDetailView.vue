@@ -7,7 +7,11 @@
                 <h3 class="title">{{todo.title | decode}}</h3>
             </section>
             <section class="content">
-                <p class="description" contenteditable="true">{{todo.description}}</p>
+                <textarea class="description"
+                          @blur="onBlur"
+                          :value="todo.description"
+                          ref="desc">
+                </textarea>
             </section>
             <section class="footer">
                 <ac-button @click="showSubTodoBox=true">添加</ac-button>
@@ -46,7 +50,7 @@
       return {
         showSubTodoBox: false,
         showEditTodoBox: false,
-        inputContent: '',
+        inputContent: ''
       }
     },
     computed: {
@@ -119,6 +123,14 @@
         else {
           this.$Message.add({type: 'error', text: '任务名不能为空，请重新输入。'})
         }
+      },
+      onBlur(){
+        this.$store.commit(this.$store.state.todo.types.UPDATE_TODO, {
+          newTodo: {
+            description: this.$refs.desc.value,
+          },
+          oldTodo: this.todo
+        })
       }
     }
   }
@@ -144,19 +156,24 @@
         .content {
             width: 100%;
             .description {
-                min-height: 36px;
-                max-height: 200px;
+                /*min-height: 36px;*/
+                max-height: 250px;
+                width: 100%;
                 line-height: 30px;
                 padding: 3px 10px;
                 overflow: scroll;
                 box-sizing: border-box;
                 background-color: #fff;
+                resize: none;
                 background-image: none;
                 outline: none;
                 border: 1px solid transparent;
                 border-radius: 4px;
                 transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
                 font-size: 14px;
+                &:hover {
+                    border: 1px solid #c0ccda;
+                }
                 &:focus {
                     border: 1px solid #20a0ff;
                 }

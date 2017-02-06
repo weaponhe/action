@@ -68,6 +68,7 @@ function addTodo(state, payload)
 
 function updateTodo(state, payload)
 {
+
   let todo    = payload.oldTodo,
       newTodo = payload.newTodo
   //common update
