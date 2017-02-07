@@ -5,6 +5,10 @@
             <section class="header">
                 <ac-checkbox v-model="done"></ac-checkbox>
                 <h3 class="title">{{todo.title | decode}}</h3>
+                <div class="option">
+                    <ac-button @click="showSubTodoBox=true">添加</ac-button>
+                    <ac-button @click="showEditTodoBox=true">编辑</ac-button>
+                </div>
             </section>
             <section class="content">
                 <textarea class="description"
@@ -14,8 +18,6 @@
                 </textarea>
             </section>
             <section class="footer">
-                <ac-button @click="showSubTodoBox=true">添加</ac-button>
-                <ac-button @click="showEditTodoBox=true">编辑</ac-button>
                 <div @keyup.enter="onEnter">
                     <ac-input placeholder="添加任务并回车"
                               v-model="inputContent"
@@ -140,7 +142,7 @@
 
     .todo {
         position: relative;
-        min-height: 200px;
+        min-height: 300px;
         margin-top: 20px;
         overflow: visible;
 
@@ -151,15 +153,16 @@
                 display: inline;
                 padding: 0 15px;
             }
+            .option {
+                float: right;
+            }
         }
 
         .content {
             width: 100%;
             .description {
-                /*min-height: 36px;*/
-                max-height: 250px;
+                min-height: 100px;
                 width: 100%;
-                line-height: 30px;
                 padding: 3px 10px;
                 overflow: scroll;
                 box-sizing: border-box;
