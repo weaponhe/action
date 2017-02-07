@@ -54,7 +54,7 @@
         return true
       },
       showDesc(){
-        return true
+        return false
       },
       showSelect() {
         return true
@@ -138,7 +138,5 @@
 </script>
 
 <style>
-    .date-input {
 
-    }
 </style>
