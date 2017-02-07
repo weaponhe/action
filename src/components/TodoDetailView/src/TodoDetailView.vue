@@ -142,7 +142,7 @@
 
     .todo {
         position: relative;
-        min-height: 300px;
+        min-height: 200px;
         margin-top: 20px;
         overflow: visible;
 
