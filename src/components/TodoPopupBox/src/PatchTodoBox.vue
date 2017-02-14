@@ -34,9 +34,9 @@
               oldTodo: this.$store.state.todo[todo]
             })
             this.vModelValue = false
-            this.$Message.add('修改成功。')
           }
         })
+        this.$Message.add('修改成功。')
       }
     }
   }
