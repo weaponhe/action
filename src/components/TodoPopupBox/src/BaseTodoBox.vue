@@ -3,14 +3,13 @@
         <message-box :title="boxTitle" v-model="vModelValue" @ok="ok">
             <ac-input v-if="showTitle" placeholder="请输入名称" v-model="title" autofocus></ac-input>
             <ac-input v-if="showDesc" placeholder="请输入描述" v-model="description"></ac-input>
-            <ac-input v-if="showDate" v-model="deadline" type="date"></ac-input>
+            <datepicker v-if="showDate" v-model="deadline"></datepicker>
             <ac-select v-if="showSelect" :options="todoList" v-model="path"></ac-select>
 
             <template slot="footer">
                 <ac-button type="success" @click="ok">确定</ac-button>
                 <ac-button @click="close">取消</ac-button>
             </template>
-
         </message-box>
     </div>
 </template>

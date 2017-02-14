@@ -3,12 +3,11 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import store from './store'
 import Filter from './filter'
-import Action from 'action-ui'
-// import Action from '../deps/action-ui'
+// import Action from 'action-ui'
+import Action from '../deps/action-ui'
 Vue.use(VueRouter)
 Vue.use(Action)
 Vue.use(Filter)
-
 
 import TopBar from './components/TopBar'
 import NavMenu from './components/NavBar'

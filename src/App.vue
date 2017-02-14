@@ -3,14 +3,8 @@
         <top-bar></top-bar>
         <nav-bar></nav-bar>
         <div class="main-body">
-            <!--<ac-button @click="show=true">Mask</ac-button>-->
-            <!--<ac-mask v-model="show"></ac-mask>-->
-
-            <!--<ac-button @click="showMessageBox=true">MessageBox</ac-button>-->
-            <!--<message-box v-model="showMessageBox"></message-box>-->
-
             <div class="router-view">
-            <router-view></router-view>
+                <router-view></router-view>
             </div>
         </div>
         <message></message>
@@ -23,7 +17,8 @@
     data(){
       return {
         show: false,
-        showMessageBox: false
+        showMessageBox: false,
+        date: '2017-01-01'
       }
     }
   }
