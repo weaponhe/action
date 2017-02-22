@@ -8,7 +8,7 @@
                      exact>
             {{todo.title | decode}}
         </router-link>
-        <span class="date">{{todo.deadline}}</span>
+        <!--<span class="date">{{todo.deadline}}</span>-->
         <span class="count">{{todos||''}}</span>
     </div>
 </template>
